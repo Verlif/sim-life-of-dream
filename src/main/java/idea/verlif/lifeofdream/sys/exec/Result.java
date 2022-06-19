@@ -1,4 +1,4 @@
-package idea.verlif.lifeofdream.sys.launch;
+package idea.verlif.lifeofdream.sys.exec;
 
 /**
  * 执行结果

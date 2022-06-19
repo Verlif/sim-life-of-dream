@@ -1,0 +1,66 @@
+{
+  "story":{
+    "name": "一个简单的故事",
+    "desc": "故事开始了",
+    "exec": "world.addRuleOfTurn 年龄提升"
+  },
+  "branches": [
+    {
+      "name": "小学",
+      "key": "小学",
+      "chance": "10000",
+      "condition": "@{role.info.age.value}>5 & @{role.info.age.value}<13",
+      "exec": "kit.message 你开始上小学了。"
+    },
+    {
+      "name": "初中",
+      "key": "初中",
+      "chance": "10000",
+      "condition": "@{role.info.age.value}>12",
+      "exec": "kit.message 你开始上初中了。;removeBranch 小学"
+    }
+  ],
+  "events": [
+    {
+      "afterBranches": [
+        "小学"
+      ],
+      "key": "小学交作业",
+      "title": "交作业",
+      "desc": "要交作业了，但是你似乎是把作业忘在家里了，现在该怎么办呢？",
+      "chance": "8000",
+      "exec": "kit.message 触发事件"
+    }
+  ],
+  "options": [
+    {
+      "afterEvents": [
+        "小学交作业"
+      ],
+      "key": "小学交作业.请假回家去拿",
+      "title": "请假回家去拿",
+      "desc": "你向老师请个假，去回家那作业",
+      "exec": ""
+    },
+    {
+      "afterEvents": [
+        "小学交作业"
+      ],
+      "key": "小学交作业.直接说没带",
+      "title": "没带作业",
+      "desc": "你向老师实话实说，没有带作业",
+      "exec": ""
+    }
+  ],
+  "items": [
+
+  ],
+  "rules": [
+    {
+      "name": "年龄提升",
+      "key": "年龄提升",
+      "desc": "每回合+1年龄",
+      "exec": "role.info.age.up 1;kit.message 你又涨了一岁。"
+    }
+  ]
+}

@@ -1,11 +1,16 @@
-package idea.verlif.lifeofdream.domain.story.branch;
+package idea.verlif.lifeofdream.domain.branch;
+
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
+
+import java.util.Objects;
 
 /**
  * 支线
  *
  * @author Verlif
  */
-public class Branch {
+public class Branch implements CanSave {
 
     /**
      * 支线名称
@@ -70,5 +75,46 @@ public class Branch {
 
     public void setExec(String exec) {
         this.exec = exec;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Branch branch = (Branch) o;
+        return Objects.equals(getKey(), branch.getKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getKey());
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("key", key);
+        json.put("cha", chance);
+        json.put("con", condition);
+        json.put("exec", exec);
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        name = json.getString("name");
+        key = json.getString("key");
+        chance = json.getString("cha");
+        condition = json.getString("con");
+        exec = json.getString("exec");
+        return true;
     }
 }

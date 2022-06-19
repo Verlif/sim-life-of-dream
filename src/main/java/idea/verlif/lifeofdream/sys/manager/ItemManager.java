@@ -1,6 +1,57 @@
 package idea.verlif.lifeofdream.sys.manager;
+
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.base.CanSavedMap;
+import idea.verlif.lifeofdream.domain.item.Item;
+
+import java.util.Map;
+
 /**
  * @author Verlif
  */
-public class BagManager {
+public class ItemManager implements CanSave {
+
+    private static final ItemManager ITEM_MANAGER = new ItemManager();
+
+    private final CanSavedMap<String, Item> itemMap;
+
+    private ItemManager() {
+        itemMap = new CanSavedMap<String, Item>() {
+            @Override
+            protected Item getNewValue(String s) {
+                return new Item();
+            }
+        };
+    }
+
+    public static ItemManager getInstance() {
+        return ITEM_MANAGER;
+    }
+
+    public Map<String, Item> getItemMap() {
+        return itemMap;
+    }
+
+    public Item get(String key) {
+        return itemMap.get(key);
+    }
+
+    public void add(Item item) {
+        itemMap.put(item.getKey(), item);
+    }
+
+    @Override
+    public JSONObject save() {
+        return JSONObject.of("im", itemMap.save());
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        itemMap.clear();
+        return itemMap.load(json.getJSONObject("im"));
+    }
 }

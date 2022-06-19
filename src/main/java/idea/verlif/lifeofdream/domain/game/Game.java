@@ -1,4 +1,4 @@
-package idea.verlif.lifeofdream.game;
+package idea.verlif.lifeofdream.domain.game;
 
 import idea.verlif.lifeofdream.domain.role.Role;
 import idea.verlif.lifeofdream.domain.world.World;

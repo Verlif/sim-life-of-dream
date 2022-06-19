@@ -1,16 +1,25 @@
-package idea.verlif.enabletheworld.module.base;
+package idea.verlif.lifeofdream.base;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 /**
  * @author Verlif
  * @version 1.0
- * @date 2021/7/1 15:26
  */
 public interface CanSave {
 
-    JSONObject toSave();
+    /**
+     * 保存数据
+     *
+     * @return 数据json
+     */
+    JSONObject save();
 
+    /**
+     * 加载数据
+     *
+     * @param json 数据json
+     * @return 是否成功加载
+     */
     boolean load(JSONObject json);
-
 }

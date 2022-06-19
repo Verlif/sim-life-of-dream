@@ -1,46 +1,47 @@
-package idea.verlif.enabletheworld.module.base;
+package idea.verlif.lifeofdream.base;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 
 import java.util.ArrayList;
 
-import idea.verlif.enabletheworld.utils.PrintUtil;
-
+/**
+ * @author Verlif
+ * @param <E> 值类型
+ */
 public abstract class CanSavedList<E extends CanSave> extends ArrayList<E> implements CanSave {
 
+    /**
+     * 获取一个类型实例
+     *
+     * @return 类型实例
+     */
     protected abstract E getNewElement();
 
     @Override
     public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
         clear();
-        try {
-            JSONArray array = json.getJSONArray("array");
-            int length = array.size();
-            for (int i = 0; i < length; i++) {
-                E e = getNewElement();
-                e.load(array.getJSONObject(i));
-                add(e);
-            }
-        } catch (JSONException e) {
-            PrintUtil.printException(e);
+        JSONArray array = json.getJSONArray("ar");
+        int length = array.size();
+        for (int i = 0; i < length; i++) {
+            E e = getNewElement();
+            e.load(array.getJSONObject(i));
+            add(e);
         }
         return false;
     }
 
     @Override
-    public JSONObject toSave() {
+    public JSONObject save() {
         JSONObject json = new JSONObject();
         JSONArray array = new JSONArray();
         for (E e : this) {
-            array.add(e.toSave());
+            array.add(e.save());
         }
-        try {
-            json.put("array", array);
-        } catch (JSONException e) {
-            PrintUtil.printException(e);
-        }
+        json.put("ar", array);
         return json;
     }
 }

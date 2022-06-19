@@ -1,5 +1,7 @@
 package idea.verlif.lifeofdream.domain.role;
 
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.domain.role.extra.Param;
 
 /**
@@ -7,7 +9,7 @@ import idea.verlif.lifeofdream.domain.role.extra.Param;
  *
  * @author Verlif
  */
-public class RoleParam {
+public class RoleParam implements CanSave {
 
     /**
      * 魅力
@@ -70,5 +72,31 @@ public class RoleParam {
 
     public Param getSpirit() {
         return spirit;
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("cha", charm.save());
+        json.put("luck", luck.save());
+        json.put("log", logic.save());
+        json.put("per", perceptual.save());
+        json.put("spo", sport.save());
+        json.put("spi", spirit.save());
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        charm.load(json.getJSONObject("cha"));
+        luck.load(json.getJSONObject("luck"));
+        logic.load(json.getJSONObject("log"));
+        perceptual.load(json.getJSONObject("per"));
+        sport.load(json.getJSONObject("spo"));
+        spirit.load(json.getJSONObject("spi"));
+        return true;
     }
 }

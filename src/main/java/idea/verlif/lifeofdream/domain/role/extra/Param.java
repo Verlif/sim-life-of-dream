@@ -1,11 +1,15 @@
 package idea.verlif.lifeofdream.domain.role.extra;
 
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.standard.NumberValue;
+
 /**
  * 判定属性类
  *
  * @author Verlif
  */
-public class Param {
+public class Param implements NumberValue, CanSave {
 
     /**
      * 属性名称
@@ -32,5 +36,34 @@ public class Param {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    @Override
+    public int value() {
+        return value;
+    }
+
+    @Override
+    public void up(int up) {
+        value += up;
+        if (value < 0) {
+            value = 0;
+        }
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("val", value);
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        value = json.getIntValue("val");
+        return true;
     }
 }

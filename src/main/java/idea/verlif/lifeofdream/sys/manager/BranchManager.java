@@ -1,6 +1,59 @@
 package idea.verlif.lifeofdream.sys.manager;
+
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.base.CanSavedMap;
+import idea.verlif.lifeofdream.domain.branch.Branch;
+
+import java.util.Map;
+
 /**
+ * 分支管理器
+ *
  * @author Verlif
  */
-public class BranchManager {
+public class BranchManager implements CanSave {
+
+    private static final BranchManager BRANCH_MANAGER = new BranchManager();
+
+    private final CanSavedMap<String, Branch> branchMap;
+
+    private BranchManager() {
+        branchMap = new CanSavedMap<String, Branch>() {
+            @Override
+            protected Branch getNewValue(String s) {
+                return new Branch();
+            }
+        };
+    }
+
+    public static BranchManager getInstance() {
+        return BRANCH_MANAGER;
+    }
+
+    public Map<String, Branch> getBranchMap() {
+        return branchMap;
+    }
+
+    public Branch getBranch(String key) {
+        return branchMap.get(key);
+    }
+
+    public void addBranch(Branch branch) {
+        branchMap.put(branch.getKey(), branch);
+    }
+
+    @Override
+    public JSONObject save() {
+        return JSONObject.of("bm", branchMap.save());
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        branchMap.clear();
+        return branchMap.load(json.getJSONObject("bm"));
+    }
 }

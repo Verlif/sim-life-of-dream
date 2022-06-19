@@ -1,9 +1,219 @@
-package idea.verlif.lifeofdream.event;
+package idea.verlif.lifeofdream.domain.event;
+
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.base.CanSavedList;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 事件
  *
  * @author Verlif
  */
-public class Event {
+public class Event implements CanSave {
+
+    /**
+     * 事件所属支线
+     */
+    private final List<String> afterBranches;
+
+    /**
+     * 事件key
+     */
+    private String key;
+
+    /**
+     * 事件标题
+     */
+    private String title;
+
+    /**
+     * 事件描述
+     */
+    private String desc;
+
+    /**
+     * 概率描述
+     */
+    private String chance;
+
+    /**
+     * 事件触发条件
+     */
+    private String condition;
+
+    /**
+     * 事件执行指令
+     */
+    private String exec;
+
+    /**
+     * 事件选项
+     */
+    private final CanSavedList<Option> options;
+
+    /**
+     * 可以触发的事件选项
+     */
+    private final CanSavedList<Option> readyOptions;
+
+    /**
+     * 剩余触发次数
+     */
+    private int remain = 1;
+
+    /**
+     * 是否已触发过
+     */
+    private boolean done;
+
+    public Event() {
+        afterBranches = new ArrayList<>();
+        options = new CanSavedList<Option>() {
+            @Override
+            protected Option getNewElement() {
+                return new Option();
+            }
+        };
+        readyOptions = new CanSavedList<Option>() {
+            @Override
+            protected Option getNewElement() {
+                return new Option();
+            }
+        };
+        done = false;
+    }
+
+    public List<String> getAfterBranches() {
+        return afterBranches;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getChance() {
+        return chance;
+    }
+
+    public void setChance(String chance) {
+        this.chance = chance;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public String getExec() {
+        return exec;
+    }
+
+    public void setExec(String exec) {
+        this.exec = exec;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public List<Option> getReadyOptions() {
+        return readyOptions;
+    }
+
+    public int getRemain() {
+        return remain;
+    }
+
+    public void setRemain(int remain) {
+        this.remain = remain;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Event event = (Event) o;
+        return Objects.equals(getKey(), event.getKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getKey());
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("ab", afterBranches);
+        json.put("key", key);
+        json.put("tit", title);
+        json.put("desc", desc);
+        json.put("cha", chance);
+        json.put("con", condition);
+        json.put("exec", exec);
+        json.put("opts", options.save());
+        json.put("rps", readyOptions.save());
+        json.put("rem", remain);
+        json.put("done", done);
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        afterBranches.clear();
+        afterBranches.addAll(json.getList("ab", String.class));
+        key = json.getString("key");
+        title = json.getString("tit");
+        desc = json.getString("desc");
+        chance = json.getString("cha");
+        condition = json.getString("con");
+        exec = json.getString("exec");
+        options.load(json.getJSONObject("opts"));
+        readyOptions.load(json.getJSONObject("rps"));
+        remain = json.getIntValue("rem");
+        done = json.getBooleanValue("done");
+        return true;
+    }
 }

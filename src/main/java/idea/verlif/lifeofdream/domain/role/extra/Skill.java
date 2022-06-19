@@ -1,11 +1,14 @@
 package idea.verlif.lifeofdream.domain.role.extra;
 
+import idea.verlif.lifeofdream.standard.LevelValue;
+import idea.verlif.lifeofdream.standard.NumberValue;
+
 /**
  * 技能类
  *
  * @author Verlif
  */
-public class Skill {
+public class Skill implements NumberValue, LevelValue {
 
     /**
      * 技能名称
@@ -60,5 +63,33 @@ public class Skill {
 
     public void setNext(int next) {
         this.next = next;
+    }
+
+    @Override
+    public int value() {
+        return value;
+    }
+
+    @Override
+    public void up(int up) {
+        value += up;
+        while (value >= next) {
+            next = next << 1;
+            value -= next;
+            level ++;
+        }
+    }
+
+    @Override
+    public int level() {
+        return level;
+    }
+
+    @Override
+    public void levelUp(int up) {
+        level += up;
+        if (level < 0) {
+            level = 0;
+        }
     }
 }

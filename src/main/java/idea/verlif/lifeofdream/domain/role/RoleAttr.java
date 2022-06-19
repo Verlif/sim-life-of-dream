@@ -1,13 +1,15 @@
 package idea.verlif.lifeofdream.domain.role;
 
-import idea.verlif.lifeofdream.role.extra.Attr;
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.domain.role.extra.Attr;
 
 /**
  * 角色基础属性
  *
  * @author Verlif
  */
-public class RoleAttr {
+public class RoleAttr implements CanSave {
 
     /**
      * 健康值
@@ -50,5 +52,27 @@ public class RoleAttr {
 
     public Attr getMood() {
         return mood;
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("hea", health.save());
+        json.put("end", endurance.save());
+        json.put("bra", brain.save());
+        json.put("mood", mood.save());
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        health.load(json.getJSONObject("hea"));
+        endurance.load(json.getJSONObject("end"));
+        brain.load(json.getJSONObject("bra"));
+        mood.load(json.getJSONObject("mood"));
+        return true;
     }
 }
