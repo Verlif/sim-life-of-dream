@@ -40,7 +40,11 @@ public class RuleManager implements CanSave {
     }
 
     public Rule get(String key) {
-        return ruleMap.get(key);
+        Rule rule = ruleMap.get(key);
+        if (rule != null) {
+            return rule.copy();
+        }
+        return null;
     }
 
     @Override

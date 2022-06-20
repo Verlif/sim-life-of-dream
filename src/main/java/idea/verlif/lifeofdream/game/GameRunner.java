@@ -1,4 +1,4 @@
-package idea.verlif.lifeofdream.sys.exec;
+package idea.verlif.lifeofdream.game;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.justsimmand.SimmandManager;
@@ -9,16 +9,18 @@ import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.branch.Branch;
 import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.event.Option;
+import idea.verlif.lifeofdream.domain.event.OptionResult;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.sys.kit.Kit;
-import idea.verlif.lifeofdream.sys.kit.KitImpl;
+import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.BranchManager;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
+import idea.verlif.lifeofdream.tool.ChanceRandom;
 import idea.verlif.lifeofdream.util.DescUtil;
 import idea.verlif.parser.vars.VarsContext;
 import idea.verlif.parser.vars.VarsHandler;
@@ -32,9 +34,9 @@ import java.util.*;
  *
  * @author Verlif
  */
-public class ExecRunner implements CanSave {
+public class GameRunner implements CanSave {
 
-    private static final ExecRunner EXEC_RUNNER = new ExecRunner();
+    private static final GameRunner EXEC_RUNNER = new GameRunner();
 
     private final SimmandManager simmandManager;
 
@@ -56,7 +58,7 @@ public class ExecRunner implements CanSave {
     /**
      * 工具
      */
-    private Kit kit;
+    private final Kit kit;
 
     /**
      * 事件管理器
@@ -96,7 +98,7 @@ public class ExecRunner implements CanSave {
     private final VarsContext varsContext;
     private final AttrHandler attrHandler;
 
-    private ExecRunner() {
+    private GameRunner() {
         this.eventManager = EventManager.getInstance();
         this.optionManager = OptionManager.getInstance();
         this.branchManager = BranchManager.getInstance();
@@ -119,13 +121,18 @@ public class ExecRunner implements CanSave {
                 return new Branch();
             }
         };
-        this.kit = new KitImpl();
+        this.kit = new Kit() {
+            @Override
+            public void message(String message) {
+                super.message(tran(message));
+            }
+        };
 
         this.varsContext = new VarsContextLocal();
         this.attrHandler = new AttrHandler();
     }
 
-    public static ExecRunner getInstance() {
+    public static GameRunner getInstance() {
         return EXEC_RUNNER;
     }
 
@@ -159,8 +166,8 @@ public class ExecRunner implements CanSave {
         branchMap.clear();
     }
 
-    public void setKit(Kit kit) {
-        this.kit = kit;
+    public void setMessageKit(MessageKit kit) {
+        this.kit.setMessageKit(kit);
     }
 
     public List<Event> getPreEvents() {
@@ -214,7 +221,25 @@ public class ExecRunner implements CanSave {
             if (option.getKey().equals(key)) {
                 kit.message(option.getDesc());
                 skipEvent();
-                return execCmd(option.getExec());
+                // 效果选择
+                List<OptionResult> results = option.getResultList();
+                List<OptionResult> readyResults = new ArrayList<>();
+                for (OptionResult result : results) {
+                    if (DescUtil.test(tran(result.getCondition()))) {
+                        readyResults.add(result);
+                    }
+                }
+                ChanceRandom<OptionResult> random = new ChanceRandom<>();
+                for (OptionResult readyResult : readyResults) {
+                    random.add(DescUtil.result(tran(readyResult.getChance())), readyResult);
+                }
+                OptionResult result = random.random();
+                if (result != null) {
+                    kit.message(result.getDesc());
+                    return execCmd(result.getExec());
+                } else {
+                    return Result.ok("ok");
+                }
             }
         }
         return Result.fail("No such option!");
@@ -244,8 +269,8 @@ public class ExecRunner implements CanSave {
             Set<Option> allSet = optionManager.getOptionOfEvent(event.getKey());
             Random random = new Random();
             for (Option option : allSet) {
-                if (DescUtil.test(varsContext.build(option.getCondition(), attrHandler))) {
-                    int chance = DescUtil.result(varsContext.build(option.getChance(), attrHandler));
+                if (DescUtil.test(tran(option.getCondition()))) {
+                    int chance = DescUtil.result(tran(option.getChance()));
                     if (chance > random.nextInt(10000)) {
                         event.getReadyOptions().add(option);
                     }
@@ -267,16 +292,19 @@ public class ExecRunner implements CanSave {
             return Result.fail("Finish!");
         }
         readyEvents.addAll(preEvents);
+        Random random = new Random();
         // 每回合规则触发
         for (Rule rule : world.getRuleOfTurn().values()) {
-            execCmd(rule.getExec());
+            if (DescUtil.test(tran(rule.getCondition()))
+                    && DescUtil.result(tran(rule.getChance())) > random.nextInt(10000)) {
+                execCmd(rule.getExec());
+            }
         }
-        Random random = new Random();
         // 分支触发
         for (Branch branch : branchManager.getBranchMap().values()) {
             if (!branchMap.containsKey(branch.getKey())
-                    && DescUtil.test(varsContext.build(branch.getCondition(), attrHandler))
-                    && DescUtil.result(varsContext.build(branch.getChance(), attrHandler)) > random.nextInt(10000)) {
+                    && DescUtil.test(tran(branch.getCondition()))
+                    && DescUtil.result(tran(branch.getChance())) > random.nextInt(10000)) {
                 addBranch(branch.getKey());
             }
         }
@@ -288,11 +316,11 @@ public class ExecRunner implements CanSave {
             if (set != null) {
                 for (Event event : set) {
                     // 避免事件重复
-                    if (event.getRemain() > 0 && !allKeys.contains(event.getKey())
-                            && DescUtil.test(varsContext.build(event.getCondition(), attrHandler))
-                            && DescUtil.result(varsContext.build(event.getChance(), attrHandler)) > random.nextInt(10000)) {
+                    if (event.enabled() && !allKeys.contains(event.getKey())
+                            && DescUtil.test(tran(event.getCondition()))
+                            && DescUtil.result(tran(event.getChance())) > random.nextInt(10000)) {
                         allKeys.add(event.getKey());
-                        readyEvents.add(event);
+                        addEventToReady(event.getKey(), -1);
                     }
                 }
             }
@@ -302,11 +330,11 @@ public class ExecRunner implements CanSave {
         if (set != null) {
             for (Event event : set) {
                 // 避免事件重复
-                if (event.getRemain() > 0 && !allKeys.contains(event.getKey())
-                        && DescUtil.test(varsContext.build(event.getCondition(), attrHandler))
-                        && DescUtil.result(varsContext.build(event.getChance(), attrHandler)) > random.nextInt(10000)) {
+                if (event.enabled() && !allKeys.contains(event.getKey())
+                        && DescUtil.test(tran(event.getCondition()))
+                        && DescUtil.result(tran(event.getChance())) > random.nextInt(10000)) {
                     allKeys.add(event.getKey());
-                    readyEvents.add(event);
+                    addEventToReady(event.getKey(), -1);
                 }
             }
         }
@@ -335,13 +363,17 @@ public class ExecRunner implements CanSave {
         branchMap.remove(key);
     }
 
+    public boolean hasBranch(String key) {
+        return branchMap.containsKey(key);
+    }
+
     /**
      * 向当前需要触发的事件列表中添加事件
      *
      * @param key   事件key
      * @param index 添加到的序号
      */
-    public void addEventToReady(String key, @SimmParam(defaultVal = "-1") int index) {
+    public boolean addEventToReady(String key, @SimmParam(defaultVal = "-1") int index) {
         Event event = eventManager.getEvent(key);
         if (event != null) {
             if (index == -1 || index > readyEvents.size()) {
@@ -349,7 +381,9 @@ public class ExecRunner implements CanSave {
             } else {
                 readyEvents.add(index, event);
             }
+            return true;
         }
+        return false;
     }
 
     /**
@@ -358,7 +392,7 @@ public class ExecRunner implements CanSave {
      * @param key   事件key
      * @param index 添加到的序号
      */
-    public void addEventToPre(String key, @SimmParam(defaultVal = "-1") int index) {
+    public boolean addEventToPre(String key, @SimmParam(defaultVal = "-1") int index) {
         Event event = eventManager.getEvent(key);
         if (event != null) {
             if (index == -1 || index > readyEvents.size()) {
@@ -366,21 +400,26 @@ public class ExecRunner implements CanSave {
             } else {
                 preEvents.add(index, event);
             }
+            return true;
         }
+        return false;
     }
 
     /**
-     * 使用背包中的物品
+     * 使用背包中的道具
      *
-     * @param key 物品Key
+     * @param key 道具Key
      */
-    public void useItem(String key) {
+    public Result useItem(String key) {
         if (role != null) {
             Item item = role.getBag().get(key);
             if (item != null) {
-                execCmd(item.getOnUse());
+                return Result.ok(execCmd(item.getOnUse()));
+            } else {
+                return Result.fail("No such item!");
             }
         }
+        return Result.fail("Fail");
     }
 
     /**
@@ -399,6 +438,7 @@ public class ExecRunner implements CanSave {
         if (cmd == null || cmd.trim().length() == 0) {
             return Result.ok("No cmd");
         }
+        cmd = tran(cmd);
         String[] ss = cmd.split(";");
         Object[] data = new Object[ss.length];
         for (int i = 0; i < ss.length; i++) {
@@ -455,6 +495,10 @@ public class ExecRunner implements CanSave {
             e.printStackTrace();
             return e.getMessage();
         }
+    }
+
+    private String tran(String desc) {
+        return varsContext.build(desc, attrHandler);
     }
 
     @Override

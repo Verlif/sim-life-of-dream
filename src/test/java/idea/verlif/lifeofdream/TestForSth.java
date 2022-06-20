@@ -9,15 +9,17 @@ import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.game.Game;
 import idea.verlif.lifeofdream.pack.Pack;
-import idea.verlif.lifeofdream.sys.exec.ExecRunner;
-import idea.verlif.lifeofdream.sys.exec.Result;
-import idea.verlif.lifeofdream.sys.kit.Kit;
+import idea.verlif.lifeofdream.game.GameRunner;
+import idea.verlif.lifeofdream.game.Result;
+import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
+import idea.verlif.lifeofdream.sys.manager.ItemManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.PackManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,7 +28,7 @@ import java.util.Scanner;
  */
 public class TestForSth {
 
-    private static final ExecRunner EXEC_RUNNER = ExecRunner.getInstance();
+    private static final GameRunner EXEC_RUNNER = GameRunner.getInstance();
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -43,8 +45,14 @@ public class TestForSth {
             Game game = Game.newGame(packs.get(0));
             System.out.println(game.exportData());
         }
-        EXEC_RUNNER.setKit(createKit());
+        EXEC_RUNNER.setMessageKit(createMessageKit());
         System.out.println(EXEC_RUNNER.start().getM());
+
+        Item item = ItemManager.getInstance().get("小学作业");
+        item.setName("hahahaha");
+        System.out.println(item.save());
+        System.out.println(ItemManager.getInstance().get("小学作业").save());
+
         while (true) {
             System.out.println("----------------------------------------------------------------\n" +
                     "1. 显示当前事件\n" +
@@ -122,7 +130,7 @@ public class TestForSth {
 
     @Test
     public void test() {
-        ExecRunner runner = ExecRunner.getInstance();
+        GameRunner runner = GameRunner.getInstance();
         Game game = new Game(runner);
         runner.init(new Role(), new World());
         initEventManager();
@@ -135,6 +143,29 @@ public class TestForSth {
         System.out.println("exportData: " + s);
         Game loadedGame = Game.loadData(s);
         System.out.println("loadedGame: " + loadedGame.exportData());
+    }
+
+    private String[] split(String str) {
+        char[] chars = str.toCharArray();
+        boolean in = false;
+        List<String> list = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (char c : chars) {
+            if (in) {
+                if (c == '\"') {
+                    in = false;
+                    list.add(sb.toString());
+                    sb.setLength(0);
+                } else {
+                    sb.append(c);
+                }
+            } else {
+                if (c == '\"') {
+                    in = true;
+                }
+            }
+        }
+        return list.toArray(new String[0]);
     }
 
     public void initEventManager() {
@@ -151,10 +182,10 @@ public class TestForSth {
         System.out.println(JSONObject.toJSONString(om.getOptionOfEvent("走路")));
     }
 
-    private Kit createKit() {
-        return new Kit() {
+    private MessageKit createMessageKit() {
+        return new MessageKit() {
             @Override
-            public void message(String message) {
+            public void show(String message) {
                 System.out.println(message);
             }
         };

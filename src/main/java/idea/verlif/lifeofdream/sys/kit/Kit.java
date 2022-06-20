@@ -5,12 +5,24 @@ package idea.verlif.lifeofdream.sys.kit;
  *
  * @author Verlif
  */
-public interface Kit {
+public class Kit {
 
-    /**
-     * 输出信息
-     *
-     * @param message 信息文本
-     */
-    void message(String message);
+    private MessageKit messageKit;
+    
+    public Kit() {
+        messageKit = message -> {
+        };
+    }
+
+    public MessageKit getMessageKit() {
+        return messageKit;
+    }
+
+    public void setMessageKit(MessageKit messageKit) {
+        this.messageKit = messageKit;
+    }
+
+    public void message(String message) {
+        messageKit.show(message);
+    }
 }

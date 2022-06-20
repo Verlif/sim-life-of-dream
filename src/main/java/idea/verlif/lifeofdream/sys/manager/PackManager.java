@@ -37,7 +37,8 @@ public class PackManager {
                 Pack pack = json.to(Pack.class);
                 packs.add(pack);
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

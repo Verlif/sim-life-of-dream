@@ -45,12 +45,13 @@ public class Option implements CanSave {
     private String condition;
 
     /**
-     * 触发效果
+     * 触发效果组
      */
-    private String exec;
+    private final List<OptionResult> resultList;
 
     public Option() {
         afterEvents = new ArrayList<>();
+        resultList = new ArrayList<>();
     }
 
     public String getKey() {
@@ -93,12 +94,8 @@ public class Option implements CanSave {
         this.condition = condition;
     }
 
-    public String getExec() {
-        return exec;
-    }
-
-    public void setExec(String exec) {
-        this.exec = exec;
+    public List<OptionResult> getResultList() {
+        return resultList;
     }
 
     public List<String> getAfterEvents() {
@@ -130,7 +127,7 @@ public class Option implements CanSave {
         json.put("desc", desc);
         json.put("cha", chance);
         json.put("con", condition);
-        json.put("exec", exec);
+        json.put("res", resultList);
         json.put("aes", afterEvents);
         return json;
     }
@@ -145,9 +142,16 @@ public class Option implements CanSave {
         desc = json.getString("desc");
         chance = json.getString("cha");
         condition = json.getString("con");
-        exec = json.getString("exec");
+        resultList.clear();
+        resultList.addAll(json.getList("res", OptionResult.class));
         afterEvents.clear();
         afterEvents.addAll(json.getList("aes", String.class));
         return true;
+    }
+
+    public Option copy() {
+        Option option = new Option();
+        option.load(save());
+        return option;
     }
 }

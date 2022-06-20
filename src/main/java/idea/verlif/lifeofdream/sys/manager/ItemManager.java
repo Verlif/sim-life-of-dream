@@ -34,7 +34,11 @@ public class ItemManager implements CanSave {
     }
 
     public Item get(String key) {
-        return itemMap.get(key);
+        Item item = itemMap.get(key);
+        if (item != null) {
+            return item.copy();
+        }
+        return null;
     }
 
     public void add(Item item) {

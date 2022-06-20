@@ -1,4 +1,4 @@
-package idea.verlif.lifeofdream.sys.exec;
+package idea.verlif.lifeofdream.game;
 
 /**
  * 执行结果

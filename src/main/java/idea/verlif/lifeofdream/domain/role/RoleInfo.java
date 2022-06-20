@@ -34,10 +34,6 @@ public class RoleInfo implements CanSave {
         return name;
     }
 
-    public void name(String name) {
-        this.name = name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -55,10 +51,6 @@ public class RoleInfo implements CanSave {
     }
 
     public void setSex(int sex) {
-        this.sex = sex;
-    }
-
-    public void sex(int sex) {
         this.sex = sex;
     }
 

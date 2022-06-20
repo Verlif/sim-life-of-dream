@@ -117,4 +117,10 @@ public class Branch implements CanSave {
         exec = json.getString("exec");
         return true;
     }
+
+    public Branch copy() {
+        Branch branch = new Branch();
+        branch.load(save());
+        return branch;
+    }
 }

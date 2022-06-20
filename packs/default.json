@@ -2,7 +2,7 @@
   "story":{
     "name": "一个简单的故事",
     "desc": "故事开始了",
-    "exec": "world.addRuleOfTurn 年龄提升"
+    "exec": "world.addRuleOfTurn 年龄提升;world.addRuleOfTurn 测试;world.addRuleOfTurn 测试3;role.info.age.up 5"
   },
   "branches": [
     {
@@ -27,9 +27,10 @@
       ],
       "key": "小学交作业",
       "title": "交作业",
+      "remain": "-1",
       "desc": "要交作业了，但是你似乎是把作业忘在家里了，现在该怎么办呢？",
-      "chance": "8000",
-      "exec": "kit.message 触发事件"
+      "chance": "0",
+      "exec": "kit.message 触发事件;addEventToReady 小学交作业"
     }
   ],
   "options": [
@@ -40,7 +41,16 @@
       "key": "小学交作业.请假回家去拿",
       "title": "请假回家去拿",
       "desc": "你向老师请个假，去回家那作业",
-      "exec": ""
+      "resultList": [
+        {
+          "chance": "400",
+          "desc": "老师希望你下次注意，也没有让你回去拿"
+        },
+        {
+          "chance": "400",
+          "desc": "老师同意你回家去拿了"
+        }
+      ]
     },
     {
       "afterEvents": [
@@ -49,18 +59,59 @@
       "key": "小学交作业.直接说没带",
       "title": "没带作业",
       "desc": "你向老师实话实说，没有带作业",
-      "exec": ""
+      "resultList": [
+        {
+          "chance": "400",
+          "desc": "老师希望你下次注意，并没有批评你"
+        },
+        {
+          "chance": "400",
+          "desc": "老师说你没带就是没写",
+          "exec": "role.attr.mood.down 20"
+        }
+      ]
     }
   ],
   "items": [
-
+    {
+      "name": "小学作业",
+      "key": "小学作业",
+      "value": 1,
+      "onUse": "kit.message 使用了小学作业。",
+      "onAdd": "kit.message 添加了小学作业。",
+      "onRemove": "kit.message 移除了小学作业。"
+    }
   ],
   "rules": [
     {
       "name": "年龄提升",
       "key": "年龄提升",
       "desc": "每回合+1年龄",
-      "exec": "role.info.age.up 1;kit.message 你又涨了一岁。"
+      "exec": "role.info.age.up 1;kit.message \"你又涨了1岁，现在 @{role.info.age.value} 岁了。\""
+    },
+    {
+      "name": "测试",
+      "key": "测试",
+      "desc": "用来测试的",
+      "condition": "@{role.info.age.value} > 7",
+      "exec": "kit.message \"@{role.info.age.value} > 7\""
+    },
+    {
+      "name": "测试3",
+      "key": "测试3",
+      "desc": "用来测试的3",
+      "condition": "@{role.info.age.bt 10}",
+      "exec": "kit.message \"role.info.age.bt 10\""
+    }
+  ],
+  "tags": [
+    {
+      "name": "生病",
+      "key": "生病",
+      "value": 1,
+      "visible": true,
+      "onAdd": "",
+      "onRemove": ""
     }
   ]
 }

@@ -1,10 +1,11 @@
 package idea.verlif.lifeofdream.domain.role;
 
 import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.justsimmand.anno.SimmParam;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
-import idea.verlif.lifeofdream.sys.exec.ExecRunner;
+import idea.verlif.lifeofdream.game.GameRunner;
 import idea.verlif.lifeofdream.sys.manager.TagManager;
 
 import java.util.Map;
@@ -37,21 +38,82 @@ public class RoleTag implements CanSave {
         return !tagMap.containsKey(key);
     }
 
-    public void add(String key) {
+    /**
+     * 获取标签值
+     *
+     * @param key 标签Key
+     * @return 标签值。当标签不存在时，返回-1。
+     */
+    public int value(String key) {
+        Tag tag = tagMap.get(key);
+        if (tag == null) {
+            return -1;
+        }
+        return tag.value();
+    }
+
+    public void up(String key, @SimmParam(defaultVal = "1") int up) {
+        Tag tag = tagMap.get(key);
+        if (tag == null) {
+            tag = add(key);
+        }
+        if (tag != null) {
+            tag.up(up);
+        }
+    }
+
+    public void down(String key, @SimmParam(defaultVal = "1") int down) {
+        up(key, -down);
+    }
+
+    public boolean eq(String key, int value) {
+        Tag tag = tagMap.get(key);
+        if (tag != null) {
+            return tag.eq(value);
+        }
+        return false;
+    }
+
+    public boolean bt(String key, int value) {
+        Tag tag = tagMap.get(key);
+        if (tag != null) {
+            return tag.bt(value);
+        }
+        return false;
+    }
+
+    public boolean lt(String key, int value) {
+        Tag tag = tagMap.get(key);
+        if (tag != null) {
+            return tag.lt(value);
+        }
+        return false;
+    }
+
+    public boolean ne(String key, int value) {
+        Tag tag = tagMap.get(key);
+        if (tag != null) {
+            return tag.ne(value);
+        }
+        return false;
+    }
+
+    public Tag add(String key) {
         TagManager tagManager = TagManager.getInstance();
-        Tag tag = tagManager.getTag(key);
+        Tag tag = tagManager.get(key);
         if (tag != null) {
             tagMap.put(key, tag);
-            ExecRunner execRunner = ExecRunner.getInstance();
-            execRunner.execCmd(tag.getOnAdd());
+            GameRunner gameRunner = GameRunner.getInstance();
+            gameRunner.execCmd(tag.getOnAdd());
         }
+        return tag;
     }
 
     public void remove(String key) {
         Tag tag = tagMap.remove(key);
         if (tag != null) {
-            ExecRunner execRunner = ExecRunner.getInstance();
-            execRunner.execCmd(tag.getOnRemove());
+            GameRunner gameRunner = GameRunner.getInstance();
+            gameRunner.execCmd(tag.getOnRemove());
         }
     }
 

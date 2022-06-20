@@ -2,6 +2,7 @@ package idea.verlif.lifeofdream.domain.role.extra;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.standard.NumberValue;
 
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
  *
  * @author Verlif
  */
-public class Tag implements CanSave {
+public class Tag implements NumberValue, CanSave {
 
     /**
      * 标签名称
@@ -131,5 +132,21 @@ public class Tag implements CanSave {
         onAdd = json.getString("add");
         onRemove = json.getString("rem");
         return true;
+    }
+
+    @Override
+    public int value() {
+        return value;
+    }
+
+    @Override
+    public void up(int up) {
+        value += up;
+    }
+
+    public Tag copy() {
+        Tag tag = new Tag();
+        tag.load(save());
+        return tag;
     }
 }

@@ -36,7 +36,11 @@ public class BranchManager implements CanSave {
     }
 
     public Branch getBranch(String key) {
-        return branchMap.get(key);
+        Branch branch = branchMap.get(key);
+        if (branch != null) {
+            return branch.copy();
+        }
+        return null;
     }
 
     public void addBranch(Branch branch) {

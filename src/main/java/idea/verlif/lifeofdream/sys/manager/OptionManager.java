@@ -40,11 +40,20 @@ public class OptionManager implements CanSave {
     }
 
     public Option getOption(String key) {
-        return allOptionMap.get(key);
+        Option option = allOptionMap.get(key);
+        if (option != null) {
+            return option.copy();
+        }
+        return null;
     }
 
     public Set<Option> getOptionOfEvent(String key) {
-        return allEventOptionMap.computeIfAbsent(key, k -> new HashSet<>());
+        Set<Option> set = allEventOptionMap.computeIfAbsent(key, k -> new HashSet<>());
+        Set<Option> setCopy = new HashSet<>();
+        for (Option option : set) {
+            setCopy.add(option.copy());
+        }
+        return setCopy;
     }
 
     public Map<String, Set<Option>> getAllEventOptionMap() {

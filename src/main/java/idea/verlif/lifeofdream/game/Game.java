@@ -10,7 +10,6 @@ import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.pack.Pack;
-import idea.verlif.lifeofdream.sys.exec.ExecRunner;
 import idea.verlif.lifeofdream.sys.manager.*;
 
 import java.util.HashSet;
@@ -23,15 +22,15 @@ import java.util.Set;
  */
 public class Game {
 
-    private final ExecRunner execRunner;
+    private final GameRunner gameRunner;
 
-    public Game(ExecRunner execRunner) {
-        this.execRunner = execRunner;
+    public Game(GameRunner gameRunner) {
+        this.gameRunner = gameRunner;
     }
 
     public static Game loadData(String data) {
         JSONObject json = JSONObject.parseObject(data);
-        ExecRunner er = ExecRunner.getInstance();
+        GameRunner er = GameRunner.getInstance();
         er.load(json.getJSONObject("er"));
 
         BranchManager bm = BranchManager.getInstance();
@@ -58,7 +57,7 @@ public class Game {
      * @return 新游戏
      */
     public static Game newGame(Pack main, Pack... addon) {
-        ExecRunner er = ExecRunner.getInstance();
+        GameRunner er = GameRunner.getInstance();
         er.setStory(main.getStory());
         er.init(new Role(), new World());
 
@@ -112,7 +111,7 @@ public class Game {
 
     public String exportData() {
         JSONObject json = new JSONObject();
-        json.put("er", execRunner.save());
+        json.put("er", gameRunner.save());
 
         BranchManager bm = BranchManager.getInstance();
         json.put("bm", bm.save());

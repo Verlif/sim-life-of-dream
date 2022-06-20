@@ -1,5 +1,7 @@
 package idea.verlif.lifeofdream.domain.role.extra;
 
+import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.standard.LevelValue;
 import idea.verlif.lifeofdream.standard.NumberValue;
 
@@ -8,7 +10,7 @@ import idea.verlif.lifeofdream.standard.NumberValue;
  *
  * @author Verlif
  */
-public class Skill implements NumberValue, LevelValue {
+public class Skill implements NumberValue, LevelValue, CanSave {
 
     /**
      * 技能名称
@@ -91,5 +93,25 @@ public class Skill implements NumberValue, LevelValue {
         if (level < 0) {
             level = 0;
         }
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("lel", level);
+        json.put("val", value);
+        json.put("next", next);
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        if (json == null) {
+            return false;
+        }
+        level = json.getIntValue("lel");
+        value = json.getIntValue("val");
+        next = json.getIntValue("next");
+        return true;
     }
 }

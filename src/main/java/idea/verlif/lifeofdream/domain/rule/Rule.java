@@ -28,6 +28,11 @@ public class Rule implements CanSave {
     private String desc;
 
     /**
+     * 规则触发概率
+     */
+    private String chance = "10000";
+
+    /**
      * 执行条件
      */
     private String condition;
@@ -59,6 +64,14 @@ public class Rule implements CanSave {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getChance() {
+        return chance;
+    }
+
+    public void setChance(String chance) {
+        this.chance = chance;
     }
 
     public String getCondition() {
@@ -100,6 +113,7 @@ public class Rule implements CanSave {
         json.put("name", name);
         json.put("key", key);
         json.put("desc", desc);
+        json.put("cha", chance);
         json.put("con", condition);
         json.put("exec", exec);
         return json;
@@ -113,8 +127,15 @@ public class Rule implements CanSave {
         name = json.getString("name");
         key = json.getString("key");
         desc = json.getString("desc");
+        chance = json.getString("cha");
         condition = json.getString("con");
         exec = json.getString("exec");
         return true;
+    }
+
+    public Rule copy() {
+        Rule rule = new Rule();
+        rule.load(save());
+        return rule;
     }
 }

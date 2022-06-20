@@ -7,24 +7,24 @@ import idea.verlif.lifeofdream.standard.NumberValue;
 import java.util.Objects;
 
 /**
- * 物品
+ * 道具
  *
  * @author Verlif
  */
 public class Item implements NumberValue, CanSave {
 
     /**
-     * 物品名称
+     * 道具名称
      */
     private String name;
 
     /**
-     * 物品key
+     * 道具key
      */
     private String key;
 
     /**
-     * 物品数量
+     * 道具数量
      */
     private int value = 0;
 
@@ -34,12 +34,12 @@ public class Item implements NumberValue, CanSave {
     private String onUse;
 
     /**
-     * 添加物品时触发。每个物品数量都会触发一次。
+     * 添加道具时触发。每个道具数量都会触发一次。
      */
     private String onAdd;
 
     /**
-     * 移除物品时触发。每个物品数量都会触发一次。
+     * 移除道具时触发。每个道具数量都会触发一次。
      */
     private String onRemove;
 
@@ -141,5 +141,11 @@ public class Item implements NumberValue, CanSave {
         onAdd = json.getString("add");
         onRemove = json.getString("rem");
         return true;
+    }
+
+    public Item copy() {
+        Item item = new Item();
+        item.load(save());
+        return item;
     }
 }

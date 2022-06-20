@@ -57,7 +57,11 @@ public class EventManager implements CanSave {
     }
 
     public Event getEvent(String key) {
-        return allEventMap.get(key);
+        Event event = allEventMap.get(key);
+        if (event != null) {
+            return event.copy();
+        }
+        return null;
     }
 
     public Set<Event> getEventOfBranch(String key) {

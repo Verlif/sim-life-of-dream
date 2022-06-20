@@ -23,8 +23,7 @@ public class DescUtil {
         for (String line : lines) {
             String[] ss = line.split("&");
             int count = 0;
-            for (String s : ss) {
-                String atom = s.trim();
+            for (String atom : ss) {
                 if (judge(atom)) {
                     count++;
                 }
@@ -50,7 +49,8 @@ public class DescUtil {
         StringBuilder lsb = new StringBuilder();
         StringBuilder rsb = new StringBuilder();
         char j = 'a';
-        char[] chars = atom.replace(" ", "").toCharArray();
+        atom = atom.replace(" ", "");
+        char[] chars = atom.toCharArray();
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             if (c == '<' || c == '>' || c == '=') {
@@ -60,9 +60,9 @@ public class DescUtil {
             }
             lsb.append(c);
         }
-        // 过滤非法语句
+        // 非数字判定
         if (j == 'a') {
-            return false;
+            return Boolean.parseBoolean(atom);
         }
         int left = result(lsb.toString());
         int right = result(rsb.toString());

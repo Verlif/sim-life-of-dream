@@ -152,7 +152,14 @@ public class Event implements CanSave {
     }
 
     public void setRemain(int remain) {
+        if (remain < -1) {
+            remain = -1;
+        }
         this.remain = remain;
+    }
+
+    public boolean enabled() {
+        return remain != 0;
     }
 
     public void setDone(boolean done) {
@@ -215,5 +222,11 @@ public class Event implements CanSave {
         remain = json.getIntValue("rem");
         done = json.getBooleanValue("done");
         return true;
+    }
+
+    public Event copy() {
+        Event event = new Event();
+        event.load(save());
+        return event;
     }
 }

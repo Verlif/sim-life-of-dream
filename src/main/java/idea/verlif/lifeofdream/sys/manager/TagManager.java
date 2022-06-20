@@ -33,8 +33,12 @@ public class TagManager implements CanSave {
         return tagMap;
     }
 
-    public Tag getTag(String key) {
-        return tagMap.get(key);
+    public Tag get(String key) {
+        Tag tag = tagMap.get(key);
+        if (tag != null) {
+            return tag.copy();
+        }
+        return null;
     }
 
     public void addTag(Tag tag) {

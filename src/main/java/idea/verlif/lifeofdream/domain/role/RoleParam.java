@@ -41,6 +41,11 @@ public class RoleParam implements CanSave {
      */
     private final Param spirit;
 
+    /**
+     * 专注
+     */
+    private final Param attentive;
+
     public RoleParam() {
         charm = new Param("魅力");
         luck = new Param("幸运");
@@ -48,6 +53,7 @@ public class RoleParam implements CanSave {
         perceptual = new Param("感性");
         sport = new Param("运动");
         spirit = new Param("精神");
+        attentive = new Param("专注");
     }
 
     public Param getCharm() {
@@ -74,6 +80,10 @@ public class RoleParam implements CanSave {
         return spirit;
     }
 
+    public Param getAttentive() {
+        return attentive;
+    }
+
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
@@ -83,6 +93,7 @@ public class RoleParam implements CanSave {
         json.put("per", perceptual.save());
         json.put("spo", sport.save());
         json.put("spi", spirit.save());
+        json.put("att", attentive.save());
         return json;
     }
 
@@ -97,6 +108,7 @@ public class RoleParam implements CanSave {
         perceptual.load(json.getJSONObject("per"));
         sport.load(json.getJSONObject("spo"));
         spirit.load(json.getJSONObject("spi"));
+        attentive.load(json.getJSONObject("att"));
         return true;
     }
 }
