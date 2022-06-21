@@ -38,9 +38,10 @@ public class TestForSth {
     public void simulation() {
         PackManager pm = PackManager.getInstance();
         pm.loadFromFile(new File("packs\\testOfLife.json"));
+        pm.loadFromFile(new File("packs\\testOfLife2.json"));
         List<Pack> packs = pm.getPacks();
         if (packs.size() > 0) {
-            Game game = Game.newGame(packs.get(0));
+            Game game = Game.newGame(packs.toArray(new Pack[0]));
             System.out.println(game.exportData());
         }
         GAME_RUNNER.setMessageKit(createMessageKit());

@@ -1,0 +1,196 @@
+{
+    "story": {
+        "name": "一个简单的故事",
+        "desc": "故事开始了"
+    },
+    "branches": [
+        {
+            "name": "小学",
+            "key": "小学",
+            "chance": "10000",
+            "condition": "@{role.info.age.value}>5 & @{role.info.age.value}<8",
+            "exec": "kit.message 你开始上小学了。;role.bag.add 小学作业"
+        },
+        {
+            "name": "初中",
+            "key": "初中",
+            "chance": "10000",
+            "condition": "@{role.info.age.value}>11 & @{role.info.age.value}<14",
+            "exec": "kit.message 你开始上初中了。;removeBranch 小学;role.bag.remove 小学作业"
+        },
+        {
+            "name": "高中",
+            "key": "高中",
+            "chance": "10000",
+            "condition": "@{role.info.age.value}>13 & @{role.info.age.value}<18",
+            "exec": "kit.message 你开始上高中了。;removeBranch 初中"
+        },
+        {
+            "name": "大学",
+            "key": "大学",
+            "chance": "10000",
+            "exec": "kit.message 你开始上大学了。;removeBranch 高中"
+        }
+    ],
+    "events": [
+        {
+            "afterBranches": [
+                "小学"
+            ],
+            "key": "小学交作业",
+            "title": "交作业",
+            "remain": "1",
+            "desc": "要交作业了，但是你似乎是把作业忘在家里了，现在该怎么办呢？",
+            "chance": "10000",
+            "exec": "kit.message 触发事件"
+        },
+        {
+            "key": "测试",
+            "title": "交作业",
+            "remain": "1",
+            "desc": "要交作业了，但是你似乎是把作业忘在家里了，现在该怎么办呢？",
+            "chance": "@{role.tag.value 季节}",
+            "condition": "@{role.tag.value 季节} % 4 = 1",
+            "exec": "kit.message 触发事件;addEventToReady 小学交作业"
+        }
+    ],
+    "options": [
+        {
+            "followEvents": [
+                "小学交作业"
+            ],
+            "key": "小学交作业.直接说没带",
+            "title": "没带作业2",
+            "desc": "你向老师实话实说，没有带作业",
+            "resultList": [
+                {
+                    "chance": "400",
+                    "desc": "老师希望你下次注意，并没有批评你"
+                },
+                {
+                    "chance": "400",
+                    "desc": "老师说你没带就是没写",
+                    "exec": "role.attr.mood.down 20"
+                }
+            ]
+        },
+        {
+            "followEvents": [
+                "小学交作业"
+            ],
+            "key": "小学交作业.直接说没带",
+            "title": "没带作业3",
+            "desc": "你向老师实话实说，没有带作业",
+            "resultList": [
+                {
+                    "chance": "400",
+                    "desc": "老师希望你下次注意，并没有批评你"
+                },
+                {
+                    "chance": "400",
+                    "desc": "老师说你没带就是没写",
+                    "exec": "role.attr.mood.down 20"
+                }
+            ]
+        }
+    ],
+    "items": [
+        {
+            "name": "小学作业",
+            "key": "小学作业",
+            "value": 1,
+            "onUse": "kit.message 使用了小学作业。",
+            "onAdd": "kit.message 添加了小学作业。",
+            "onRemove": "kit.message 移除了小学作业。"
+        }
+    ],
+    "rules": [
+        {
+            "name": "年龄提升",
+            "key": "年龄提升",
+            "desc": "每回合+1年龄",
+            "condition": "@{role.tag.value 季节} % 4 = 1",
+            "exec": "role.info.age.up 1;kit.message \"你又涨了1岁。\""
+        },
+        {
+            "name": "季节变化",
+            "key": "季节变化",
+            "desc": "季节切换变换",
+            "exec": "role.tag.up 季节 1"
+        },
+        {
+            "name": "季节轮回",
+            "key": "季节轮回",
+            "desc": "季节轮回",
+            "condition": "@{role.tag.value 季节} = 5",
+            "exec": "role.tag.down 季节 4;kit.message 新的一年开始了。"
+        },
+        {
+            "name": "春",
+            "key": "季节描述.春",
+            "desc": "季节 -> 春天",
+            "condition": "@{role.tag.value 季节} % 4 = 1",
+            "exec": "kit.message \"季节 -> 春天\""
+        },
+        {
+            "name": "夏",
+            "key": "季节描述.夏",
+            "desc": "季节 -> 夏天",
+            "condition": "@{role.tag.value 季节} = 2",
+            "exec": "kit.message \"季节 -> 夏天\""
+        },
+        {
+            "name": "秋",
+            "key": "季节描述.秋",
+            "desc": "季节 -> 秋天",
+            "condition": "@{role.tag.value 季节} = 3",
+            "exec": "kit.message \"季节 -> 秋天\""
+        },
+        {
+            "name": "冬",
+            "key": "季节描述.冬",
+            "desc": "季节 -> 冬天",
+            "condition": "@{role.tag.value 季节} = 4",
+            "exec": "kit.message \"季节 -> 冬天\""
+        },
+        {
+            "name": "生病",
+            "key": "生病",
+            "desc": "随机生病",
+            "chance": "500",
+            "condition": "@{role.tag.hasno 生病}",
+            "exec": "role.tag.add 生病"
+        },
+        {
+            "name": "病情加重",
+            "key": "病情加重",
+            "desc": "生病没有治愈时，会加重病情",
+            "condition": "@{role.tag.has 生病}",
+            "exec": "role.attr.health.down 10;kit.message 你似乎越来越不舒服了。"
+        },
+        {
+            "name": "病情自愈",
+            "key": "病情自愈",
+            "desc": "生病时有可能自愈",
+            "chance": "1000",
+            "condition": "@{role.tag.has 生病}",
+            "exec": "role.tag.remove 生病"
+        }
+    ],
+    "tags": [
+        {
+            "name": "生病",
+            "key": "生病",
+            "value": 1,
+            "visible": true,
+            "onAdd": "kit.message 你感觉身体有些不舒服。",
+            "onRemove": "kit.message 你的病痊愈了。"
+        },
+        {
+            "name": "季节",
+            "key": "季节",
+            "value": 1,
+            "visible": true
+        }
+    ]
+}

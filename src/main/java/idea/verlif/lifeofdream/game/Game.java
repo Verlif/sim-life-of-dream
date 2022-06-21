@@ -52,22 +52,24 @@ public class Game {
     /**
      * 从资源包中创建新游戏
      *
-     * @param main  主故事包
-     * @param addon 拓展包
+     * @param packs 资源包
      * @return 新游戏
      */
-    public static Game newGame(Pack main, Pack... addon) {
+    public static Game newGame(Pack... packs) {
         GameRunner er = GameRunner.getInstance();
-        er.addStory(main.getStory());
         er.init(new Role(), new World());
 
-        Set<Branch> branches = new HashSet<>(main.getBranches());
-        Set<Event> events = new HashSet<>(main.getEvents());
-        Set<Item> items = new HashSet<>(main.getItems());
-        Set<Option> options = new HashSet<>(main.getOptions());
-        Set<Rule> rules = new HashSet<>(main.getRules());
-        Set<Tag> tags = new HashSet<>(main.getTags());
-        for (Pack pack : addon) {
+        Set<Branch> branches = new HashSet<>();
+        Set<Event> events = new HashSet<>();
+        Set<Item> items = new HashSet<>();
+        Set<Option> options = new HashSet<>();
+        Set<Rule> rules = new HashSet<>();
+        Set<Tag> tags = new HashSet<>();
+        for (Pack pack : packs) {
+            er.addStory(pack.getStory());
+        }
+        for (int i = packs.length - 1; i > -1; i--) {
+            Pack pack = packs[i];
             branches.addAll(pack.getBranches());
             events.addAll(pack.getEvents());
             items.addAll(pack.getItems());
