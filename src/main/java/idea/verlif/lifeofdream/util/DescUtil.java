@@ -118,13 +118,15 @@ public class DescUtil {
             // 每组处理
             char[] gs = s.toCharArray();
             for (char g : gs) {
-                if (g == '*' || g == '/') {
+                if (g == '*' || g == '/' || g == '%') {
                     int t = Integer.parseInt(sb.toString());
                     sb.setLength(0);
                     if (multiTemp == '*') {
                         result *= t;
                     } else if (multiTemp == '/') {
                         result /= t;
+                    } else if (multiTemp == '%') {
+                        result %= t;
                     } else {
                         result = t;
                     }
@@ -140,6 +142,8 @@ public class DescUtil {
                     result *= t;
                 } else if (multiTemp == '/') {
                     result /= t;
+                } else if (multiTemp == '%') {
+                    result %= t;
                 } else {
                     result = t;
                 }

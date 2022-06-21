@@ -17,7 +17,7 @@ public class Option implements CanSave {
     /**
      * 衔接的事件Key列表
      */
-    private final List<String> afterEvents;
+    private final List<String> followEvents;
 
     /**
      * 选项key
@@ -50,7 +50,7 @@ public class Option implements CanSave {
     private final List<OptionResult> resultList;
 
     public Option() {
-        afterEvents = new ArrayList<>();
+        followEvents = new ArrayList<>();
         resultList = new ArrayList<>();
     }
 
@@ -98,8 +98,8 @@ public class Option implements CanSave {
         return resultList;
     }
 
-    public List<String> getAfterEvents() {
-        return afterEvents;
+    public List<String> getFollowEvents() {
+        return followEvents;
     }
 
     @Override
@@ -128,7 +128,7 @@ public class Option implements CanSave {
         json.put("cha", chance);
         json.put("con", condition);
         json.put("res", resultList);
-        json.put("aes", afterEvents);
+        json.put("aes", followEvents);
         return json;
     }
 
@@ -144,8 +144,8 @@ public class Option implements CanSave {
         condition = json.getString("con");
         resultList.clear();
         resultList.addAll(json.getList("res", OptionResult.class));
-        afterEvents.clear();
-        afterEvents.addAll(json.getList("aes", String.class));
+        followEvents.clear();
+        followEvents.addAll(json.getList("aes", String.class));
         return true;
     }
 

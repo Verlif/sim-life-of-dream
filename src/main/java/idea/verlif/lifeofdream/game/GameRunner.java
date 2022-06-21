@@ -43,7 +43,7 @@ public class GameRunner implements CanSave {
     /**
      * 故事数据
      */
-    private Story story;
+    private final List<Story> stories;
 
     /**
      * 角色数据
@@ -103,6 +103,7 @@ public class GameRunner implements CanSave {
         this.optionManager = OptionManager.getInstance();
         this.branchManager = BranchManager.getInstance();
         this.simmandManager = new SimmandManager();
+        this.stories = new ArrayList<>();
         this.readyEvents = new CanSavedList<Event>() {
             @Override
             protected Event getNewElement() {
@@ -136,12 +137,12 @@ public class GameRunner implements CanSave {
         return EXEC_RUNNER;
     }
 
-    public void setStory(Story story) {
-        this.story = story;
+    public void addStory(Story... stories) {
+        Collections.addAll(this.stories, stories);
     }
 
-    public Story getStory() {
-        return story;
+    public List<Story> getStories() {
+        return stories;
     }
 
     public Role getRole() {
@@ -188,11 +189,14 @@ public class GameRunner implements CanSave {
      * @return 开始结果
      */
     public Result start() {
-        if (story == null) {
+        if (stories == null) {
             return Result.fail("No story!");
         }
-        kit.message(story.getDesc());
-        return execCmd(story.getExec());
+        for (Story story : stories) {
+            kit.message(story.getDesc());
+            execCmd(story.getExec());
+        }
+        return Result.ok("Start!");
     }
 
     /**
@@ -207,7 +211,7 @@ public class GameRunner implements CanSave {
     }
 
     /**
-     * 执行事件选项
+     * 执行事件选项。执行后，事件会自动移除。
      *
      * @param key 选项Key
      * @return 执行结果
@@ -259,7 +263,10 @@ public class GameRunner implements CanSave {
             return event;
         }
         execCmd(event.getExec());
-        event.setRemain(event.getRemain() - 1);
+        Event rawEvent = eventManager.getRawEvent(event.getKey());
+        if (rawEvent != null) {
+            rawEvent.setRemain(event.getRemain() - 1);
+        }
         if (event.getOptions().size() == 0) {
             event.getOptions().addAll(optionManager.getOptionOfEvent(event.getKey()));
         }
@@ -405,6 +412,16 @@ public class GameRunner implements CanSave {
         return false;
     }
 
+    public boolean canUseItem(String key) {
+        if (role != null) {
+            Item item = role.getBag().get(key);
+            if (item != null) {
+                return DescUtil.test(tran(item.getCondition()));
+            }
+        }
+        return false;
+    }
+
     /**
      * 使用背包中的道具
      *
@@ -414,7 +431,9 @@ public class GameRunner implements CanSave {
         if (role != null) {
             Item item = role.getBag().get(key);
             if (item != null) {
-                return Result.ok(execCmd(item.getOnUse()));
+                if (DescUtil.test(tran(item.getCondition()))) {
+                    return Result.ok(execCmd(item.getOnUse()));
+                }
             } else {
                 return Result.fail("No such item!");
             }
@@ -504,8 +523,8 @@ public class GameRunner implements CanSave {
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
-        if (story != null) {
-            json.put("sto", story.save());
+        if (stories != null) {
+            json.put("sto", stories);
         }
         if (role != null) {
             json.put("role", role.save());
@@ -513,6 +532,7 @@ public class GameRunner implements CanSave {
         if (world != null) {
             json.put("wor", world.save());
         }
+        json.put("kit", kit.save());
         json.put("res", readyEvents.save());
         json.put("pes", preEvents.save());
         json.put("bm", branchMap.save());
@@ -524,12 +544,12 @@ public class GameRunner implements CanSave {
         if (json == null) {
             return false;
         }
-        story = new Story();
-        story.load(json.getJSONObject("sto"));
+        stories.addAll(json.getList("sto", Story.class));
         role = new Role();
         role.load(json.getJSONObject("role"));
         world = new World();
         world.load(json.getJSONObject("wor"));
+        kit.load(json.getJSONObject("kit"));
         readyEvents.clear();
         readyEvents.load(json.getJSONObject("res"));
         preEvents.clear();

@@ -35,7 +35,7 @@
   ],
   "options": [
     {
-      "afterEvents": [
+      "followEvents": [
         "小学交作业"
       ],
       "key": "小学交作业.请假回家去拿",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "afterEvents": [
+      "followEvents": [
         "小学交作业"
       ],
       "key": "小学交作业.直接说没带",

@@ -58,7 +58,7 @@ public class Game {
      */
     public static Game newGame(Pack main, Pack... addon) {
         GameRunner er = GameRunner.getInstance();
-        er.setStory(main.getStory());
+        er.addStory(main.getStory());
         er.init(new Role(), new World());
 
         Set<Branch> branches = new HashSet<>(main.getBranches());

@@ -3,6 +3,7 @@ package idea.verlif.lifeofdream.domain.role;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.standard.NumberValue;
+import idea.verlif.lifeofdream.standard.TextValue;
 
 /**
  * 角色基础信息
@@ -14,12 +15,12 @@ public class RoleInfo implements CanSave {
     /**
      * 姓名
      */
-    private String name;
+    private final Name name;
 
     /**
      * 年龄
      */
-    private Age age;
+    private final Age age;
 
     /**
      * 性别代号；0 - 未知；1 - 男；2 - 女
@@ -27,23 +28,16 @@ public class RoleInfo implements CanSave {
     private int sex;
 
     public RoleInfo() {
+        name = new Name();
         age = new Age();
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Age getAge() {
         return age;
-    }
-
-    public void setAge(Age age) {
-        this.age = age;
     }
 
     public int getSex() {
@@ -57,7 +51,7 @@ public class RoleInfo implements CanSave {
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
-        json.put("name", name);
+        json.put("name", name.str);
         json.put("age", age.value);
         json.put("sex", sex);
         return json;
@@ -68,11 +62,25 @@ public class RoleInfo implements CanSave {
         if (json == null) {
             return false;
         }
-        name = json.getString("name");
-        age = new Age();
+        name.set(json.getString("name"));
         age.setValue(json.getIntValue("age"));
         sex = json.getIntValue("sex");
         return true;
+    }
+
+    public static class Name implements TextValue {
+
+        private String str;
+
+        @Override
+        public String text() {
+            return str;
+        }
+
+        @Override
+        public void set(String text) {
+            this.str = text;
+        }
     }
 
     public static class Age implements NumberValue {

@@ -23,7 +23,7 @@ public class OptionResult implements CanSave {
     /**
      * 触发几率
      */
-    private String chance = "10000";
+    private String chance = "100";
 
     /**
      * 触发效果

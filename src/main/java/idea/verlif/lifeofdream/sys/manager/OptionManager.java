@@ -62,7 +62,7 @@ public class OptionManager implements CanSave {
 
     public void addOptionToAll(Option option) {
         allOptionMap.put(option.getKey(), option);
-        for (String event : option.getAfterEvents()) {
+        for (String event : option.getFollowEvents()) {
             Set<Option> set = allEventOptionMap.computeIfAbsent(event, k -> new HashSet<>());
             set.add(option);
         }
@@ -82,7 +82,7 @@ public class OptionManager implements CanSave {
         allEventOptionMap.clear();
         allOptionMap.load(json.getJSONObject("aom"));
         for (Option option : allOptionMap.values()) {
-            for (String event : option.getAfterEvents()) {
+            for (String event : option.getFollowEvents()) {
                 Set<Option> set = allEventOptionMap.computeIfAbsent(event, k -> new HashSet<>());
                 set.add(option);
             }

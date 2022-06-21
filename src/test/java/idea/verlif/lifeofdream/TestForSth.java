@@ -5,30 +5,28 @@ import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.event.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
+import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.game.Game;
-import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.game.GameRunner;
 import idea.verlif.lifeofdream.game.Result;
+import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
-import idea.verlif.lifeofdream.sys.manager.ItemManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.PackManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author Verlif
  */
 public class TestForSth {
 
-    private static final GameRunner EXEC_RUNNER = GameRunner.getInstance();
+    private static final GameRunner GAME_RUNNER = GameRunner.getInstance();
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -39,91 +37,103 @@ public class TestForSth {
     @Test
     public void simulation() {
         PackManager pm = PackManager.getInstance();
-        pm.loadFromFile(new File("packs\\default.json"));
+        pm.loadFromFile(new File("packs\\testOfLife.json"));
         List<Pack> packs = pm.getPacks();
         if (packs.size() > 0) {
             Game game = Game.newGame(packs.get(0));
             System.out.println(game.exportData());
         }
-        EXEC_RUNNER.setMessageKit(createMessageKit());
-        System.out.println(EXEC_RUNNER.start().getM());
-
-        Item item = ItemManager.getInstance().get("小学作业");
-        item.setName("hahahaha");
-        System.out.println(item.save());
-        System.out.println(ItemManager.getInstance().get("小学作业").save());
-
+        GAME_RUNNER.setMessageKit(createMessageKit());
+        System.out.println(GAME_RUNNER.start().getM());
+        int i = 1;
         while (true) {
-            System.out.println("----------------------------------------------------------------\n" +
+            System.out.println("----------------------------------------- " + i++ + " -----------------------------------------\n" +
                     "1. 显示当前事件\n" +
                     "2. 跳过当前事件\n" +
                     "3. 下一回合\n" +
                     "4. 显示角色属性\n" +
-                    "5. 显示世界信息");
-            select(SCANNER.nextInt());
+                    "5. 显示背包\n" +
+                    "6. 显示世界信息");
+            int opt = SCANNER.nextInt();
+            System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\n");
+            select(opt);
+            System.out.println("\n↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
         }
     }
 
     private static void select(int opt) {
         switch (opt) {
             case 1: {
-                Event event = EXEC_RUNNER.nextEvent();
+                Event event = GAME_RUNNER.nextEvent();
                 if (event != null) {
                     showEvent(event);
                     List<Option> options = event.getReadyOptions();
-                    showOptions(options);
-                    int i = SCANNER.nextInt();
-                    if (i <= options.size()) {
-                        Option option = options.get(i - 1);
-                        System.out.println(JSONObject.toJSONString(EXEC_RUNNER.execCmd("execOption " + option.getKey()).getData()));
-                        select(1);
-                    } else {
-                        select(2);
+                    if (options.size() > 0) {
+                        showOptions(options);
+                        int i = SCANNER.nextInt();
+                        if (i <= options.size()) {
+                            Option option = options.get(i - 1);
+                            Result result = GAME_RUNNER.execCmd("execOption " + option.getKey());
+                            if (!result.isOk()) {
+                                System.out.println(JSONObject.toJSONString(result.getData()));
+                            }
+                        }
                     }
+                    System.out.println();
+                    select(2);
                 } else {
                     System.out.println("没有事件发生");
                 }
                 break;
             }
             case 2: {
-                System.out.println(JSONObject.toJSONString(EXEC_RUNNER.execCmd("skipEvent").getData()));
-                Result result = EXEC_RUNNER.execCmd("nextTurn");
-                System.out.println(JSONObject.toJSONString(result.getData()));
+                Result result = GAME_RUNNER.execCmd("skipEvent");
                 if (result.isOk()) {
                     select(1);
                 }
                 break;
             }
             case 3:
-                Result result = EXEC_RUNNER.execCmd("nextTurn");
-                System.out.println(JSONObject.toJSONString(result.getData()));
+                Result result = GAME_RUNNER.execCmd("nextTurn");
                 if (result.isOk()) {
                     select(1);
                 }
                 break;
-            case 5:
-                System.out.println(JSONObject.toJSONString(EXEC_RUNNER.getWorld()));
+            case 5: {
+                Map<String, Item> itemMap = GAME_RUNNER.getRole().getBag().getItemMap();
+                Collection<Item> items = itemMap.values();
+                int i = 1;
+                for (Item item : items) {
+                    System.out.println((i++ + ". " + item.getName() + (GAME_RUNNER.canUseItem(item.getKey()) ? "" : "(无法使用)")));
+                }
                 break;
+            }
+            case 6: {
+                Map<String, Rule> ruleMap = GAME_RUNNER.getWorld().getRuleOfTurn();
+                for (Rule rule : ruleMap.values()) {
+                    System.out.println(rule.getName() + " ---- " + rule.getDesc());
+                }
+                break;
+            }
             default:
-                showRole(EXEC_RUNNER.getRole());
+                showRole(GAME_RUNNER.getRole());
         }
     }
 
     private static void showEvent(Event event) {
-        System.out.println(event.getTitle() + "\n\t\t" + event.getDesc());
+        System.out.println(">>> " + event.getTitle() + "\n-->\t" + event.getDesc());
     }
 
     private static void showOptions(List<Option> options) {
         for (int i = 0; i < options.size(); i++) {
             Option option = options.get(i);
-            System.out.println((i + 1) + ". \t\t" + option.getTitle());
-            System.out.println("   \t\t" + option.getDesc());
+            System.out.println((i + 1) + ".\t" + option.getTitle() + " ---- " + option.getDesc());
         }
-        System.out.println((options.size() + 1) + ". \t\t忽略");
+        System.out.println((options.size() + 1) + ".\t跳过");
     }
 
     private static void showRole(Role role) {
-        System.out.println("姓名：" + role.getInfo().getName() + "\t\t年龄：" + role.getInfo().getAge().value());
+        System.out.println("姓名：" + role.getInfo().getName().text() + "\t\t年龄：" + role.getInfo().getAge().value());
         System.out.println("健康：" + role.getAttr().getHealth().value() + "\t\t体力：" + role.getAttr().getEndurance().value());
         System.out.println("脑力：" + role.getAttr().getBrain().value() + "\t\t心情：" + role.getAttr().getMood().value());
     }
@@ -135,7 +145,7 @@ public class TestForSth {
         runner.init(new Role(), new World());
         initEventManager();
         initOptionManager();
-        runner.setStory(new Story());
+        runner.addStory(new Story());
         runner.execCmd("role.info.name 小明");
         runner.execCmd("addEventToReady 吃饭 1");
         System.out.println(JSONObject.toJSONString(runner.execCmd("nextEvent").getData()));
@@ -207,7 +217,7 @@ public class TestForSth {
         Option option = new Option();
         option.setKey(key);
         for (String event : events) {
-            option.getAfterEvents().add(event);
+            option.getFollowEvents().add(event);
         }
         option.setChance("5000");
         return option;
