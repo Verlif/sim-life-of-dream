@@ -91,9 +91,9 @@ public class GameRunner implements CanSave {
     private final CanSavedMap<String, Branch> branchMap;
 
     /**
-     * 是否结束
+     * 是否游戏进程状态；0 - 未开始；1 - 进行中；2 - 结束
      */
-    private boolean finish;
+    private int process;
 
     private final VarsContext varsContext;
     private final AttrHandler attrHandler;
@@ -189,6 +189,11 @@ public class GameRunner implements CanSave {
      * @return 开始结果
      */
     public Result start() {
+        if (process == 1) {
+            return Result.ok(null);
+        } else if (process == 2) {
+            return Result.fail("It's finished!");
+        }
         if (stories == null) {
             return Result.fail("No story!");
         }
@@ -196,6 +201,7 @@ public class GameRunner implements CanSave {
             kit.message(story.getDesc());
             execCmd(story.getExec());
         }
+        process = 1;
         return Result.ok("Start!");
     }
 
@@ -224,6 +230,7 @@ public class GameRunner implements CanSave {
         for (Option option : event.getReadyOptions()) {
             if (option.getKey().equals(key)) {
                 kit.message(option.getDesc());
+                // 跳过此事件
                 skipEvent();
                 // 效果选择
                 List<OptionResult> results = option.getResultList();
@@ -240,6 +247,7 @@ public class GameRunner implements CanSave {
                 OptionResult result = random.random();
                 if (result != null) {
                     kit.message(result.getDesc());
+                    // 执行结果
                     return execCmd(result.getExec());
                 } else {
                     return Result.ok("ok");
@@ -263,8 +271,9 @@ public class GameRunner implements CanSave {
             return event;
         }
         execCmd(event.getExec());
+        // 降低事件剩余次数
         Event rawEvent = eventManager.getRawEvent(event.getKey());
-        if (rawEvent != null) {
+        if (rawEvent != null && rawEvent.getRemain() > 0) {
             rawEvent.setRemain(event.getRemain() - 1);
         }
         if (event.getOptions().size() == 0) {
@@ -294,7 +303,9 @@ public class GameRunner implements CanSave {
      */
     public Result nextTurn() {
         readyEvents.clear();
-        if (finish) {
+        if (process == 0) {
+            return Result.fail("Not start!");
+        } else if (process == 2) {
             preEvents.clear();
             return Result.fail("Finish!");
         }
@@ -445,7 +456,13 @@ public class GameRunner implements CanSave {
      * 游戏结束
      */
     public void finish() {
-        this.finish = true;
+        this.process = 2;
+        readyEvents.clear();
+        preEvents.clear();
+    }
+
+    public boolean isFinish() {
+        return process == 2;
     }
 
     /**

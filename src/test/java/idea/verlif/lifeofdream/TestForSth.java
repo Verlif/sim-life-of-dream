@@ -18,7 +18,6 @@ import idea.verlif.lifeofdream.sys.manager.EventManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.PackManager;
 import idea.verlif.lifeofdream.sys.manager.TagManager;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.*;
@@ -36,31 +35,34 @@ public class TestForSth {
         tfs.simulation();
     }
 
-    @Test
     public void simulation() {
         PackManager pm = PackManager.getInstance();
-        pm.loadFromFile(new File("packs\\testOfLife.json"));
-        pm.loadFromFile(new File("packs\\testOfLife2.json"));
+        pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
         List<Pack> packs = pm.getPacks();
         if (packs.size() > 0) {
             Game game = Game.newGame(packs.toArray(new Pack[0]));
-            System.out.println(game.exportData());
-        }
-        GAME_RUNNER.setMessageKit(createMessageKit());
-        System.out.println(GAME_RUNNER.start().getM());
-        int i = 1;
-        while (true) {
-            System.out.println("----------------------------------------- " + i++ + " -----------------------------------------\n" +
-                    "1. 显示当前事件\n" +
-                    "2. 跳过当前事件\n" +
-                    "3. 下一回合\n" +
-                    "4. 显示角色属性\n" +
-                    "5. 显示背包\n" +
-                    "6. 显示世界信息");
-            int opt = SCANNER.nextInt();
-            System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\n");
-            select(opt);
-            System.out.println("\n↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+            GAME_RUNNER.setMessageKit(createMessageKit());
+            GAME_RUNNER.start();
+            System.out.println();
+            int i = 1;
+            while (true) {
+                if (!game.isFinish()) {
+                    System.out.print("----------------------------------------- " + i++ + " -----------------------------------------\n" +
+                            "1. 显示当前事件\n" +
+                            "2. 跳过当前事件\n" +
+                            "3. 下一回合\n" +
+                            "4. 显示角色属性\n" +
+                            "5. 显示背包\n" +
+                            "6. 显示世界信息\n" +
+                            "你的选择是：");
+                    int opt = SCANNER.nextInt();
+                    System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\n");
+                    select(opt);
+                    System.out.println("\n↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+                } else {
+                    break;
+                }
+            }
         }
     }
 
@@ -71,19 +73,29 @@ public class TestForSth {
                 if (event != null) {
                     showEvent(event);
                     List<Option> options = event.getReadyOptions();
+                    // 当没有选项时，表示叙事事件，可直接跳过
                     if (options.size() > 0) {
                         showOptions(options);
-                        int i = SCANNER.nextInt();
-                        if (i <= options.size()) {
-                            Option option = options.get(i - 1);
-                            Result result = GAME_RUNNER.execCmd("execOption " + option.getKey());
-                            if (!result.isOk()) {
-                                System.out.println(JSONObject.toJSONString(result.getData()));
+                        while (true) {
+                            int i = SCANNER.nextInt();
+                            if (i <= options.size()) {
+                                Option option = options.get(i - 1);
+                                Result result = GAME_RUNNER.execCmd("execOption " + option.getKey());
+                                if (result.isOk()) {
+                                    select(1);
+                                } else {
+                                    System.out.println("出错-" + JSONObject.toJSONString(result.getM()));
+                                }
+                            } else {
+                                System.out.println("没有此选项");
+                                select(1);
                             }
+                            break;
                         }
+                    } else {
+                        System.out.println();
+                        select(2);
                     }
-                    System.out.println();
-                    select(2);
                 } else {
                     System.out.println("没有事件发生");
                 }
@@ -132,7 +144,6 @@ public class TestForSth {
             Option option = options.get(i);
             System.out.println((i + 1) + ".\t" + option.getTitle() + " ---- " + option.getDesc());
         }
-        System.out.println((options.size() + 1) + ".\t跳过");
     }
 
     private static void showRole(Role role) {
@@ -141,7 +152,6 @@ public class TestForSth {
         System.out.println("脑力：" + role.getAttr().getBrain().value() + "\t\t心情：" + role.getAttr().getMood().value());
     }
 
-    @Test
     public void test() {
         TagManager tagManager = TagManager.getInstance();
         tagManager.addTag(createTag("location.四川"));

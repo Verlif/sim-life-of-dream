@@ -63,7 +63,7 @@ public class RoleInfo implements CanSave {
             return false;
         }
         name.set(json.getString("name"));
-        age.setValue(json.getIntValue("age"));
+        age.set(json.getIntValue("age"));
         sex = json.getIntValue("sex");
         return true;
     }
@@ -100,11 +100,8 @@ public class RoleInfo implements CanSave {
             }
         }
 
-        public int getValue() {
-            return value;
-        }
-
-        public void setValue(int value) {
+        @Override
+        public void set(int value) {
             this.value = value;
         }
     }

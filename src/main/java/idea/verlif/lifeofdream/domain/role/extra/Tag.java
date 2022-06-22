@@ -144,6 +144,11 @@ public class Tag implements NumberValue, CanSave {
         value += up;
     }
 
+    @Override
+    public void set(int value) {
+        this.value = value;
+    }
+
     public Tag copy() {
         Tag tag = new Tag();
         tag.load(save());

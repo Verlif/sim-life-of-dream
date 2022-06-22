@@ -1,0 +1,131 @@
+{
+  "story": {
+    "name": "一个简单的故事",
+    "desc": "故事开始了",
+    "exec": "role.info.age.up 5;world.addRuleOfTurn 年龄提升;world.addRuleOfTurn 季节变化;world.addRuleOfTurn 季节轮回;world.addRuleOfTurn 季节描述.春;world.addRuleOfTurn 季节描述.夏;world.addRuleOfTurn 季节描述.秋;world.addRuleOfTurn 季节描述.冬;world.addRuleOfTurn 生病;world.addRuleOfTurn 病情自愈;world.addRuleOfTurn 病情加重"
+  },
+  "branches": [
+    {
+      "name": "小学",
+      "key": "小学",
+      "chance": "10000",
+      "condition": "@{role.info.age.value}>5 & @{role.info.age.value}<8",
+      "exec": "kit.message 你开始上小学了。;role.bag.add 小学作业"
+    },
+    {
+      "name": "初中",
+      "key": "初中",
+      "chance": "10000",
+      "condition": "@{role.info.age.value}>11 & @{role.info.age.value}<14",
+      "exec": "kit.message 你开始上初中了。;removeBranch 小学;role.bag.remove 小学作业"
+    },
+    {
+      "name": "高中",
+      "key": "高中",
+      "chance": "10000",
+      "condition": "@{role.info.age.value}>13 & @{role.info.age.value}<18",
+      "exec": "kit.message 你开始上高中了。;removeBranch 初中"
+    },
+    {
+      "name": "大学",
+      "key": "大学",
+      "chance": "10000",
+      "exec": "kit.message 你开始上大学了。;removeBranch 高中"
+    }
+  ],
+  "events": [
+    {
+      "key": "Searcher",
+      "title": "搜寻者移动",
+      "remain": "-1",
+      "desc": "每回合搜寻者都会移动",
+      "chance": "10000",
+      "exec": "kit.message 触发事件"
+    },
+    {
+      "key": "测试",
+      "title": "交作业",
+      "remain": "1",
+      "desc": "要交作业了，但是你似乎是把作业忘在家里了，现在该怎么办呢？",
+      "chance": "@{role.tag.value 季节}",
+      "condition": "@{role.tag.value 季节} % 4 = 1",
+      "exec": "kit.message 触发事件;addEventToReady 小学交作业"
+    }
+  ],
+  "options": [
+    {
+      "followEvents": [
+        "小学交作业"
+      ],
+      "key": "小学交作业.请假回家去拿",
+      "title": "请假回家去拿",
+      "desc": "你向老师请个假，去回家那作业",
+      "resultList": [
+        {
+          "chance": "400",
+          "desc": "老师希望你下次注意，也没有让你回去拿"
+        },
+        {
+          "chance": "400",
+          "desc": "老师同意你回家去拿了"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "小学交作业"
+      ],
+      "key": "小学交作业.直接说没带",
+      "title": "没带作业",
+      "desc": "你向老师实话实说，没有带作业",
+      "resultList": [
+        {
+          "chance": "400",
+          "desc": "老师希望你下次注意，并没有批评你"
+        },
+        {
+          "chance": "400",
+          "desc": "老师说你没带就是没写",
+          "exec": "role.attr.mood.down 20"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "name": "301钥匙",
+      "key": "key.301",
+      "value": 1,
+      "condition": "",
+      "onUse": "kit.message 打开了301房间。",
+      "onAdd": "kit.message 获得了301房间的钥匙。",
+      "onRemove": "kit.message 失去了301房间的钥匙。"
+    }
+  ],
+  "rules": [
+    {
+      "name": "年龄提升",
+      "key": "年龄提升",
+      "desc": "每回合+1年龄",
+      "condition": "@{role.tag.value 季节} % 4 = 1",
+      "exec": "role.info.age.up 1;kit.message \"你又涨了1岁。\""
+    },
+    {
+      "name": "搜寻者移动",
+      "key": "Searcher",
+      "desc": "每回合搜寻者都会移动",
+      "chance": "10000",
+      "exec": "kit.message 触发事件"
+    }
+  ],
+  "tags": [
+    {
+      "name": "位置",
+      "key": "location",
+      "value": 1,
+      "visible": false,
+      "onAdd": "kit.message 你已经进入到了第3层。",
+      "onRemove": "kit.message 你已成功逃出第3层。finish"
+    }
+  ]
+}

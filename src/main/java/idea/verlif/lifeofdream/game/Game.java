@@ -37,6 +37,10 @@ public class Game {
         gameRunner.finish();
     }
 
+    public boolean isFinish() {
+        return gameRunner.isFinish();
+    }
+
     public static Game loadData(String data) {
         JSONObject json = JSONObject.parseObject(data);
         GameRunner er = GameRunner.getInstance();

@@ -52,6 +52,11 @@ public class Param implements NumberValue, CanSave {
     }
 
     @Override
+    public void set(int value) {
+        this.value = value;
+    }
+
+    @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
         json.put("val", value);

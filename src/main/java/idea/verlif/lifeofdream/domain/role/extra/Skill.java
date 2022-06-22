@@ -83,6 +83,11 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     }
 
     @Override
+    public void set(int value) {
+        this.value = value;
+    }
+
+    @Override
     public int level() {
         return level;
     }

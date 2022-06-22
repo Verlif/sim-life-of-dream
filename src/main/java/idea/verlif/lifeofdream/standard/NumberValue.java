@@ -20,6 +20,13 @@ public interface NumberValue {
     void up(int up);
 
     /**
+     * 设定数值
+     *
+     * @param value 设定的目标数值
+     */
+    void set(int value);
+
+    /**
      * 降低数值
      *
      * @param down 降低的数值

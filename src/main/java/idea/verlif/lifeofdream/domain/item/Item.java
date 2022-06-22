@@ -78,6 +78,11 @@ public class Item implements NumberValue, CanSave {
         this.value += up;
     }
 
+    @Override
+    public void set(int value) {
+        this.value = value;
+    }
+
     public void setValue(int value) {
         this.value = value;
     }
