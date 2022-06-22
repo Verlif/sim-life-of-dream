@@ -28,6 +28,15 @@ public class Game {
         this.gameRunner = gameRunner;
     }
 
+    public Result start() {
+        gameRunner.init(new Role(), new World());
+        return gameRunner.start();
+    }
+
+    public void finish() {
+        gameRunner.finish();
+    }
+
     public static Game loadData(String data) {
         JSONObject json = JSONObject.parseObject(data);
         GameRunner er = GameRunner.getInstance();

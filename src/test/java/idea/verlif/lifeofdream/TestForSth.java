@@ -5,8 +5,9 @@ import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.event.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
+import idea.verlif.lifeofdream.domain.role.RoleTag;
+import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
-import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.game.Game;
 import idea.verlif.lifeofdream.game.GameRunner;
@@ -16,6 +17,7 @@ import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.PackManager;
+import idea.verlif.lifeofdream.sys.manager.TagManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -141,19 +143,31 @@ public class TestForSth {
 
     @Test
     public void test() {
-        GameRunner runner = GameRunner.getInstance();
-        Game game = new Game(runner);
-        runner.init(new Role(), new World());
-        initEventManager();
-        initOptionManager();
-        runner.addStory(new Story());
-        runner.execCmd("role.info.name 小明");
-        runner.execCmd("addEventToReady 吃饭 1");
-        System.out.println(JSONObject.toJSONString(runner.execCmd("nextEvent").getData()));
-        String s = game.exportData();
-        System.out.println("exportData: " + s);
-        Game loadedGame = Game.loadData(s);
-        System.out.println("loadedGame: " + loadedGame.exportData());
+        TagManager tagManager = TagManager.getInstance();
+        tagManager.addTag(createTag("location.四川"));
+        tagManager.addTag(createTag("location.四川.绵阳"));
+        tagManager.addTag(createTag("location.四川.成都"));
+        tagManager.addTag(createTag("location.重庆"));
+        tagManager.addTag(createTag("阿伟"));
+        Game game = new Game(GAME_RUNNER);
+        GAME_RUNNER.init(new Role(), new World());
+        GAME_RUNNER.setMessageKit(System.out::println);
+        RoleTag roleTag = GAME_RUNNER.getRole().getTag();
+        roleTag.add("location");
+        roleTag.up("location", 1);
+        roleTag.up("location", 1);
+        roleTag.up("阿伟", 2);
+        roleTag.remove("阿伟");
+        System.out.println(JSONObject.toJSONString(roleTag.getTagMap()));
+        System.out.println("移除 - location.四川");
+        roleTag.removeOne("location.四川");
+        System.out.println("移除 - location.四川");
+        roleTag.remove("location.四川");
+        System.out.println("up - location");
+        roleTag.up("location", 1);
+        System.out.println(JSONObject.toJSONString(roleTag.getTagMap()));
+        System.out.println("移除 - location.重庆");
+        roleTag.remove("location.重庆");
     }
 
     private String[] split(String str) {
@@ -200,6 +214,14 @@ public class TestForSth {
                 System.out.println(message);
             }
         };
+    }
+
+    private Tag createTag(String key) {
+        Tag tag = new Tag();
+        tag.setKey(key);
+        tag.setOnAdd("kit.message " + key + "-被添加");
+        tag.setOnRemove("kit.message " + key + "-被移除");
+        return tag;
     }
 
     public Item createItem(String key) {

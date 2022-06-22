@@ -8,7 +8,9 @@ import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.game.GameRunner;
 import idea.verlif.lifeofdream.sys.manager.TagManager;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Verlif
@@ -53,12 +55,22 @@ public class RoleTag implements CanSave {
     }
 
     public void up(String key, @SimmParam(defaultVal = "1") int up) {
-        Tag tag = tagMap.get(key);
-        if (tag == null) {
-            tag = add(key);
+        TagManager tagManager = TagManager.getInstance();
+        Set<String> set = tagManager.getGroup(key);
+        if (set == null) {
+            set = new HashSet<>();
         }
-        if (tag != null) {
-            tag.up(up);
+        set.add(key);
+        for (String k : set) {
+            Tag tag = tagMap.get(k);
+            if (tag == null) {
+                tag = addOne(k);
+                if (tag != null) {
+                    tag.up(up);
+                }
+            } else {
+                tag.up(up);
+            }
         }
     }
 
@@ -98,22 +110,61 @@ public class RoleTag implements CanSave {
         return false;
     }
 
-    public Tag add(String key) {
-        TagManager tagManager = TagManager.getInstance();
-        Tag tag = tagManager.get(key);
-        if (tag != null) {
-            tagMap.put(key, tag);
+    /**
+     * 添加标签及标签组
+     *
+     * @param key 标签或标签组key
+     */
+    public void add(String key) {
+        Set<Tag> tags = TagManager.getInstance().get(key);
+        for (Tag tag : tags) {
+            if (tag != null && !tagMap.containsKey(tag.getKey())) {
+                tagMap.put(tag.getKey(), tag);
+                GameRunner gameRunner = GameRunner.getInstance();
+                gameRunner.execCmd(tag.getOnAdd());
+            }
+        }
+    }
+
+    public Tag addOne(String key) {
+        Tag tag = TagManager.getInstance().getOfKey(key);
+        if (tag != null && !tagMap.containsKey(key)) {
+            tagMap.put(tag.getKey(), tag);
             GameRunner gameRunner = GameRunner.getInstance();
             gameRunner.execCmd(tag.getOnAdd());
         }
         return tag;
     }
 
+    /**
+     * 移除标签及标签组
+     *
+     * @param key 标签或标签组key
+     */
     public void remove(String key) {
-        Tag tag = tagMap.remove(key);
-        if (tag != null) {
+        // 移除完整key标签
+        removeOne(key);
+        // 移除标签组
+        TagManager tagManager = TagManager.getInstance();
+        Set<String> set = tagManager.getGroup(key);
+        // 不是分组
+        if (set != null) {
+            for (String s : set) {
+                Tag tag = tagMap.remove(s);
+                if (tag != null) {
+                    GameRunner gameRunner = GameRunner.getInstance();
+                    gameRunner.execCmd(tag.getOnRemove());
+                }
+            }
+        }
+    }
+
+    public void removeOne(String key) {
+        // 移除完整key标签
+        Tag t = tagMap.remove(key);
+        if (t != null) {
             GameRunner gameRunner = GameRunner.getInstance();
-            gameRunner.execCmd(tag.getOnRemove());
+            gameRunner.execCmd(t.getOnRemove());
         }
     }
 
