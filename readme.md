@@ -38,3 +38,101 @@ __西米的梦境师计划__ 的目标是可以达成一个类似与文字游戏
 - [__标签__](docs/domain/tag.md)。标签是角色所属的项目，一般是用作项目条件判断。
 
 资源包编写时可以参考 [数据编写说明](docs/数据编写说明.md) 与 [变量与执行描述](docs/变量与执行描述.md)。
+
+## 使用
+
+使用流程为：
+
+1. 添加资源包
+2. 新建游戏对象
+3. 开始游戏
+4. 进行操作
+
+```java
+// 新建资源包管理器
+PackManager pm = PackManager.getInstance();
+// 向资源包管理器中添加资源包文件
+pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
+pm.loadFromFile(new File("packs\\default.json"));
+List<Pack> packs = pm.getPacks();
+if (packs.size() > 0) {
+    // 新建游戏
+    Game game = Game.newGame(packs.toArray(new Pack[0]));
+    // GameRunner是全局唯一的游戏运行器
+    GameRunner GAME_RUNNER = GameRunner.getInstance();
+    // 向GameRunner中添加信息工具
+    GAME_RUNNER.setMessageKit(createMessageKit());
+    // 游戏开始
+    game.start();
+    System.out.println();
+    int i = 1;
+    while (true) {
+        // 当游戏未结束时，循环操作
+        if (!game.isFinish()) {
+            System.out.print("----------------------------------------- " + i++ + " -----------------------------------------\n" +
+                    "1. 显示当前事件\n" +
+                    "2. 跳过当前事件\n" +
+                    "3. 下一回合\n" +
+                    "4. 显示角色属性\n" +
+                    "5. 显示背包\n" +
+                    "6. 显示世界信息\n" +
+                    "你的选择是：");
+            int opt = SCANNER.nextInt();
+            System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\n");
+            select(opt);
+            System.out.println("\n↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        } else {
+            break;
+        }
+    }
+}
+```
+
+### 依赖
+
+1. 添加Jitpack仓库源
+
+   [![Release](https://jitpack.io/v/Verlif/sim-life-of-dream.svg)](https://jitpack.io/#Verlif/sim-life-of-dream)
+
+   1. maven
+
+   ```xml
+   <repositories>
+      <repository>
+          <id>jitpack.io</id>
+          <url>https://jitpack.io</url>
+      </repository>
+   </repositories>
+   ```
+
+   2. Gradle
+
+   ```text
+   allprojects {
+     repositories {
+         maven { url 'https://jitpack.io' }
+     }
+   }
+   ```
+
+2. 添加依赖
+
+   1. maven
+
+   ```xml
+      <dependencies>
+          <dependency>
+              <groupId>com.github.Verlif</groupId>
+              <artifactId>sim-life-of-dream</artifactId>
+              <version>最新版本号</version>
+          </dependency>
+      </dependencies>
+   ```
+
+   2. Gradle
+
+   ```text
+   dependencies {
+     implementation 'com.github.Verlif:sim-life-of-dream:最新版本号'
+   }
+   ```

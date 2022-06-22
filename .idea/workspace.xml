@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 对标签key进行了分组管理，现在可以通过分组key进行更方便的操作了&#10;2. 修复了添加已拥有标签会导致重复触发效果的问题">
-      <change afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packs/Test-EscapeTheRoom.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 数字类型添加了set方法&#10;2. 已经开始的游戏使用start不会再次触发开始&#10;3. 正式版1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/event.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/event.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/变量与执行描述.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/变量与执行描述.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Attr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Attr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Param.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Param.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/standard/NumberValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/standard/NumberValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655894364562</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1. 数字类型添加了set方法&#10;2. 已经开始的游戏使用start不会再次触发开始&#10;3. 正式版1.0">
+      <created>1655906972267</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1655906972267</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,7 +206,8 @@
     <MESSAGE value="1. 数据运算增加除余%&#10;2. 保存了kit.message的输出内容&#10;3. 角色姓名改为了对象，现在支持文本类型的方法了&#10;4. 事件管理器addEventToAll需要修复无分依赖的事件没有添加到分支事件表中的问题&#10;5. 物品有使用条件&#10;6. 同时加载多个资源包时，所有的故事都可以展现并触发&#10;7. 完善了文档&#10;8. 项目[选项]中的afterEvents属性改名为followEvents&#10;9. 修复了事件剩余次数无法自动减少的bug" />
     <MESSAGE value="1. 去除了资源包的类型，现在会加载所有选择的资源包&#10;2. 完善了项目加载逻辑，现在可以按照顺序来替换先加载的项目" />
     <MESSAGE value="1. 对标签key进行了分组管理，现在可以通过分组key进行更方便的操作了&#10;2. 修复了添加已拥有标签会导致重复触发效果的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 对标签key进行了分组管理，现在可以通过分组key进行更方便的操作了&#10;2. 修复了添加已拥有标签会导致重复触发效果的问题" />
+    <MESSAGE value="1. 数字类型添加了set方法&#10;2. 已经开始的游戏使用start不会再次触发开始&#10;3. 正式版1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 数字类型添加了set方法&#10;2. 已经开始的游戏使用start不会再次触发开始&#10;3. 正式版1.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
