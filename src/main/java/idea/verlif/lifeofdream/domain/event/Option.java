@@ -2,6 +2,8 @@ package idea.verlif.lifeofdream.domain.event;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.standard.Chancable;
+import idea.verlif.lifeofdream.standard.Conditionable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.Objects;
  *
  * @author Verlif
  */
-public class Option implements CanSave {
+public class Option implements CanSave, Chancable, Conditionable {
 
     /**
      * 衔接的事件Key列表
@@ -78,6 +80,7 @@ public class Option implements CanSave {
         this.desc = desc;
     }
 
+    @Override
     public String getChance() {
         return chance;
     }
@@ -86,6 +89,7 @@ public class Option implements CanSave {
         this.chance = chance;
     }
 
+    @Override
     public String getCondition() {
         return condition;
     }

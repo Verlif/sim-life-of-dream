@@ -2,6 +2,7 @@ package idea.verlif.lifeofdream.domain.item;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.standard.Conditionable;
 import idea.verlif.lifeofdream.standard.NumberValue;
 
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
  *
  * @author Verlif
  */
-public class Item implements NumberValue, CanSave {
+public class Item implements NumberValue, CanSave, Conditionable {
 
     /**
      * 道具名称
@@ -87,6 +88,7 @@ public class Item implements NumberValue, CanSave {
         this.value = value;
     }
 
+    @Override
     public String getCondition() {
         return condition;
     }

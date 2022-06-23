@@ -1,6 +1,7 @@
 package idea.verlif.lifeofdream.game;
 
 import com.alibaba.fastjson2.JSONObject;
+import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.domain.branch.Branch;
 import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.event.Option;
@@ -8,11 +9,14 @@ import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
+import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.sys.manager.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,31 +24,37 @@ import java.util.Set;
  *
  * @author Verlif
  */
-public class Game {
+public class Game implements CanSave {
 
-    private final GameRunner gameRunner;
+    private final Role role;
+    private final World world;
+    private final List<Story> stories;
 
-    public Game(GameRunner gameRunner) {
-        this.gameRunner = gameRunner;
+    public Game() {
+        this.role = new Role();
+        this.world = new World();
+        this.stories = new ArrayList<>();
     }
 
-    public Result start() {
-        gameRunner.init(new Role(), new World());
-        return gameRunner.start();
+    public Role getRole() {
+        return role;
     }
 
-    public void finish() {
-        gameRunner.finish();
+    public World getWorld() {
+        return world;
     }
 
-    public boolean isFinish() {
-        return gameRunner.isFinish();
+    public List<Story> getStories() {
+        return stories;
     }
 
     public static Game loadData(String data) {
         JSONObject json = JSONObject.parseObject(data);
         GameRunner er = GameRunner.getInstance();
         er.load(json.getJSONObject("er"));
+
+        Game game = new Game();
+        game.load(json.getJSONObject("game"));
 
         BranchManager bm = BranchManager.getInstance();
         bm.load(json.getJSONObject("bm"));
@@ -59,7 +69,7 @@ public class Game {
         TagManager tm = TagManager.getInstance();
         tm.load(json.getJSONObject("tm"));
 
-        return new Game(er);
+        return game;
     }
 
     /**
@@ -69,9 +79,7 @@ public class Game {
      * @return 新游戏
      */
     public static Game newGame(Pack... packs) {
-        GameRunner er = GameRunner.getInstance();
-        er.init(new Role(), new World());
-
+        Game game = new Game();
         Set<Branch> branches = new HashSet<>();
         Set<Event> events = new HashSet<>();
         Set<Item> items = new HashSet<>();
@@ -79,7 +87,9 @@ public class Game {
         Set<Rule> rules = new HashSet<>();
         Set<Tag> tags = new HashSet<>();
         for (Pack pack : packs) {
-            er.addStory(pack.getStory());
+            if (pack.getStory() != null) {
+                game.getStories().add(pack.getStory());
+            }
         }
         for (int i = packs.length - 1; i > -1; i--) {
             Pack pack = packs[i];
@@ -121,12 +131,13 @@ public class Game {
             tm.addTag(tag);
         }
 
-        return new Game(er);
+        return game;
     }
 
     public String exportData() {
         JSONObject json = new JSONObject();
-        json.put("er", gameRunner.save());
+        json.put("er", GameRunner.getInstance().save());
+        json.put("game", save());
 
         BranchManager bm = BranchManager.getInstance();
         json.put("bm", bm.save());
@@ -142,5 +153,22 @@ public class Game {
         json.put("tm", tm.save());
 
         return json.toJSONString();
+    }
+
+    @Override
+    public JSONObject save() {
+        JSONObject json = new JSONObject();
+        json.put("role", role.save());
+        json.put("world", world.save());
+        json.put("stos", stories);
+        return json;
+    }
+
+    @Override
+    public boolean load(JSONObject json) {
+        role.load(json.getJSONObject("role"));
+        world.load(json.getJSONObject("world"));
+        stories.addAll(json.getList("stos", Story.class));
+        return true;
     }
 }

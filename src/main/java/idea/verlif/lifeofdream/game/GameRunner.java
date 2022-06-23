@@ -15,6 +15,8 @@ import idea.verlif.lifeofdream.domain.role.Role;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
+import idea.verlif.lifeofdream.standard.Chancable;
+import idea.verlif.lifeofdream.standard.Conditionable;
 import idea.verlif.lifeofdream.sys.kit.Kit;
 import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.BranchManager;
@@ -97,6 +99,7 @@ public class GameRunner implements CanSave {
 
     private final VarsContext varsContext;
     private final AttrHandler attrHandler;
+    private final Random random;
 
     private GameRunner() {
         this.eventManager = EventManager.getInstance();
@@ -131,6 +134,7 @@ public class GameRunner implements CanSave {
 
         this.varsContext = new VarsContextLocal();
         this.attrHandler = new AttrHandler();
+        this.random = new Random();
     }
 
     public static GameRunner getInstance() {
@@ -188,13 +192,16 @@ public class GameRunner implements CanSave {
      *
      * @return 开始结果
      */
-    public Result start() {
+    public Result start(Game game) {
         if (process == 1) {
             return Result.ok(null);
         } else if (process == 2) {
             return Result.fail("It's finished!");
         }
-        if (stories == null) {
+        init(game.getRole(), game.getWorld());
+        stories.clear();
+        stories.addAll(game.getStories());
+        if (stories.size() == 0) {
             return Result.fail("No story!");
         }
         for (Story story : stories) {
@@ -236,7 +243,7 @@ public class GameRunner implements CanSave {
                 List<OptionResult> results = option.getResultList();
                 List<OptionResult> readyResults = new ArrayList<>();
                 for (OptionResult result : results) {
-                    if (DescUtil.test(tran(result.getCondition()))) {
+                    if (testCondition(result)) {
                         readyResults.add(result);
                     }
                 }
@@ -285,11 +292,8 @@ public class GameRunner implements CanSave {
             Set<Option> allSet = optionManager.getOptionOfEvent(event.getKey());
             Random random = new Random();
             for (Option option : allSet) {
-                if (DescUtil.test(tran(option.getCondition()))) {
-                    int chance = DescUtil.result(tran(option.getChance()));
-                    if (chance > random.nextInt(10000)) {
-                        event.getReadyOptions().add(option);
-                    }
+                if (testCondition(option) && randomChance(option)) {
+                    event.getReadyOptions().add(option);
                 }
             }
         }
@@ -313,16 +317,15 @@ public class GameRunner implements CanSave {
         Random random = new Random();
         // 每回合规则触发
         for (Rule rule : world.getRuleOfTurn().values()) {
-            if (DescUtil.test(tran(rule.getCondition()))
-                    && DescUtil.result(tran(rule.getChance())) > random.nextInt(10000)) {
+            if (testCondition(rule) && randomChance(rule)) {
                 execCmd(rule.getExec());
             }
         }
         // 分支触发
         for (Branch branch : branchManager.getBranchMap().values()) {
             if (!branchMap.containsKey(branch.getKey())
-                    && DescUtil.test(tran(branch.getCondition()))
-                    && DescUtil.result(tran(branch.getChance())) > random.nextInt(10000)) {
+                    && testCondition(branch)
+                    && randomChance(branch)) {
                 addBranch(branch.getKey());
             }
         }
@@ -335,8 +338,8 @@ public class GameRunner implements CanSave {
                 for (Event event : set) {
                     // 避免事件重复
                     if (event.enabled() && !allKeys.contains(event.getKey())
-                            && DescUtil.test(tran(event.getCondition()))
-                            && DescUtil.result(tran(event.getChance())) > random.nextInt(10000)) {
+                            && testCondition(event)
+                            && randomChance(event)) {
                         allKeys.add(event.getKey());
                         addEventToReady(event.getKey(), -1);
                     }
@@ -349,8 +352,8 @@ public class GameRunner implements CanSave {
             for (Event event : set) {
                 // 避免事件重复
                 if (event.enabled() && !allKeys.contains(event.getKey())
-                        && DescUtil.test(tran(event.getCondition()))
-                        && DescUtil.result(tran(event.getChance())) > random.nextInt(10000)) {
+                        && testCondition(event)
+                        && randomChance(event)) {
                     allKeys.add(event.getKey());
                     addEventToReady(event.getKey(), -1);
                 }
@@ -427,7 +430,7 @@ public class GameRunner implements CanSave {
         if (role != null) {
             Item item = role.getBag().get(key);
             if (item != null) {
-                return DescUtil.test(tran(item.getCondition()));
+                return testCondition(item);
             }
         }
         return false;
@@ -442,7 +445,7 @@ public class GameRunner implements CanSave {
         if (role != null) {
             Item item = role.getBag().get(key);
             if (item != null) {
-                if (DescUtil.test(tran(item.getCondition()))) {
+                if (testCondition(item)) {
                     return Result.ok(execCmd(item.getOnUse()));
                 }
             } else {
@@ -535,6 +538,14 @@ public class GameRunner implements CanSave {
 
     private String tran(String desc) {
         return varsContext.build(desc, attrHandler);
+    }
+
+    private boolean testCondition(Conditionable conditionable) {
+        return DescUtil.test(tran(conditionable.getCondition()));
+    }
+
+    private boolean randomChance(Chancable chancable) {
+        return DescUtil.result(tran(chancable.getChance())) > random.nextInt(10000);
     }
 
     @Override

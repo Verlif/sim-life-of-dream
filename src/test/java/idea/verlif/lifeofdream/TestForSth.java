@@ -42,11 +42,11 @@ public class TestForSth {
         if (packs.size() > 0) {
             Game game = Game.newGame(packs.toArray(new Pack[0]));
             GAME_RUNNER.setMessageKit(createMessageKit());
-            GAME_RUNNER.start();
+            GAME_RUNNER.start(game);
             System.out.println();
             int i = 1;
             while (true) {
-                if (!game.isFinish()) {
+                if (!GAME_RUNNER.isFinish()) {
                     System.out.print("----------------------------------------- " + i++ + " -----------------------------------------\n" +
                             "1. 显示当前事件\n" +
                             "2. 跳过当前事件\n" +
@@ -159,7 +159,6 @@ public class TestForSth {
         tagManager.addTag(createTag("location.四川.成都"));
         tagManager.addTag(createTag("location.重庆"));
         tagManager.addTag(createTag("阿伟"));
-        Game game = new Game(GAME_RUNNER);
         GAME_RUNNER.init(new Role(), new World());
         GAME_RUNNER.setMessageKit(System.out::println);
         RoleTag roleTag = GAME_RUNNER.getRole().getTag();

@@ -8,9 +8,9 @@ __西米的梦境师计划__ 是一个开放的故事加载器，通过载入外
 - __存档迁移__。存档信息包括在一个`json`文件中，只需要保存此存档文件即可在不同设备或是不同平台间同步存档。
 - __高度自定义的资源包__。在资源包中的项目概率、执行条件与执行效果都是动态的，例如条件可以使用以下方式进行书写：
 
-    `@{role.info.age.value}>12 & @{role.attr.mood.value}>50;@{role.tag.has happy}`
-    
-    这表示了当角色年龄大于12且角色心情大于50时，或者角色带有`happy`标签时生效。
+  `@{role.info.age.value}>12 & @{role.attr.mood.value}>50;@{role.tag.has happy}`
+
+  这表示了当角色年龄大于12且角色心情大于50时，或者角色带有`happy`标签时生效。
 
 ## 目的
 
@@ -49,40 +49,41 @@ __西米的梦境师计划__ 的目标是可以达成一个类似与文字游戏
 4. 进行操作
 
 ```java
-// 新建资源包管理器
-PackManager pm = PackManager.getInstance();
-// 向资源包管理器中添加资源包文件
-pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
-pm.loadFromFile(new File("packs\\default.json"));
-List<Pack> packs = pm.getPacks();
-if (packs.size() > 0) {
-    // 新建游戏
-    Game game = Game.newGame(packs.toArray(new Pack[0]));
-    // GameRunner是全局唯一的游戏运行器
-    GameRunner GAME_RUNNER = GameRunner.getInstance();
-    // 向GameRunner中添加信息工具
-    GAME_RUNNER.setMessageKit(createMessageKit());
-    // 游戏开始
-    game.start();
-    System.out.println();
-    int i = 1;
-    while (true) {
-        // 当游戏未结束时，循环操作
-        if (!game.isFinish()) {
-            System.out.print("----------------------------------------- " + i++ + " -----------------------------------------\n" +
-                    "1. 显示当前事件\n" +
-                    "2. 跳过当前事件\n" +
-                    "3. 下一回合\n" +
-                    "4. 显示角色属性\n" +
-                    "5. 显示背包\n" +
-                    "6. 显示世界信息\n" +
-                    "你的选择是：");
-            int opt = SCANNER.nextInt();
-            System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\n");
-            select(opt);
-            System.out.println("\n↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
-        } else {
-            break;
+public class main {
+
+    public void simulation() {
+        // 添加资源包
+        PackManager pm = PackManager.getInstance();
+        pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
+        pm.loadFromFile(new File("packs\\Demo-default.json"));
+        List<Pack> packs = pm.getPacks();
+        if (packs.size() > 0) {
+            // 新建游戏
+            Game game = Game.newGame(packs.toArray(new Pack[0]));
+            // 设定信息输出工具
+            GAME_RUNNER.setMessageKit(createMessageKit());
+            // 开始游戏
+            GAME_RUNNER.start(game);
+            System.out.println();
+            int i = 1;
+            while (true) {
+                if (!GAME_RUNNER.isFinish()) {
+                    System.out.print("----------------------------------------- " + i++ + " -----------------------------------------\n" +
+                            "1. 显示当前事件\n" +
+                            "2. 跳过当前事件\n" +
+                            "3. 下一回合\n" +
+                            "4. 显示角色属性\n" +
+                            "5. 显示背包\n" +
+                            "6. 显示世界信息\n" +
+                            "你的选择是：");
+                    int opt = SCANNER.nextInt();
+                    System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓\n");
+                    select(opt);
+                    System.out.println("\n↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+                } else {
+                    break;
+                }
+            }
         }
     }
 }
@@ -94,7 +95,7 @@ if (packs.size() > 0) {
 
    [![Release](https://jitpack.io/v/Verlif/sim-life-of-dream.svg)](https://jitpack.io/#Verlif/sim-life-of-dream)
 
-   1. maven
+    1. maven
 
    ```xml
    <repositories>
@@ -105,7 +106,7 @@ if (packs.size() > 0) {
    </repositories>
    ```
 
-   2. Gradle
+    2. Gradle
 
    ```text
    allprojects {
@@ -117,7 +118,7 @@ if (packs.size() > 0) {
 
 2. 添加依赖
 
-   1. maven
+    1. maven
 
    ```xml
       <dependencies>
@@ -129,7 +130,7 @@ if (packs.size() > 0) {
       </dependencies>
    ```
 
-   2. Gradle
+    2. Gradle
 
    ```text
    dependencies {

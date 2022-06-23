@@ -2,6 +2,8 @@ package idea.verlif.lifeofdream.domain.branch;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.standard.Chancable;
+import idea.verlif.lifeofdream.standard.Conditionable;
 
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ import java.util.Objects;
  *
  * @author Verlif
  */
-public class Branch implements CanSave {
+public class Branch implements CanSave, Chancable, Conditionable {
 
     /**
      * 支线名称
@@ -53,6 +55,7 @@ public class Branch implements CanSave {
         this.key = key;
     }
 
+    @Override
     public String getChance() {
         return chance;
     }
@@ -61,6 +64,7 @@ public class Branch implements CanSave {
         this.chance = chance;
     }
 
+    @Override
     public String getCondition() {
         return condition;
     }

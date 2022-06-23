@@ -297,7 +297,7 @@
         {
           "chance": "100",
           "desc": "小丽出了剪刀，你赢了。",
-          "exec": "role.tag.up score 2;kit.message 增加1分。"
+          "exec": "role.tag.up score 2;kit.message 增加2分。"
         }
       ]
     },
