@@ -9,6 +9,10 @@ import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.game.Game;
 import idea.verlif.lifeofdream.game.GameRunner;
 import idea.verlif.lifeofdream.game.Result;
+import idea.verlif.lifeofdream.notice.NoticeHandler;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.Tip;
+import idea.verlif.lifeofdream.notice.entity.ValueNotice;
 import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.sys.manager.PackManager;
 
@@ -32,6 +36,20 @@ public class TestForSth {
         PackManager pm = PackManager.getInstance();
         pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
         List<Pack> packs = pm.getPacks();
+        NoticeHandler handler = new NoticeHandler() {
+            @Override
+            public void handle(Tip tip) {
+                if (tip == Tip.EVENT_NOW) {
+                    select(1);
+                }
+            }
+
+            @Override
+            public void handle(ValueNotice notice) {
+                System.out.println(notice.getName() + " " + notice.getChange());
+            }
+        };
+        NoticeRunner.getInstance().addHandler(handler);
         if (packs.size() > 0) {
             Game game = Game.newGame(packs.toArray(new Pack[0]));
             GAME_RUNNER.setMessageKit(System.out::println);

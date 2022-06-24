@@ -2,6 +2,8 @@ package idea.verlif.lifeofdream.domain.role.extra;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.NumberValue;
 
 import java.util.Objects;
@@ -37,6 +39,11 @@ public class Tag implements NumberValue, CanSave {
      * 添加标签时触发
      */
     private String onAdd;
+
+    /**
+     * 新回合生效
+     */
+    private String onTurn;
 
     /**
      * 移除标签时触发
@@ -86,6 +93,14 @@ public class Tag implements NumberValue, CanSave {
         this.onAdd = onAdd;
     }
 
+    public String getOnTurn() {
+        return onTurn;
+    }
+
+    public void setOnTurn(String onTurn) {
+        this.onTurn = onTurn;
+    }
+
     public String getOnRemove() {
         return onRemove;
     }
@@ -119,6 +134,7 @@ public class Tag implements NumberValue, CanSave {
         json.put("val", value);
         json.put("vis", visible);
         json.put("add", onAdd);
+        json.put("turn", onTurn);
         json.put("rem", onRemove);
         return json;
     }
@@ -133,6 +149,7 @@ public class Tag implements NumberValue, CanSave {
         value = json.getIntValue("val");
         visible = json.getBooleanValue("vis");
         onAdd = json.getString("add");
+        onTurn = json.getString("turn");
         onRemove = json.getString("rem");
         return true;
     }
@@ -145,6 +162,9 @@ public class Tag implements NumberValue, CanSave {
     @Override
     public void up(int up) {
         value += up;
+        if (up != 0) {
+            NoticeRunner.notice(name, up, ValueType.TAG);
+        }
     }
 
     @Override

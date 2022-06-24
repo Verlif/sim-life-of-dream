@@ -2,6 +2,8 @@ package idea.verlif.lifeofdream.domain.role.extra;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.LevelValue;
 import idea.verlif.lifeofdream.standard.NumberValue;
 
@@ -95,6 +97,9 @@ public class Skill implements NumberValue, LevelValue, CanSave {
             value -= next;
             next = next << 1;
             level ++;
+        }
+        if (up != 0) {
+            NoticeRunner.notice(name, up, ValueType.SKILL);
         }
     }
 

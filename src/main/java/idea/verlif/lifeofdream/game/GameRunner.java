@@ -12,9 +12,12 @@ import idea.verlif.lifeofdream.domain.event.Option;
 import idea.verlif.lifeofdream.domain.event.OptionResult;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
+import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.standard.Chancable;
 import idea.verlif.lifeofdream.standard.Conditionable;
 import idea.verlif.lifeofdream.sys.kit.Kit;
@@ -343,12 +346,13 @@ public class GameRunner implements CanSave {
      * @return 结果
      */
     public Result nextTurn() {
-        readyEvents.clear();
         if (process == 0) {
             return Result.fail("Not start!");
         } else if (process == 2) {
-            preEvents.clear();
             return Result.fail("Finish!");
+        }
+        if (readyEvents.size() > 0) {
+            return Result.fail("Can't turn to next with events!");
         }
         readyEvents.addAll(preEvents);
         Random random = new Random();
@@ -357,6 +361,9 @@ public class GameRunner implements CanSave {
             if (testCondition(rule) && randomChance(rule)) {
                 execCmd(rule.getExec());
             }
+        }
+        for (Tag tag : role.getTag().getTagMap().values()) {
+            execCmd(tag.getOnTurn());
         }
         // 分支触发
         for (Branch branch : branchManager.getBranchMap().values()) {
@@ -438,6 +445,9 @@ public class GameRunner implements CanSave {
                 readyEvents.add(event);
             } else {
                 readyEvents.add(index, event);
+                if (index == 0) {
+                    NoticeRunner.notice(Tip.EVENT_NOW);
+                }
             }
             return true;
         }

@@ -2,6 +2,8 @@ package idea.verlif.lifeofdream.domain.item;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.Conditionable;
 import idea.verlif.lifeofdream.standard.NumberValue;
 
@@ -79,6 +81,9 @@ public class Item implements NumberValue, CanSave, Conditionable {
 
     @Override
     public void up(int up) {
+        if (up != 0) {
+            NoticeRunner.notice(name, up, ValueType.ITEM);
+        }
         this.value += up;
     }
 

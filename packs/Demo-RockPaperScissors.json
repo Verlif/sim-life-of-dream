@@ -2,7 +2,7 @@
   "story": {
     "name": "剪刀石头布",
     "desc": "欢迎来到剪刀石头布的比赛，看看你能在10回合内能获得多少分呢？游戏规则如下:",
-    "exec": "kit.message \"1. 石头赢剪刀，剪刀赢布，布赢石头。每回合获胜可获得1分，失败则减1分。\";kit.message \"2. 相同的手势作平局，不得分。\";role.tag.add score;role.tag.add time;world.addRule select;world.addRule timeToEnd;world.addRule end;world.addRule showScore"
+    "exec": "kit.message \"1. 石头赢剪刀，剪刀赢布，布赢石头。每回合获胜可获得1分，失败则减1分。\";kit.message \"2. 相同的手势作平局，不得分。\";role.tag.add score;role.tag.add time;world.addRule select;world.addRule end;world.addRule showScore"
   },
   "events": [
     {
@@ -360,12 +360,6 @@
       "exec": "addEventToReady play 1"
     },
     {
-      "name": "回合倒数",
-      "key": "timeToEnd",
-      "desc": "回合数倒计时",
-      "exec": "role.tag.down time 1"
-    },
-    {
       "name": "回合结束",
       "key": "end",
       "desc": "回合结束，统计得分",
@@ -389,6 +383,7 @@
     {
       "name": "倒计时",
       "key": "time",
+      "onTurn": "role.tag.down time 1",
       "value": 10,
       "visible": true
     }

@@ -2,6 +2,8 @@ package idea.verlif.lifeofdream.domain.role;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.NumberValue;
 import idea.verlif.lifeofdream.standard.TextValue;
 
@@ -97,6 +99,9 @@ public class RoleInfo implements CanSave {
             this.value += up;
             if (value < 0) {
                 value = 0;
+            }
+            if (up != 0) {
+                NoticeRunner.notice("年龄", up, ValueType.INFO);
             }
         }
 
