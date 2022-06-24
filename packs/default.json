@@ -2,7 +2,7 @@
   "story":{
     "name": "一个简单的故事",
     "desc": "故事开始了",
-    "exec": "world.addRuleOfTurn 年龄提升;world.addRuleOfTurn 测试;world.addRuleOfTurn 测试3;role.info.age.up 5"
+    "exec": "world.addRule 年龄提升;world.addRule 测试;world.addRule 测试3;role.info.age.up 5"
   },
   "branches": [
     {

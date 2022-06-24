@@ -15,7 +15,12 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     /**
      * 技能名称
      */
-    private final String name;
+    private String name;
+
+    /**
+     * 技能唯一键值
+     */
+    private String key;
 
     /**
      * 技能等级
@@ -25,22 +30,33 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     /**
      * 技能值
      */
-    private int value;
+    private int value = 0;
 
     /**
      * 下一等级需要的技能值
      */
-    private int next;
+    private int next = 20;
 
-    public Skill(String name, int next) {
+    public Skill() {
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.level = 0;
-        this.value = 0;
-        this.next = next;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getKey() {
+        if (key == null) {
+            key = name;
+        }
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public int getLevel() {
@@ -76,15 +92,16 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     public void up(int up) {
         value += up;
         while (value >= next) {
-            next = next << 1;
             value -= next;
+            next = next << 1;
             level ++;
         }
     }
 
     @Override
     public void set(int value) {
-        this.value = value;
+        this.value = 0;
+        up(value);
     }
 
     @Override
@@ -118,5 +135,11 @@ public class Skill implements NumberValue, LevelValue, CanSave {
         value = json.getIntValue("val");
         next = json.getIntValue("next");
         return true;
+    }
+
+    public Skill copy() {
+        Skill skill = new Skill();
+        skill.load(save());
+        return skill;
     }
 }

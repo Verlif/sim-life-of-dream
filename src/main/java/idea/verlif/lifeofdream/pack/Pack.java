@@ -4,6 +4,7 @@ import idea.verlif.lifeofdream.domain.branch.Branch;
 import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.event.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
+import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
@@ -31,6 +32,8 @@ public class Pack {
     private List<Rule> rules;
 
     private List<Tag> tags;
+
+    private List<Skill> skills;
 
     public Story getStory() {
         return story;
@@ -104,5 +107,16 @@ public class Pack {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public List<Skill> getSkills() {
+        if (skills == null) {
+            skills = new ArrayList<>();
+        }
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 }

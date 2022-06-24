@@ -224,44 +224,81 @@ public class GameRunner implements CanSave {
     }
 
     /**
+     * 执行世界选项
+     *
+     * @param key 选项key
+     * @return 执行结果
+     */
+    public Result execOptionOfWorld(String key) {
+        Option option = world.getOptionMap().get(key);
+        if (option != null) {
+            if (testCondition(option)) {
+                return Result.fail("Can't execute the option");
+            } else {
+                return invokeOption(option);
+            }
+        } else {
+            return Result.fail("No such option!");
+        }
+    }
+
+    /**
+     * 是否可以执行选项
+     *
+     * @param key 选项key
+     * @return 是否条件满足
+     */
+    public boolean canExecOption(String key) {
+        Option option = world.getOptionMap().get(key);
+        if (option == null) {
+            return false;
+        }
+        return testCondition(option);
+    }
+
+    /**
      * 执行事件选项。执行后，事件会自动移除。
      *
      * @param key 选项Key
      * @return 执行结果
      */
-    public Result execOption(String key) {
+    public Result execOptionOfEvent(String key) {
         if (readyEvents.size() == 0) {
             return Result.fail("No event can be executed!");
         }
         Event event = readyEvents.get(0);
         for (Option option : event.getReadyOptions()) {
             if (option.getKey().equals(key)) {
-                kit.message(option.getDesc());
                 // 跳过此事件
                 skipEvent();
-                // 效果选择
-                List<OptionResult> results = option.getResultList();
-                List<OptionResult> readyResults = new ArrayList<>();
-                for (OptionResult result : results) {
-                    if (testCondition(result)) {
-                        readyResults.add(result);
-                    }
-                }
-                ChanceRandom<OptionResult> random = new ChanceRandom<>();
-                for (OptionResult readyResult : readyResults) {
-                    random.add(DescUtil.result(tran(readyResult.getChance())), readyResult);
-                }
-                OptionResult result = random.random();
-                if (result != null) {
-                    kit.message(result.getDesc());
-                    // 执行结果
-                    return execCmd(result.getExec());
-                } else {
-                    return Result.ok("ok");
-                }
+                return invokeOption(option);
             }
         }
         return Result.fail("No such option!");
+    }
+
+    private Result invokeOption(Option option) {
+        kit.message(option.getDesc());
+        // 效果选择
+        List<OptionResult> results = option.getResultList();
+        List<OptionResult> readyResults = new ArrayList<>();
+        for (OptionResult result : results) {
+            if (testCondition(result)) {
+                readyResults.add(result);
+            }
+        }
+        ChanceRandom<OptionResult> random = new ChanceRandom<>();
+        for (OptionResult readyResult : readyResults) {
+            random.add(DescUtil.result(tran(readyResult.getChance())), readyResult);
+        }
+        OptionResult result = random.random();
+        if (result != null) {
+            kit.message(result.getDesc());
+            // 执行结果
+            return execCmd(result.getExec());
+        } else {
+            return Result.ok("ok");
+        }
     }
 
     /**
@@ -316,7 +353,7 @@ public class GameRunner implements CanSave {
         readyEvents.addAll(preEvents);
         Random random = new Random();
         // 每回合规则触发
-        for (Rule rule : world.getRuleOfTurn().values()) {
+        for (Rule rule : world.getRuleMap().values()) {
             if (testCondition(rule) && randomChance(rule)) {
                 execCmd(rule.getExec());
             }

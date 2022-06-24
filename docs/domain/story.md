@@ -15,7 +15,7 @@
   "story": {
     "name": "一个简单的故事",
     "desc": "故事开始了",
-    "exec": "world.addRuleOfTurn 年龄提升;role.info.age.up 5"
+    "exec": "world.addRule 年龄提升;role.info.age.up 5"
   }
 }
 ```

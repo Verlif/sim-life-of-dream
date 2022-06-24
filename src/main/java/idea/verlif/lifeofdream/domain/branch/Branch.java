@@ -48,6 +48,9 @@ public class Branch implements CanSave, Chancable, Conditionable {
     }
 
     public String getKey() {
+        if (key == null) {
+            key = name;
+        }
         return key;
     }
 

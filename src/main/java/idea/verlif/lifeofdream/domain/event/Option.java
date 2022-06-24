@@ -57,6 +57,9 @@ public class Option implements CanSave, Chancable, Conditionable {
     }
 
     public String getKey() {
+        if (key == null) {
+            key = title;
+        }
         return key;
     }
 

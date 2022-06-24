@@ -31,7 +31,7 @@ public class Tag implements NumberValue, CanSave {
     /**
      * 标签是否可见
      */
-    private boolean visible;
+    private boolean visible = true;
 
     /**
      * 添加标签时触发
@@ -52,6 +52,9 @@ public class Tag implements NumberValue, CanSave {
     }
 
     public String getKey() {
+        if (key == null) {
+            key = name;
+        }
         return key;
     }
 

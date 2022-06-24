@@ -7,6 +7,7 @@ import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.event.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
+import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
@@ -68,6 +69,8 @@ public class Game implements CanSave {
         rm.load(json.getJSONObject("rm"));
         TagManager tm = TagManager.getInstance();
         tm.load(json.getJSONObject("tm"));
+        SkillManager sm = SkillManager.getInstance();
+        sm.load(json.getJSONObject("sm"));
 
         return game;
     }
@@ -86,6 +89,7 @@ public class Game implements CanSave {
         Set<Option> options = new HashSet<>();
         Set<Rule> rules = new HashSet<>();
         Set<Tag> tags = new HashSet<>();
+        Set<Skill> skills = new HashSet<>();
         for (Pack pack : packs) {
             if (pack.getStory() != null) {
                 game.getStories().add(pack.getStory());
@@ -99,6 +103,7 @@ public class Game implements CanSave {
             options.addAll(pack.getOptions());
             rules.addAll(pack.getRules());
             tags.addAll(pack.getTags());
+            skills.addAll(pack.getSkills());
         }
         BranchManager bm = BranchManager.getInstance();
         bm.getBranchMap().clear();
@@ -130,6 +135,11 @@ public class Game implements CanSave {
         for (Tag tag : tags) {
             tm.addTag(tag);
         }
+        SkillManager sm = SkillManager.getInstance();
+        sm.getSkillMap().clear();
+        for (Skill skill : skills) {
+            sm.add(skill);
+        }
 
         return game;
     }
@@ -151,6 +161,8 @@ public class Game implements CanSave {
         json.put("rm", rm.save());
         TagManager tm = TagManager.getInstance();
         json.put("tm", tm.save());
+        SkillManager sm = SkillManager.getInstance();
+        json.put("sm", sm.save());
 
         return json.toJSONString();
     }

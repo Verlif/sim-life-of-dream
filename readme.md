@@ -36,8 +36,9 @@ __西米的梦境师计划__ 的目标是可以达成一个类似与文字游戏
 - [__道具__](docs/domain/item.md)。提供给玩家使用的项目，用来主动触发效果。
 - [__规则__](docs/domain/rule.md)。规则表示了每回合需要执行的效果，用来配合故事开端来形成一个世界背景。也可以配合标签来形成buff。
 - [__标签__](docs/domain/tag.md)。标签是角色所属的项目，一般是用作项目条件判断。
+- [__技能__](docs/domain/skill.md)。技能是角色拥有的属性，提供了等级规范。
 
-资源包编写时可以参考 [数据编写说明](docs/数据编写说明.md) 与 [变量与执行描述](docs/变量与执行描述.md)。
+[资源包](docs/资源包编写.md) 编写时可以参考 [数据编写说明](docs/数据编写说明.md) 与 [变量与执行描述](docs/变量与执行描述.md)。
 
 ## 使用
 
@@ -61,7 +62,7 @@ public class main {
             // 新建游戏
             Game game = Game.newGame(packs.toArray(new Pack[0]));
             // 设定信息输出工具
-            GAME_RUNNER.setMessageKit(createMessageKit());
+            GAME_RUNNER.setMessageKit(System.out::println);
             // 开始游戏
             GAME_RUNNER.start(game);
             System.out.println();
@@ -90,6 +91,8 @@ public class main {
 ```
 
 ### 依赖
+
+**请注意，1.X版本为预览版，2.0+版本才是稳定版。**
 
 1. 添加Jitpack仓库源
 

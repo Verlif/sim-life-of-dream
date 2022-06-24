@@ -58,6 +58,9 @@ public class Item implements NumberValue, CanSave, Conditionable {
     }
 
     public String getKey() {
+        if (key == null) {
+            key = name;
+        }
         return key;
     }
 

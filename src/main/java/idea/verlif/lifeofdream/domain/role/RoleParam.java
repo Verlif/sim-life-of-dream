@@ -32,11 +32,6 @@ public class RoleParam implements CanSave {
     private final Param perceptual;
 
     /**
-     * 运动
-     */
-    private final Param sport;
-
-    /**
      * 精神
      */
     private final Param spirit;
@@ -46,14 +41,97 @@ public class RoleParam implements CanSave {
      */
     private final Param attentive;
 
+    /**
+     * 游泳
+     */
+    private final Param swimming;
+
+    /**
+     * 厨艺
+     */
+    private final Param cooking;
+
+    /**
+     * 驾驶
+     */
+    private final Param driving;
+
+    /**
+     * 音律
+     */
+    private final Param melody;
+
+    /**
+     * 唱功
+     */
+    private final Param singing;
+
+    /**
+     * 协调
+     */
+    private final Param coordination;
+
+    /**
+     * 言语
+     */
+    private final Param speeching;
+
+    /**
+     * 绘画
+     */
+    private final Param painting;
+
+    /**
+     * 文字
+     */
+    private final Param writing;
+
+    /**
+     * 联想
+     */
+    private final Param association;
+
+    /**
+     * 想象
+     */
+    private final Param imagination;
+
+    /**
+     * 记忆
+     */
+    private final Param memory;
+
+    /**
+     * 耐心
+     */
+    private final Param patience;
+
+    /**
+     * 艺术
+     */
+    private final Param art;
+
     public RoleParam() {
         charm = new Param("魅力");
         luck = new Param("幸运");
         logic = new Param("逻辑");
         perceptual = new Param("感性");
-        sport = new Param("运动");
         spirit = new Param("精神");
         attentive = new Param("专注");
+        swimming = new Param("游泳");
+        cooking = new Param("厨艺");
+        driving = new Param("驾驶");
+        melody = new Param("音律");
+        singing = new Param("唱功");
+        coordination = new Param("协调");
+        speeching = new Param("言语");
+        painting = new Param("绘画");
+        writing = new Param("文字");
+        association = new Param("联想");
+        imagination = new Param("想象");
+        memory = new Param("记忆");
+        patience = new Param("耐心");
+        art = new Param("艺术");
     }
 
     public Param getCharm() {
@@ -72,16 +150,68 @@ public class RoleParam implements CanSave {
         return perceptual;
     }
 
-    public Param getSport() {
-        return sport;
-    }
-
     public Param getSpirit() {
         return spirit;
     }
 
     public Param getAttentive() {
         return attentive;
+    }
+
+    public Param getSwimming() {
+        return swimming;
+    }
+
+    public Param getCooking() {
+        return cooking;
+    }
+
+    public Param getDriving() {
+        return driving;
+    }
+
+    public Param getMelody() {
+        return melody;
+    }
+
+    public Param getSinging() {
+        return singing;
+    }
+
+    public Param getCoordination() {
+        return coordination;
+    }
+
+    public Param getSpeeching() {
+        return speeching;
+    }
+
+    public Param getPainting() {
+        return painting;
+    }
+
+    public Param getWriting() {
+        return writing;
+    }
+
+    public Param getAssociation() {
+        return association;
+    }
+
+    public Param getImagination() {
+        return imagination;
+    }
+
+    public Param getMemory() {
+        return memory;
+    }
+
+    public Param getPatience() {
+        return patience;
+    }
+
+    public Param getArt() {
+        return art;
     }
 
     @Override
@@ -91,9 +221,22 @@ public class RoleParam implements CanSave {
         json.put("luck", luck.save());
         json.put("log", logic.save());
         json.put("per", perceptual.save());
-        json.put("spo", sport.save());
         json.put("spi", spirit.save());
         json.put("att", attentive.save());
+        json.put("swi", swimming.save());
+        json.put("coo", cooking.save());
+        json.put("dri", driving.save());
+        json.put("mel", melody.save());
+        json.put("sin", singing.save());
+        json.put("coor", coordination.save());
+        json.put("spe", speeching.save());
+        json.put("pai", painting.save());
+        json.put("wri", writing.save());
+        json.put("ast", association.save());
+        json.put("ima", imagination.save());
+        json.put("mem", memory.save());
+        json.put("pat", patience.save());
+        json.put("art", art.save());
         return json;
     }
 
@@ -106,9 +249,22 @@ public class RoleParam implements CanSave {
         luck.load(json.getJSONObject("luck"));
         logic.load(json.getJSONObject("log"));
         perceptual.load(json.getJSONObject("per"));
-        sport.load(json.getJSONObject("spo"));
         spirit.load(json.getJSONObject("spi"));
         attentive.load(json.getJSONObject("att"));
+        swimming.load(JSONObject.parseObject("swi"));
+        cooking.load(JSONObject.parseObject("coo"));
+        driving.load(JSONObject.parseObject("dri"));
+        melody.load(JSONObject.parseObject("mel"));
+        singing.load(JSONObject.parseObject("sin"));
+        coordination.load(JSONObject.parseObject("coor"));
+        speeching.load(JSONObject.parseObject("spe"));
+        painting.load(JSONObject.parseObject("pai"));
+        writing.load(JSONObject.parseObject("wri"));
+        association.load(JSONObject.parseObject("ast"));
+        imagination.load(JSONObject.parseObject("ima"));
+        memory.load(JSONObject.parseObject("mem"));
+        patience.load(JSONObject.parseObject("pat"));
+        art.load(JSONObject.parseObject("art"));
         return true;
     }
 }

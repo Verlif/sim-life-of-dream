@@ -2,7 +2,7 @@
   "story": {
     "name": "一个简单的故事",
     "desc": "故事开始了",
-    "exec": "role.info.age.up 5;world.addRuleOfTurn 年龄提升;world.addRuleOfTurn 季节变化;world.addRuleOfTurn 季节轮回;world.addRuleOfTurn 季节描述.春;world.addRuleOfTurn 季节描述.夏;world.addRuleOfTurn 季节描述.秋;world.addRuleOfTurn 季节描述.冬;world.addRuleOfTurn 生病;world.addRuleOfTurn 病情自愈;world.addRuleOfTurn 病情加重"
+    "exec": "role.info.age.up 5;world.addRule 年龄提升;world.addRule 季节变化;world.addRule 季节轮回;world.addRule 季节描述.春;world.addRule 季节描述.夏;world.addRule 季节描述.秋;world.addRule 季节描述.冬;world.addRule 生病;world.addRule 病情自愈;world.addRule 病情加重"
   },
   "branches": [
     {
