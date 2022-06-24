@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class Pack {
 
+    private PackInfo info;
+
     private Story story;
 
     private List<Branch> branches;
@@ -34,6 +36,14 @@ public class Pack {
     private List<Tag> tags;
 
     private List<Skill> skills;
+
+    public PackInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(PackInfo info) {
+        this.info = info;
+    }
 
     public Story getStory() {
         return story;

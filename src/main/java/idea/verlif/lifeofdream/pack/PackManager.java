@@ -1,7 +1,6 @@
-package idea.verlif.lifeofdream.sys.manager;
+package idea.verlif.lifeofdream.pack;
 
 import com.alibaba.fastjson2.JSONObject;
-import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.util.FileUtil;
 
 import java.io.File;
@@ -36,6 +35,7 @@ public class PackManager {
             if (json != null) {
                 Pack pack = json.to(Pack.class);
                 packs.add(pack);
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();

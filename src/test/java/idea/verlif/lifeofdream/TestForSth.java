@@ -14,7 +14,7 @@ import idea.verlif.lifeofdream.notice.NoticeRunner;
 import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.notice.entity.ValueNotice;
 import idea.verlif.lifeofdream.pack.Pack;
-import idea.verlif.lifeofdream.sys.manager.PackManager;
+import idea.verlif.lifeofdream.pack.PackManager;
 
 import java.io.File;
 import java.util.*;

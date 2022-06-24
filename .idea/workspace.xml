@@ -4,25 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 完善了角色判定属性&#10;2. 对角色技能进行了拓展，现在角色技能可以像角色标签一样进行自定义了">
-      <change afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/NoticeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/NoticeRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/Tip.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/ValueNotice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/ValueType.java" afterDir="false" />
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 项目[标签]中增加了onTurn参数，用于在每回合时触发&#10;2. 增加了提醒触发器，用于对数值或是一些游戏变化做消息提醒&#10;3. 现在nextTurn只能在当前回合没有事件的情况下生效&#10;4. 1.2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/PackInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/tag.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/tag.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/变量与执行描述.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/变量与执行描述.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/数据编写说明.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/数据编写说明.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/资源包编写.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/资源包编写.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Attr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Attr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Param.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Param.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/Pack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/Pack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/PackManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/PackManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,9 +24,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -227,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655908575764</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="1. 项目[标签]中增加了onTurn参数，用于在每回合时触发&#10;2. 增加了提醒触发器，用于对数值或是一些游戏变化做消息提醒&#10;3. 现在nextTurn只能在当前回合没有事件的情况下生效&#10;4. 1.2">
+      <created>1656081774915</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1656081774915</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +233,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -254,7 +261,8 @@
     <MESSAGE value="1. 数字类型添加了set方法&#10;2. 已经开始的游戏使用start不会再次触发开始&#10;3. 正式版1.0" />
     <MESSAGE value="1. 完善readme" />
     <MESSAGE value="1. 完善了角色判定属性&#10;2. 对角色技能进行了拓展，现在角色技能可以像角色标签一样进行自定义了" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 完善了角色判定属性&#10;2. 对角色技能进行了拓展，现在角色技能可以像角色标签一样进行自定义了" />
+    <MESSAGE value="1. 项目[标签]中增加了onTurn参数，用于在每回合时触发&#10;2. 增加了提醒触发器，用于对数值或是一些游戏变化做消息提醒&#10;3. 现在nextTurn只能在当前回合没有事件的情况下生效&#10;4. 1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 项目[标签]中增加了onTurn参数，用于在每回合时触发&#10;2. 增加了提醒触发器，用于对数值或是一些游戏变化做消息提醒&#10;3. 现在nextTurn只能在当前回合没有事件的情况下生效&#10;4. 1.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
