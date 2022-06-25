@@ -52,6 +52,7 @@ public class TestForSth {
         NoticeRunner.getInstance().addHandler(handler);
         if (packs.size() > 0) {
             Game game = Game.newGame(packs.toArray(new Pack[0]));
+            game.load(game.save());
             GAME_RUNNER.setMessageKit(System.out::println);
             GAME_RUNNER.start(game);
             System.out.println();

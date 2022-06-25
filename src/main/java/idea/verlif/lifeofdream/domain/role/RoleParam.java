@@ -251,20 +251,20 @@ public class RoleParam implements CanSave {
         perceptual.load(json.getJSONObject("per"));
         spirit.load(json.getJSONObject("spi"));
         attentive.load(json.getJSONObject("att"));
-        swimming.load(JSONObject.parseObject("swi"));
-        cooking.load(JSONObject.parseObject("coo"));
-        driving.load(JSONObject.parseObject("dri"));
-        melody.load(JSONObject.parseObject("mel"));
-        singing.load(JSONObject.parseObject("sin"));
-        coordination.load(JSONObject.parseObject("coor"));
-        speeching.load(JSONObject.parseObject("spe"));
-        painting.load(JSONObject.parseObject("pai"));
-        writing.load(JSONObject.parseObject("wri"));
-        association.load(JSONObject.parseObject("ast"));
-        imagination.load(JSONObject.parseObject("ima"));
-        memory.load(JSONObject.parseObject("mem"));
-        patience.load(JSONObject.parseObject("pat"));
-        art.load(JSONObject.parseObject("art"));
+        swimming.load(json.getJSONObject("swi"));
+        cooking.load(json.getJSONObject("coo"));
+        driving.load(json.getJSONObject("dri"));
+        melody.load(json.getJSONObject("mel"));
+        singing.load(json.getJSONObject("sin"));
+        coordination.load(json.getJSONObject("coor"));
+        speeching.load(json.getJSONObject("spe"));
+        painting.load(json.getJSONObject("pai"));
+        writing.load(json.getJSONObject("wri"));
+        association.load(json.getJSONObject("ast"));
+        imagination.load(json.getJSONObject("ima"));
+        memory.load(json.getJSONObject("mem"));
+        patience.load(json.getJSONObject("pat"));
+        art.load(json.getJSONObject("art"));
         return true;
     }
 }
