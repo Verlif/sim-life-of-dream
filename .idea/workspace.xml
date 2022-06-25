@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 对资源加载判定了空列表&#10;2. 1.3.1">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 修复了判定属性中load的bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656136791333</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="1. 修复了判定属性中load的bug">
+      <created>1656139884564</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1656139884564</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +280,8 @@
     <MESSAGE value="1. 增加了资源包信息&#10;2. 将fastjson2切换版本到2.0.7.android" />
     <MESSAGE value="1. 增加了资源包信息&#10;2. 将fastjson2切换版本到2.0.7.android&#10;3. 1.3" />
     <MESSAGE value="1. 对资源加载判定了空列表&#10;2. 1.3.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 对资源加载判定了空列表&#10;2. 1.3.1" />
+    <MESSAGE value="1. 修复了判定属性中load的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 修复了判定属性中load的bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

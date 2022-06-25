@@ -49,8 +49,7 @@ public class Game implements CanSave {
         return stories;
     }
 
-    public static Game loadData(String data) {
-        JSONObject json = JSONObject.parseObject(data);
+    public static Game loadData(JSONObject json) {
         GameRunner er = GameRunner.getInstance();
         er.load(json.getJSONObject("er"));
 
@@ -144,7 +143,7 @@ public class Game implements CanSave {
         return game;
     }
 
-    public String exportData() {
+    public JSONObject exportData() {
         JSONObject json = new JSONObject();
         json.put("er", GameRunner.getInstance().save());
         json.put("game", save());
@@ -164,7 +163,7 @@ public class Game implements CanSave {
         SkillManager sm = SkillManager.getInstance();
         json.put("sm", sm.save());
 
-        return json.toJSONString();
+        return json;
     }
 
     @Override
