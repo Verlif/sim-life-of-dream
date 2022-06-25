@@ -2,7 +2,6 @@ package idea.verlif.lifeofdream.game;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.justsimmand.SimmandManager;
-import idea.verlif.justsimmand.anno.SimmParam;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedList;
 import idea.verlif.lifeofdream.base.CanSavedMap;
@@ -438,7 +437,7 @@ public class GameRunner implements CanSave {
      * @param key   事件key
      * @param index 添加到的序号
      */
-    public boolean addEventToReady(String key, @SimmParam(defaultVal = "-1") int index) {
+    public boolean addEventToReady(String key, int index) {
         Event event = eventManager.getEvent(key);
         if (event != null) {
             if (index == -1 || index > readyEvents.size()) {
@@ -460,7 +459,7 @@ public class GameRunner implements CanSave {
      * @param key   事件key
      * @param index 添加到的序号
      */
-    public boolean addEventToPre(String key, @SimmParam(defaultVal = "-1") int index) {
+    public boolean addEventToPre(String key, int index) {
         Event event = eventManager.getEvent(key);
         if (event != null) {
             if (index == -1 || index > readyEvents.size()) {

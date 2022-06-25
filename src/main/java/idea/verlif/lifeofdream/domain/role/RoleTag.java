@@ -1,7 +1,6 @@
 package idea.verlif.lifeofdream.domain.role;
 
 import com.alibaba.fastjson2.JSONObject;
-import idea.verlif.justsimmand.anno.SimmParam;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
@@ -54,7 +53,7 @@ public class RoleTag implements CanSave {
         return tag.value();
     }
 
-    public void up(String key, @SimmParam(defaultVal = "1") int up) {
+    public void up(String key, int up) {
         TagManager tagManager = TagManager.getInstance();
         Set<String> set = tagManager.getGroup(key);
         if (set == null) {
@@ -74,7 +73,7 @@ public class RoleTag implements CanSave {
         }
     }
 
-    public void down(String key, @SimmParam(defaultVal = "1") int down) {
+    public void down(String key, int down) {
         up(key, -down);
     }
 

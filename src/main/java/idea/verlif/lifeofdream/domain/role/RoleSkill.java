@@ -1,7 +1,6 @@
 package idea.verlif.lifeofdream.domain.role;
 
 import com.alibaba.fastjson2.JSONObject;
-import idea.verlif.justsimmand.anno.SimmParam;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.role.extra.Skill;
@@ -57,7 +56,7 @@ public class RoleSkill implements CanSave {
         }
     }
 
-    public void up(String key, @SimmParam(defaultVal = "1") int up) {
+    public void up(String key, int up) {
         Skill skill = skillMap.get(key);
         if (skill == null) {
             add(key);
@@ -68,7 +67,7 @@ public class RoleSkill implements CanSave {
         }
     }
 
-    public void down(String key, @SimmParam(defaultVal = "1") int down) {
+    public void down(String key, int down) {
         up(key, -down);
     }
 

@@ -1,7 +1,6 @@
 package idea.verlif.lifeofdream.domain.role.extra;
 
 import com.alibaba.fastjson2.JSONObject;
-import idea.verlif.justsimmand.anno.SimmParam;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.item.Item;
@@ -53,7 +52,7 @@ public class Bag implements CanSave {
     /**
      * 背包中是否有足量的此道具
      *
-     * @param key   道具Key
+     * @param key 道具Key
      * @return 是否有此道具。true - 有此道具；false - 没有此道具
      */
     public boolean has(String key) {
@@ -116,7 +115,7 @@ public class Bag implements CanSave {
      * @param key   道具Key
      * @param count 道具数量。在指令中默认值为1。
      */
-    public Item add(String key, @SimmParam(defaultVal = "1") int count) {
+    public Item add(String key, int count) {
         Item item = itemMap.get(key);
         if (item == null) {
             ItemManager itemManager = ItemManager.getInstance();
@@ -139,7 +138,7 @@ public class Bag implements CanSave {
      * @param key   道具Key
      * @param count 道具数量。在指令中默认值为所有。
      */
-    public void remove(String key, @SimmParam(defaultVal = "1") int count) {
+    public void remove(String key, int count) {
         Item item = itemMap.get(key);
         if (item != null) {
             if (count == -1 || item.lt(count)) {
