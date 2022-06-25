@@ -150,9 +150,13 @@ public class Option implements CanSave, Chancable, Conditionable {
         chance = json.getString("cha");
         condition = json.getString("con");
         resultList.clear();
-        resultList.addAll(json.getList("res", OptionResult.class));
+        if (json.containsKey("res")) {
+            resultList.addAll(json.getList("res", OptionResult.class));
+        }
         followEvents.clear();
-        followEvents.addAll(json.getList("aes", String.class));
+        if (json.containsKey("aes")) {
+            followEvents.addAll(json.getList("aes", String.class));
+        }
         return true;
     }
 

@@ -619,7 +619,9 @@ public class GameRunner implements CanSave {
         if (json == null) {
             return false;
         }
-        stories.addAll(json.getList("sto", Story.class));
+        if (json.containsKey("sto")) {
+            stories.addAll(json.getList("sto", Story.class));
+        }
         role = new Role();
         role.load(json.getJSONObject("role"));
         world = new World();

@@ -217,7 +217,9 @@ public class Event implements CanSave, Chancable, Conditionable {
             return false;
         }
         afterBranches.clear();
-        afterBranches.addAll(json.getList("ab", String.class));
+        if (json.containsKey("ab")) {
+            afterBranches.addAll(json.getList("ab", String.class));
+        }
         key = json.getString("key");
         title = json.getString("tit");
         desc = json.getString("desc");

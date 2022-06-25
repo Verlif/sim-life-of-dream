@@ -49,7 +49,9 @@ public class Kit implements CanSave {
             return false;
         }
         records.clear();
-        records.addAll(json.getList("res", String.class));
+        if (json.containsKey("res")) {
+            records.addAll(json.getList("res", String.class));
+        }
         return true;
     }
 }
