@@ -54,10 +54,10 @@ public class BranchManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        branchMap.clear();
         if (json == null) {
             return false;
         }
-        branchMap.clear();
         return branchMap.load(json.getJSONObject("bm"));
     }
 }

@@ -54,10 +54,10 @@ public class RuleManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        ruleMap.clear();
         if (json == null) {
             return false;
         }
-        ruleMap.clear();
         return ruleMap.load(json.getJSONObject("rm"));
     }
 }

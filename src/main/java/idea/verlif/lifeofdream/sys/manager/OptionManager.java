@@ -75,11 +75,11 @@ public class OptionManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        allOptionMap.clear();
+        allEventOptionMap.clear();
         if (json == null) {
             return false;
         }
-        allOptionMap.clear();
-        allEventOptionMap.clear();
         allOptionMap.load(json.getJSONObject("aom"));
         for (Option option : allOptionMap.values()) {
             for (String event : option.getFollowEvents()) {

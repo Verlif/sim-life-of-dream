@@ -16,7 +16,7 @@ public class Kit implements CanSave {
     private MessageKit messageKit;
 
     private final List<String> records;
-    
+
     public Kit() {
         messageKit = message -> {
         };
@@ -32,8 +32,10 @@ public class Kit implements CanSave {
     }
 
     public void message(String message) {
-        messageKit.show(message);
-        records.add(message);
+        if (message != null && message.length() > 0) {
+            messageKit.show(message);
+            records.add(message);
+        }
     }
 
     public List<String> getRecords() {
@@ -49,10 +51,10 @@ public class Kit implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        records.clear();
         if (json == null) {
             return false;
         }
-        records.clear();
         if (json.containsKey("res")) {
             records.addAll(json.getList("res", String.class));
         }

@@ -103,11 +103,11 @@ public class EventManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        allEventMap.clear();
+        allBranchEventMap.clear();
         if (json == null) {
             return false;
         }
-        allEventMap.clear();
-        allBranchEventMap.clear();
         allEventMap.load(json.getJSONObject("aem"));
         for (Event event : allEventMap.values()) {
             for (String branch : event.getAfterBranches()) {

@@ -107,10 +107,10 @@ public class TagManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        tagMap.clear();
         if (json == null) {
             return false;
         }
-        tagMap.clear();
         tagMap.load(json.getJSONObject("tm"));
         for (String key : tagMap.keySet()) {
             addKeyToGroup(key);

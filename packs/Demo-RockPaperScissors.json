@@ -363,13 +363,13 @@
       "name": "触发选人",
       "key": "select",
       "desc": "随机选择对手",
-      "exec": "addEventToReady play 1"
+      "exec": "addEventToReady play 0"
     },
     {
       "name": "回合结束",
       "key": "end",
       "desc": "回合结束，统计得分",
-      "condition": "@{role.tag.value time} = 0",
+      "condition": "@{role.tag.value time} < 1",
       "exec": "finish;kit.message \"比赛结束，你的分数是 @{role.tag.value score}\""
     },
     {
