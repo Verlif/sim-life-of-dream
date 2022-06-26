@@ -31,10 +31,16 @@ public class Game implements CanSave {
     private final World world;
     private final List<Story> stories;
 
+    /**
+     * 是否游戏进程状态；0 - 未开始；1 - 进行中；2 - 结束
+     */
+    private int process;
+
     public Game() {
         this.role = new Role();
         this.world = new World();
         this.stories = new ArrayList<>();
+        this.process = 0;
     }
 
     public Role getRole() {
@@ -47,6 +53,18 @@ public class Game implements CanSave {
 
     public List<Story> getStories() {
         return stories;
+    }
+
+    public int getProcess() {
+        return process;
+    }
+
+    public void setProcess(int process) {
+        this.process = process;
+    }
+
+    public boolean isFinish() {
+        return process == 2;
     }
 
     public static Game loadData(JSONObject json) {
@@ -172,6 +190,7 @@ public class Game implements CanSave {
         json.put("role", role.save());
         json.put("world", world.save());
         json.put("stos", stories);
+        json.put("pro", process);
         return json;
     }
 
@@ -180,6 +199,7 @@ public class Game implements CanSave {
         role.load(json.getJSONObject("role"));
         world.load(json.getJSONObject("world"));
         stories.addAll(json.getList("stos", Story.class));
+        process = json.getIntValue("pro");
         return true;
     }
 }

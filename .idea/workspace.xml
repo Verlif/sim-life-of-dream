@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. kit提供了消息列表&#10;2. GameRunner现在会储存process">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/event.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/event.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/option.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/option.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/kit/Kit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/kit/Kit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -288,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656215115032</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3">
+      <created>1656232048840</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1656232048840</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +340,8 @@
     <MESSAGE value="1. 修复了判定属性中load的bug" />
     <MESSAGE value="1. 更改了Game的导入导出的格式" />
     <MESSAGE value="1. kit提供了消息列表&#10;2. GameRunner现在会储存process" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. kit提供了消息列表&#10;2. GameRunner现在会储存process" />
+    <MESSAGE value="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -343,6 +350,16 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java</url>
+          <line>214</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java</url>
+          <line>357</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

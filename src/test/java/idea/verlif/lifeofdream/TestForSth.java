@@ -61,7 +61,7 @@ public class TestForSth {
             System.out.println();
             int i = 1;
             while (true) {
-                if (!GAME_RUNNER.isFinish()) {
+                if (!game.isFinish()) {
                     System.out.print("----------------------------------------- " + i++ + " -----------------------------------------\n" +
                             "1. 显示当前事件\n" +
                             "2. 跳过当前事件\n" +

@@ -363,7 +363,7 @@
       "name": "触发选人",
       "key": "select",
       "desc": "随机选择对手",
-      "exec": "addEventToReady play 1"
+      "exec": "addEventToReady play 0"
     },
     {
       "name": "回合结束",

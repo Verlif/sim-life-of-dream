@@ -94,10 +94,7 @@ public class GameRunner implements CanSave {
      */
     private final CanSavedMap<String, Branch> branchMap;
 
-    /**
-     * 是否游戏进程状态；0 - 未开始；1 - 进行中；2 - 结束
-     */
-    private int process;
+    private Game game;
 
     private final VarsContext varsContext;
     private final AttrHandler attrHandler;
@@ -199,9 +196,10 @@ public class GameRunner implements CanSave {
      * @return 开始结果
      */
     public Result start(Game game) {
-        if (process == 1) {
+        this.game = game;
+        if (game.getProcess() == 1) {
             return Result.ok(null);
-        } else if (process == 2) {
+        } else if (game.getProcess() == 2) {
             return Result.fail("It's finished!");
         }
         init(game.getRole(), game.getWorld());
@@ -214,7 +212,7 @@ public class GameRunner implements CanSave {
             kit.message(story.getDesc());
             execCmd(story.getExec());
         }
-        process = 1;
+        game.setProcess(1);
         return Result.ok("Start!");
     }
 
@@ -322,6 +320,7 @@ public class GameRunner implements CanSave {
         }
         kit.message(event.getDesc());
         execCmd(event.getExec());
+        event.setDone(true);
         // 降低事件剩余次数
         Event rawEvent = eventManager.getRawEvent(event.getKey());
         if (rawEvent != null && rawEvent.getRemain() > 0) {
@@ -334,7 +333,6 @@ public class GameRunner implements CanSave {
             OptionManager optionManager = OptionManager.getInstance();
             // 进行选项判定
             Set<Option> allSet = optionManager.getOptionOfEvent(event.getKey());
-            Random random = new Random();
             for (Option option : allSet) {
                 if (testCondition(option) && randomChance(option)) {
                     event.getReadyOptions().add(option);
@@ -350,16 +348,15 @@ public class GameRunner implements CanSave {
      * @return 结果
      */
     public Result nextTurn() {
-        if (process == 0) {
+        if (game.getProcess() == 0) {
             return Result.fail("Not start!");
-        } else if (process == 2) {
+        } else if (game.getProcess() == 2) {
             return Result.fail("Finish!");
         }
         if (readyEvents.size() > 0) {
             return Result.fail("Can't turn to next with events!");
         }
         readyEvents.addAll(preEvents);
-        Random random = new Random();
         // 每回合规则触发
         for (Rule rule : world.getRuleMap().values()) {
             if (testCondition(rule) && randomChance(rule)) {
@@ -510,13 +507,9 @@ public class GameRunner implements CanSave {
      * 游戏结束
      */
     public void finish() {
-        this.process = 2;
+        game.setProcess(2);
         readyEvents.clear();
         preEvents.clear();
-    }
-
-    public boolean isFinish() {
-        return process == 2;
     }
 
     /**
@@ -615,7 +608,6 @@ public class GameRunner implements CanSave {
         json.put("res", readyEvents.save());
         json.put("pes", preEvents.save());
         json.put("bm", branchMap.save());
-        json.put("pro", process);
         return json;
     }
 
@@ -638,7 +630,6 @@ public class GameRunner implements CanSave {
         preEvents.load(json.getJSONObject("pes"));
         branchMap.clear();
         branchMap.load(json.getJSONObject("bm"));
-        process = json.getIntValue("pro");
         return true;
     }
 
