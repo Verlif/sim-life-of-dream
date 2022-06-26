@@ -42,6 +42,10 @@ public class Kit implements CanSave {
         return records;
     }
 
+    public void clear() {
+        records.clear();
+    }
+
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();

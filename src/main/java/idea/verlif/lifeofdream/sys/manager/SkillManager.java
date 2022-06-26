@@ -46,6 +46,10 @@ public class SkillManager implements CanSave {
         skillMap.put(skill.getKey(), skill);
     }
 
+    public void clear() {
+        skillMap.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("sm", skillMap.save());

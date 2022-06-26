@@ -86,10 +86,7 @@ public class EventManager implements CanSave {
         return allEventMap;
     }
 
-    /**
-     * 重置事件集数据
-     */
-    public void reset() {
+    public void clear() {
         allBranchEventMap.clear();
         allEventMap.clear();
     }

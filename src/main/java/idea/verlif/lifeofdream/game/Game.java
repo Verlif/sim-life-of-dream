@@ -184,6 +184,18 @@ public class Game implements CanSave {
         return json;
     }
 
+    public void clear() {
+        stories.clear();
+        BranchManager.getInstance().clear();
+        EventManager.getInstance().clear();
+        ItemManager.getInstance().clear();
+        OptionManager.getInstance().clear();
+        RuleManager.getInstance().clear();
+        SkillManager.getInstance().clear();
+        StoryManager.getInstance().clear();
+        TagManager.getInstance().clear();
+    }
+
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();

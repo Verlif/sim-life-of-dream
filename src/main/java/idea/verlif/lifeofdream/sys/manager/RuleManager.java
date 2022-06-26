@@ -47,6 +47,10 @@ public class RuleManager implements CanSave {
         return null;
     }
 
+    public void clear() {
+        ruleMap.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("rm", ruleMap.save());

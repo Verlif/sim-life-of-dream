@@ -68,6 +68,11 @@ public class OptionManager implements CanSave {
         }
     }
 
+    public void clear() {
+        allOptionMap.clear();
+        allEventOptionMap.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("aom", allOptionMap.save());

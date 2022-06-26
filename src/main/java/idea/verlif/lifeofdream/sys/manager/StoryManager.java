@@ -35,6 +35,10 @@ public class StoryManager implements CanSave {
         return stories;
     }
 
+    public void clear() {
+        stories.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("sts", stories.save());

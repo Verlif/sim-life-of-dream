@@ -100,6 +100,10 @@ public class TagManager implements CanSave {
         }
     }
 
+    public void clear() {
+        tagMap.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("tm", tagMap.save());

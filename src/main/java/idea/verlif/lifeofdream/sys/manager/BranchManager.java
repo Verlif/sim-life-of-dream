@@ -47,6 +47,10 @@ public class BranchManager implements CanSave {
         branchMap.put(branch.getKey(), branch);
     }
 
+    public void clear() {
+        branchMap.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("bm", branchMap.save());

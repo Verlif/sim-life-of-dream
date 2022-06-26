@@ -512,6 +512,12 @@ public class GameRunner implements CanSave {
         preEvents.clear();
     }
 
+    public void clear() {
+        kit.clear();
+        stories.clear();
+        game.clear();
+    }
+
     /**
      * 执行指令集
      *

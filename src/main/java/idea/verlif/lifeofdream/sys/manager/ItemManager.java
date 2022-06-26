@@ -45,6 +45,10 @@ public class ItemManager implements CanSave {
         itemMap.put(item.getKey(), item);
     }
 
+    public void clear() {
+        itemMap.clear();
+    }
+
     @Override
     public JSONObject save() {
         return JSONObject.of("im", itemMap.save());
