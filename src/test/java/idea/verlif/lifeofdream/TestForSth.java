@@ -17,7 +17,10 @@ import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.pack.PackManager;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * @author Verlif
@@ -83,7 +86,6 @@ public class TestForSth {
             case 1: {
                 Event event = GAME_RUNNER.nextEvent();
                 if (event != null) {
-                    showEvent(event);
                     List<Option> options = event.getReadyOptions();
                     // 当没有选项时，表示叙事事件，可直接跳过
                     if (options.size() > 0) {
@@ -142,10 +144,6 @@ public class TestForSth {
             default:
                 showRole(GAME_RUNNER.getRole());
         }
-    }
-
-    private static void showEvent(Event event) {
-        System.out.println(">>> " + event.getTitle() + "\n-->\t" + event.getDesc());
     }
 
     private static void showOptions(List<Option> options) {

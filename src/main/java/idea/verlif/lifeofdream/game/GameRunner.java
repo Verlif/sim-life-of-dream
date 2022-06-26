@@ -159,6 +159,10 @@ public class GameRunner implements CanSave {
         return world;
     }
 
+    public Kit getKit() {
+        return kit;
+    }
+
     /**
      * 重置执行器
      *
@@ -316,6 +320,7 @@ public class GameRunner implements CanSave {
         if (event.isDone()) {
             return event;
         }
+        kit.message(event.getDesc());
         execCmd(event.getExec());
         // 降低事件剩余次数
         Event rawEvent = eventManager.getRawEvent(event.getKey());

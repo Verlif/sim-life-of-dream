@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 去除了SimmParam注解">
-      <change beforePath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. kit提供了消息列表&#10;2. GameRunner现在会储存process">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/domain/event.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/event.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/domain/option.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/option.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/kit/Kit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/kit/Kit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +28,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="android" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -275,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656144574261</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="1. kit提供了消息列表&#10;2. GameRunner现在会储存process">
+      <created>1656215115032</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1656215115032</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,7 +333,8 @@
     <MESSAGE value="1. 对资源加载判定了空列表&#10;2. 1.3.1" />
     <MESSAGE value="1. 修复了判定属性中load的bug" />
     <MESSAGE value="1. 更改了Game的导入导出的格式" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 更改了Game的导入导出的格式" />
+    <MESSAGE value="1. kit提供了消息列表&#10;2. GameRunner现在会储存process" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. kit提供了消息列表&#10;2. GameRunner现在会储存process" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
