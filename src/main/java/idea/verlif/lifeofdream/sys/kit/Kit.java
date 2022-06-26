@@ -36,6 +36,10 @@ public class Kit implements CanSave {
         records.add(message);
     }
 
+    public List<String> getRecords() {
+        return records;
+    }
+
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();

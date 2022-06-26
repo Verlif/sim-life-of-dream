@@ -610,6 +610,7 @@ public class GameRunner implements CanSave {
         json.put("res", readyEvents.save());
         json.put("pes", preEvents.save());
         json.put("bm", branchMap.save());
+        json.put("pro", process);
         return json;
     }
 
@@ -632,6 +633,7 @@ public class GameRunner implements CanSave {
         preEvents.load(json.getJSONObject("pes"));
         branchMap.clear();
         branchMap.load(json.getJSONObject("bm"));
+        process = json.getIntValue("pro");
         return true;
     }
 

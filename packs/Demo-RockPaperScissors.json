@@ -1,4 +1,10 @@
 {
+  "info": {
+    "name": "剪刀石头布",
+    "desc": "Demo测试",
+    "version": "1.0",
+    "author": "Verlif"
+  },
   "story": {
     "name": "剪刀石头布",
     "desc": "欢迎来到剪刀石头布的比赛，看看你能在10回合内能获得多少分呢？游戏规则如下:",
@@ -334,19 +340,19 @@
       "resultList": [
         {
           "desc": "你的对手是小明。",
-          "exec": "addEventToReady player.a"
+          "exec": "addEventToReady player.a 0"
         },
         {
           "desc": "你的对手是小红。",
-          "exec": "addEventToReady player.b"
+          "exec": "addEventToReady player.b 0"
         },
         {
           "desc": "你的对手是小刚。",
-          "exec": "addEventToReady player.c"
+          "exec": "addEventToReady player.c 0"
         },
         {
           "desc": "你的对手是小丽。",
-          "exec": "addEventToReady player.d"
+          "exec": "addEventToReady player.d 0"
         }
       ]
     }
