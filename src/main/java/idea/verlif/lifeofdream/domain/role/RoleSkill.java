@@ -129,10 +129,10 @@ public class RoleSkill implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        skillMap.clear();
         if (json == null) {
             return false;
         }
-        skillMap.clear();
         skillMap.load(json.getJSONObject("sm"));
         return true;
     }

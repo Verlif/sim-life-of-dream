@@ -20,10 +20,10 @@ public abstract class CanSavedList<E extends CanSave> extends ArrayList<E> imple
 
     @Override
     public boolean load(JSONObject json) {
+        clear();
         if (json == null) {
             return false;
         }
-        clear();
         JSONArray array = json.getJSONArray("ar");
         int length = array.size();
         for (int i = 0; i < length; i++) {

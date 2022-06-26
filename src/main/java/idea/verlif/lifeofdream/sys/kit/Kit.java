@@ -51,10 +51,10 @@ public class Kit implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        records.clear();
         if (json == null) {
             return false;
         }
-        records.clear();
         if (json.containsKey("res")) {
             records.addAll(json.getList("res", String.class));
         }

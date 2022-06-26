@@ -213,10 +213,10 @@ public class Event implements CanSave, Chancable, Conditionable {
 
     @Override
     public boolean load(JSONObject json) {
+        afterBranches.clear();
         if (json == null) {
             return false;
         }
-        afterBranches.clear();
         if (json.containsKey("ab")) {
             afterBranches.addAll(json.getList("ab", String.class));
         }

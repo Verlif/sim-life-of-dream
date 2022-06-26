@@ -141,6 +141,8 @@ public class Option implements CanSave, Chancable, Conditionable {
 
     @Override
     public boolean load(JSONObject json) {
+        resultList.clear();
+        followEvents.clear();
         if (json == null) {
             return false;
         }
@@ -149,11 +151,9 @@ public class Option implements CanSave, Chancable, Conditionable {
         desc = json.getString("desc");
         chance = json.getString("cha");
         condition = json.getString("con");
-        resultList.clear();
         if (json.containsKey("res")) {
             resultList.addAll(json.getList("res", OptionResult.class));
         }
-        followEvents.clear();
         if (json.containsKey("aes")) {
             followEvents.addAll(json.getList("aes", String.class));
         }

@@ -52,10 +52,10 @@ public class ItemManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        itemMap.clear();
         if (json == null) {
             return false;
         }
-        itemMap.clear();
         return itemMap.load(json.getJSONObject("im"));
     }
 }

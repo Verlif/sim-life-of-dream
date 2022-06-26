@@ -4,12 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 现在已触发的事件不会被nextEvent错误地重复触发了&#10;2. 游戏进程会被正确地储存了&#10;3. 版本1.3.4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/base/CanSavedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/base/CanSavedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/base/CanSavedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/base/CanSavedMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Option.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Option.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/RoleSkill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/kit/Kit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/kit/Kit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/BranchManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/BranchManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/EventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/EventManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/ItemManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/OptionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/OptionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/RuleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/RuleManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/SkillManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/SkillManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/StoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/StoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/TagManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/TagManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656232048840</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="1. 现在已触发的事件不会被nextEvent错误地重复触发了&#10;2. 游戏进程会被正确地储存了&#10;3. 版本1.3.4">
+      <created>1656255722651</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1656255722651</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,7 +360,8 @@
     <MESSAGE value="1. 更改了Game的导入导出的格式" />
     <MESSAGE value="1. kit提供了消息列表&#10;2. GameRunner现在会储存process" />
     <MESSAGE value="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 版本1.3.3" />
+    <MESSAGE value="1. 现在已触发的事件不会被nextEvent错误地重复触发了&#10;2. 游戏进程会被正确地储存了&#10;3. 版本1.3.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 现在已触发的事件不会被nextEvent错误地重复触发了&#10;2. 游戏进程会被正确地储存了&#10;3. 版本1.3.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -352,13 +372,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java</url>
-          <line>214</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java</url>
-          <line>357</line>
-          <option name="timeStamp" value="6" />
+          <line>350</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

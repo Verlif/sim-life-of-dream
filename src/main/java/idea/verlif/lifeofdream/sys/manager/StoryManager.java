@@ -42,10 +42,10 @@ public class StoryManager implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        stories.clear();
         if (json == null) {
             return false;
         }
-        stories.clear();
         return stories.load(json.getJSONObject("sts"));
     }
 }

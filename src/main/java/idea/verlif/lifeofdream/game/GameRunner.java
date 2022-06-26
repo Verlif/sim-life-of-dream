@@ -613,6 +613,9 @@ public class GameRunner implements CanSave {
 
     @Override
     public boolean load(JSONObject json) {
+        readyEvents.clear();
+        preEvents.clear();
+        branchMap.clear();
         if (json == null) {
             return false;
         }
@@ -624,11 +627,8 @@ public class GameRunner implements CanSave {
         world = new World();
         world.load(json.getJSONObject("wor"));
         kit.load(json.getJSONObject("kit"));
-        readyEvents.clear();
         readyEvents.load(json.getJSONObject("res"));
-        preEvents.clear();
         preEvents.load(json.getJSONObject("pes"));
-        branchMap.clear();
         branchMap.load(json.getJSONObject("bm"));
         return true;
     }

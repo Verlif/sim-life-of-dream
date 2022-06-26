@@ -369,7 +369,7 @@
       "name": "回合结束",
       "key": "end",
       "desc": "回合结束，统计得分",
-      "condition": "@{role.tag.value time} = 0",
+      "condition": "@{role.tag.value time} < 1",
       "exec": "finish;kit.message \"比赛结束，你的分数是 @{role.tag.value score}\""
     },
     {
