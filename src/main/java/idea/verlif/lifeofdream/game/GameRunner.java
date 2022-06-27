@@ -11,19 +11,20 @@ import idea.verlif.lifeofdream.domain.event.Option;
 import idea.verlif.lifeofdream.domain.event.OptionResult;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
+import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.domain.story.Story;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.notice.NoticeRunner;
 import idea.verlif.lifeofdream.notice.entity.Tip;
+import idea.verlif.lifeofdream.pack.Pack;
+import idea.verlif.lifeofdream.pack.PackManager;
 import idea.verlif.lifeofdream.standard.Chancable;
 import idea.verlif.lifeofdream.standard.Conditionable;
 import idea.verlif.lifeofdream.sys.kit.Kit;
 import idea.verlif.lifeofdream.sys.kit.MessageKit;
-import idea.verlif.lifeofdream.sys.manager.BranchManager;
-import idea.verlif.lifeofdream.sys.manager.EventManager;
-import idea.verlif.lifeofdream.sys.manager.OptionManager;
+import idea.verlif.lifeofdream.sys.manager.*;
 import idea.verlif.lifeofdream.tool.ChanceRandom;
 import idea.verlif.lifeofdream.util.DescUtil;
 import idea.verlif.parser.vars.VarsContext;
@@ -197,23 +198,88 @@ public class GameRunner implements CanSave {
      */
     public Result start(Game game) {
         this.game = game;
+        // 加载游戏
+        if (!load(game)) {
+            return Result.fail("No story!");
+        }
         if (game.getProcess() == 1) {
             return Result.ok(null);
         } else if (game.getProcess() == 2) {
             return Result.fail("It's finished!");
         }
         init(game.getRole(), game.getWorld());
-        stories.clear();
-        stories.addAll(game.getStories());
-        if (stories.size() == 0) {
-            return Result.fail("No story!");
-        }
         for (Story story : stories) {
             kit.message(story.getDesc());
             execCmd(story.getExec());
         }
         game.setProcess(1);
         return Result.ok("Start!");
+    }
+
+    private boolean load(Game game) {
+        Set<Branch> branches = new HashSet<>();
+        Set<Event> events = new HashSet<>();
+        Set<Item> items = new HashSet<>();
+        Set<Option> options = new HashSet<>();
+        Set<Rule> rules = new HashSet<>();
+        Set<Tag> tags = new HashSet<>();
+        Set<Skill> skills = new HashSet<>();
+        PackManager pm = PackManager.getInstance();
+        stories.clear();
+        for (String key : game.getPacks()) {
+            Pack pack = pm.get(key);
+            if (pack != null) {
+                if (pack.getStory() != null) {
+                    stories.add(pack.getStory());
+                }
+                branches.addAll(pack.getBranches());
+                events.addAll(pack.getEvents());
+                items.addAll(pack.getItems());
+                options.addAll(pack.getOptions());
+                rules.addAll(pack.getRules());
+                tags.addAll(pack.getTags());
+                skills.addAll(pack.getSkills());
+            }
+        }
+        if (stories.size() == 0) {
+            return false;
+        }
+        BranchManager bm = BranchManager.getInstance();
+        bm.getBranchMap().clear();
+        for (Branch branch : branches) {
+            bm.addBranch(branch);
+        }
+        EventManager em = EventManager.getInstance();
+        em.getAllEventMap().clear();
+        for (Event event : events) {
+            em.addEventToAll(event);
+        }
+        OptionManager om = OptionManager.getInstance();
+        om.getAllOptionMap().clear();
+        for (Option option : options) {
+            om.addOptionToAll(option);
+        }
+        ItemManager im = ItemManager.getInstance();
+        im.getItemMap().clear();
+        for (Item item : items) {
+            im.add(item);
+        }
+        RuleManager rm = RuleManager.getInstance();
+        rm.getRuleMap().clear();
+        for (Rule rule : rules) {
+            rm.add(rule);
+        }
+        TagManager tm = TagManager.getInstance();
+        tm.getTagMap().clear();
+        for (Tag tag : tags) {
+            tm.addTag(tag);
+        }
+        SkillManager sm = SkillManager.getInstance();
+        sm.getSkillMap().clear();
+        for (Skill skill : skills) {
+            sm.add(skill);
+        }
+        return true;
     }
 
     /**
@@ -516,6 +582,15 @@ public class GameRunner implements CanSave {
         kit.clear();
         stories.clear();
         game.clear();
+
+        BranchManager.getInstance().clear();
+        EventManager.getInstance().clear();
+        ItemManager.getInstance().clear();
+        OptionManager.getInstance().clear();
+        RuleManager.getInstance().clear();
+        SkillManager.getInstance().clear();
+        StoryManager.getInstance().clear();
+        TagManager.getInstance().clear();
     }
 
     /**

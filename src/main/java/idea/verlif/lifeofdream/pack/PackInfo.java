@@ -11,6 +11,11 @@ public class PackInfo {
     private String name;
 
     /**
+     * 资源包key
+     */
+    private String key;
+
+    /**
      * 资源包描述
      */
     private String desc;
@@ -31,6 +36,17 @@ public class PackInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getKey() {
+        if (key == null) {
+            key = name;
+        }
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDesc() {

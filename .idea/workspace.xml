@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 修复了story在加载时未清除原来数据的问题&#10;2. 删除了无用的game对象">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 新增了GameRunner.clear方法用于清空数据">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/BranchManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/BranchManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/EventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/EventManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/ItemManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/OptionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/OptionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/RuleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/RuleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/SkillManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/SkillManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/StoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/StoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/TagManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/TagManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/PackInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/PackInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/PackManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/PackManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -320,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656257360570</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="1. 新增了GameRunner.clear方法用于清空数据">
+      <created>1656259170762</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1656259170762</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,7 +374,8 @@
     <MESSAGE value="1. 修正了加载数据时，部分数据未清除地问题" />
     <MESSAGE value="1. 修复了story在加载时未清除原来数据的问题&#10;2. 删除了无用的game对象" />
     <MESSAGE value="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 现在已触发的事件不会被nextEvent错误地重复触发了&#10;5. 游戏进程会被正确地储存了&#10;6. 修正了加载数据时，部分数据未清除地问题&#10;7. 修复了story在加载时未清除原来数据的问题&#10;8. 删除了无用的game对象&#10;6. 版本1.3.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 修复了story在加载时未清除原来数据的问题&#10;2. 删除了无用的game对象" />
+    <MESSAGE value="1. 新增了GameRunner.clear方法用于清空数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 新增了GameRunner.clear方法用于清空数据" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -380,11 +384,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java</url>
-          <line>350</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

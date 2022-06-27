@@ -38,7 +38,7 @@ public class TestForSth {
     public void simulation() {
         PackManager pm = PackManager.getInstance();
         pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
-        List<Pack> packs = pm.getPacks();
+        Map<String, Pack> packMap = pm.getPackMap();
         NoticeHandler handler = new NoticeHandler() {
             @Override
             public void handle(Tip tip) {
@@ -53,11 +53,14 @@ public class TestForSth {
             }
         };
         NoticeRunner.getInstance().addHandler(handler);
-        if (packs.size() > 0) {
-            Game game = Game.newGame(packs.toArray(new Pack[0]));
+        if (packMap.size() > 0) {
+            Game game = Game.newGame(packMap.values());
             game.load(game.save());
             GAME_RUNNER.setMessageKit(System.out::println);
             GAME_RUNNER.start(game);
+            JSONObject grj = GAME_RUNNER.save();
+            System.out.println(grj);
+            GAME_RUNNER.load(grj);
             System.out.println();
             int i = 1;
             while (true) {
