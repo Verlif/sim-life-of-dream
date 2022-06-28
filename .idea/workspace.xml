@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 修复了空条件被判定为false的问题">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 优化了选项结果判定&#10;2. 对消息系统添加了道具与标签的添加与移除Tip&#10;3. 1.4.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-Test.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-Test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/Tip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/Tip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/tool/ChanceRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/tool/ChanceRandom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/NoticeRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/NoticeRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656419643936</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="1. 优化了选项结果判定&#10;2. 对消息系统添加了道具与标签的添加与移除Tip&#10;3. 1.4.2">
+      <created>1656431078488</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1656431078488</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +387,8 @@
     <MESSAGE value="1. 现在事件触发时会自动调用kit.message来输出desc属性&#10;2. GameRunner添加了getKit方法&#10;3. Kit.message现在会过滤空字符串&#10;4. 现在已触发的事件不会被nextEvent错误地重复触发了&#10;5. 游戏进程会被正确地储存了&#10;6. 修正了加载数据时，部分数据未清除地问题&#10;7. 修复了story在加载时未清除原来数据的问题&#10;8. 删除了无用的game对象&#10;6. 版本1.3.4" />
     <MESSAGE value="1. 新增了GameRunner.clear方法用于清空数据" />
     <MESSAGE value="1. 修复了空条件被判定为false的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 修复了空条件被判定为false的问题" />
+    <MESSAGE value="1. 优化了选项结果判定&#10;2. 对消息系统添加了道具与标签的添加与移除Tip&#10;3. 1.4.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 优化了选项结果判定&#10;2. 对消息系统添加了道具与标签的添加与移除Tip&#10;3. 1.4.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

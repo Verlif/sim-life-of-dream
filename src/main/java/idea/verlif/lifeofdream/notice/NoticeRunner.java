@@ -34,6 +34,10 @@ public class NoticeRunner {
         }
     }
 
+    public void removeHandler(NoticeHandler handler) {
+        handlers.remove(handler);
+    }
+
     public static void notice(String name, int change, ValueType type) {
         ValueNotice notice = new ValueNotice(name, change, type);
         for (NoticeHandler handler : NOTICE_RUNNER.handlers) {
