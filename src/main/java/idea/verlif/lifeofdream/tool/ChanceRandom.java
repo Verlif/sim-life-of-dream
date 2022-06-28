@@ -33,6 +33,9 @@ public class ChanceRandom<T> {
         if (list.size() == 0) {
             return null;
         }
+        if (list.size() == 1) {
+            return list.get(0);
+        }
         int target = random.nextInt(total);
         for (int i = 0; i < idx.size(); i++) {
             if (idx.get(i) >= target) {

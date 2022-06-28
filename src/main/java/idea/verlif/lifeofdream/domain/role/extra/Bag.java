@@ -5,6 +5,8 @@ import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.game.GameRunner;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.sys.manager.ItemManager;
 
 import java.util.Map;
@@ -120,6 +122,7 @@ public class Bag implements CanSave {
         if (item == null) {
             ItemManager itemManager = ItemManager.getInstance();
             item = itemManager.get(key);
+            NoticeRunner.notice(Tip.ITEM_ADDED);
         }
         if (item != null) {
             item.up(count);
@@ -151,6 +154,7 @@ public class Bag implements CanSave {
             }
             if (item.getValue() == 0) {
                 itemMap.remove(key);
+                NoticeRunner.notice(Tip.ITEM_REMOVED);
             }
         }
     }

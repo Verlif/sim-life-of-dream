@@ -5,6 +5,8 @@ import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.game.GameRunner;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.sys.manager.TagManager;
 
 import java.util.HashSet;
@@ -119,6 +121,7 @@ public class RoleTag implements CanSave {
         for (Tag tag : tags) {
             if (tag != null && !tagMap.containsKey(tag.getKey())) {
                 tagMap.put(tag.getKey(), tag);
+                NoticeRunner.notice(Tip.TAG_ADDED);
                 GameRunner gameRunner = GameRunner.getInstance();
                 gameRunner.execCmd(tag.getOnAdd());
             }
@@ -129,6 +132,7 @@ public class RoleTag implements CanSave {
         Tag tag = TagManager.getInstance().getOfKey(key);
         if (tag != null && !tagMap.containsKey(key)) {
             tagMap.put(tag.getKey(), tag);
+            NoticeRunner.notice(Tip.TAG_ADDED);
             GameRunner gameRunner = GameRunner.getInstance();
             gameRunner.execCmd(tag.getOnAdd());
         }
@@ -151,6 +155,7 @@ public class RoleTag implements CanSave {
             for (String s : set) {
                 Tag tag = tagMap.remove(s);
                 if (tag != null) {
+                    NoticeRunner.notice(Tip.TAG_REMOVED);
                     GameRunner gameRunner = GameRunner.getInstance();
                     gameRunner.execCmd(tag.getOnRemove());
                 }
@@ -162,6 +167,7 @@ public class RoleTag implements CanSave {
         // 移除完整key标签
         Tag t = tagMap.remove(key);
         if (t != null) {
+            NoticeRunner.notice(Tip.TAG_REMOVED);
             GameRunner gameRunner = GameRunner.getInstance();
             gameRunner.execCmd(t.getOnRemove());
         }

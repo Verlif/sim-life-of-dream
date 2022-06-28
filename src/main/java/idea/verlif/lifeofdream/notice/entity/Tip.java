@@ -8,5 +8,13 @@ public enum Tip {
     /**
      * 即时事件
      */
-    EVENT_NOW;
+    EVENT_NOW,
+
+    TAG_ADDED,
+
+    TAG_REMOVED,
+
+    ITEM_ADDED,
+
+    ITEM_REMOVED;
 }

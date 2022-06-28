@@ -19,7 +19,7 @@
       "desc": "来上幼儿园吧，hiahiahia",
       "resultList": [
         {
-          "exec": "role.item.add 幼儿园作业"
+          "exec": "role.tag.add edu.0"
         }
       ]
     },
@@ -28,7 +28,7 @@
       "desc": "来上学前班吧，hiahiahia",
       "resultList": [
         {
-          "exec": "role.item.add 学前班作业"
+          "exec": "role.tag.add edu.1"
         }
       ]
     },
@@ -37,7 +37,7 @@
       "desc": "来上小学吧，hiahiahia",
       "resultList": [
         {
-          "exec": "role.item.add 小学作业"
+          "exec": "role.tag.add edu.2"
         }
       ]
     },
@@ -46,7 +46,7 @@
       "desc": "来上中学吧，hiahiahia",
       "resultList": [
         {
-          "exec": "role.item.add 中学作业"
+          "exec": "role.tag.add edu.3"
         }
       ]
     },
@@ -55,7 +55,7 @@
       "desc": "来上大学吧，hiahiahia",
       "resultList": [
         {
-          "exec": "role.item.add 大学作业"
+          "exec": "role.tag.add edu.4"
         }
       ]
     }
@@ -103,40 +103,40 @@
     {
       "name": "幼儿园",
       "key": "edu.0",
-      "onAdd": "kit.message 上幼儿园啦;role.tag.remove edu;role.item.add 幼儿园作业",
-      "onRemove": "role.item.remove 幼儿园作业",
+      "onAdd": "kit.message 上幼儿园啦;role.bag.add 幼儿园作业 1",
+      "onRemove": "role.bag.remove 幼儿园作业 1",
       "value": 0,
       "visible": true
     },
     {
       "name": "学前班",
       "key": "edu.1",
-      "onAdd": "kit.message 上学前班啦;role.tag.remove edu;role.item.add 学前班作业",
-      "onRemove": "role.item.remove 学前班作业",
+      "onAdd": "kit.message 上学前班啦;role.bag.add 学前班作业 1",
+      "onRemove": "role.bag.remove 学前班作业 1",
       "value": 0,
       "visible": true
     },
     {
       "name": "小学",
       "key": "edu.2",
-      "onAdd": "kit.message 上小学啦;role.tag.remove edu;role.item.add 小学作业",
-      "onRemove": "role.item.remove 小学作业",
+      "onAdd": "kit.message 上小学啦;role.bag.add 小学作业 1",
+      "onRemove": "role.bag.remove 小学作业 1",
       "value": 0,
       "visible": true
     },
     {
       "name": "中学",
       "key": "edu.3",
-      "onAdd": "kit.message 上中学啦;role.tag.remove edu;role.item.add 中学作业",
-      "onRemove": "role.item.remove 中学作业",
+      "onAdd": "kit.message 上中学啦;role.bag.add 中学作业 1",
+      "onRemove": "role.bag.remove 中学作业 1",
       "value": 0,
       "visible": true
     },
     {
       "name": "大学",
       "key": "edu.4",
-      "onAdd": "kit.message 上大学啦;role.tag.remove edu;role.item.add 大学作业",
-      "onRemove": "role.item.remove 大学作业",
+      "onAdd": "kit.message 上大学啦;role.bag.add 大学作业 1",
+      "onRemove": "role.bag.remove 大学作业 1",
       "value": 0,
       "visible": true
     }
