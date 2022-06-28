@@ -2,6 +2,7 @@
   "info": {
     "name": "剪刀石头布",
     "desc": "Demo测试",
+    "key": "verlif.demo.rps",
     "version": "1.0",
     "author": "Verlif"
   },

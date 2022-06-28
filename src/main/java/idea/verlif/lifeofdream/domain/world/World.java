@@ -62,7 +62,7 @@ public class World implements CanSave {
     public void addOption(String key) {
         Option option = OptionManager.getInstance().getOption(key);
         if (option != null) {
-            optionMap.put("key", option);
+            optionMap.put(key, option);
         }
     }
 

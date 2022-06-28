@@ -4,9 +4,8 @@ import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.util.FileUtil;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,19 +33,15 @@ public class PackManager {
         return packMap.get(key);
     }
 
-    public boolean loadFromFile(File jsonFile) {
-        try {
-            String jsonStr = FileUtil.readFromFile(jsonFile);
-            JSONObject json = JSONObject.parseObject(jsonStr);
-            if (json != null) {
-                Pack pack = json.to(Pack.class);
-                if (pack.getInfo() != null) {
-                    packMap.put(pack.getInfo().getKey(), pack);
-                    return true;
-                }
+    public boolean loadFromFile(File jsonFile) throws IOException {
+        String jsonStr = FileUtil.readFromFile(jsonFile);
+        JSONObject json = JSONObject.parseObject(jsonStr);
+        if (json != null) {
+            Pack pack = json.to(Pack.class);
+            if (pack.getInfo() != null) {
+                packMap.put(pack.getInfo().getKey(), pack);
+                return true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return false;
     }
