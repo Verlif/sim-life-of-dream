@@ -16,7 +16,7 @@ public class DescUtil {
      * @return 条件是否成立
      */
     public static boolean test(String desc) {
-        if (desc == null) {
+        if (desc == null || desc.length() == 0) {
             return true;
         }
         String[] lines = desc.split(";");
@@ -43,7 +43,7 @@ public class DescUtil {
      * @return 条件是否成立
      */
     public static boolean judge(String atom) {
-        if (atom == null) {
+        if (atom == null || atom.length() == 0) {
             return true;
         }
         StringBuilder lsb = new StringBuilder();

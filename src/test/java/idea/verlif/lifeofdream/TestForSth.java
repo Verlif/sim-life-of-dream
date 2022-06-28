@@ -15,7 +15,6 @@ import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.notice.entity.ValueNotice;
 import idea.verlif.lifeofdream.pack.Pack;
 import idea.verlif.lifeofdream.pack.PackManager;
-import idea.verlif.lifeofdream.sys.manager.OptionManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,9 +59,6 @@ public class TestForSth {
             game.load(game.save());
             GAME_RUNNER.setMessageKit(System.out::println);
             GAME_RUNNER.start(game);
-
-            System.out.println(JSONObject.toJSONString(GAME_RUNNER.getWorld().getOptionMap()));
-
             JSONObject grj = GAME_RUNNER.save();
             System.out.println(grj);
             GAME_RUNNER.load(grj);

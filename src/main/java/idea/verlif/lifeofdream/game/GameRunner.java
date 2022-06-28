@@ -303,9 +303,9 @@ public class GameRunner implements CanSave {
         Option option = world.getOptionMap().get(key);
         if (option != null) {
             if (testCondition(option)) {
-                return Result.fail("Can't execute the option");
-            } else {
                 return invokeOption(option);
+            } else {
+                return Result.fail("Can't execute the option");
             }
         } else {
             return Result.fail("No such option!");

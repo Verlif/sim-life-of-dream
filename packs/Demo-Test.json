@@ -1,0 +1,144 @@
+{
+  "info": {
+    "name": "一些测试",
+    "desc": "Demo测试",
+    "key": "verlif.demo.test",
+    "version": "1.0",
+    "author": "Verlif"
+  },
+  "story": {
+    "name": "测试开始啦",
+    "desc": "欢迎来到《西米的梦境师计划》的测试，在这里请所以点击。",
+    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学"
+  },
+  "events": [
+  ],
+  "options": [
+    {
+      "title": "上幼儿园",
+      "desc": "来上幼儿园吧，hiahiahia",
+      "resultList": [
+        {
+          "exec": "role.item.add 幼儿园作业"
+        }
+      ]
+    },
+    {
+      "title": "上学前班",
+      "desc": "来上学前班吧，hiahiahia",
+      "resultList": [
+        {
+          "exec": "role.item.add 学前班作业"
+        }
+      ]
+    },
+    {
+      "title": "上小学",
+      "desc": "来上小学吧，hiahiahia",
+      "resultList": [
+        {
+          "exec": "role.item.add 小学作业"
+        }
+      ]
+    },
+    {
+      "title": "上中学",
+      "desc": "来上中学吧，hiahiahia",
+      "resultList": [
+        {
+          "exec": "role.item.add 中学作业"
+        }
+      ]
+    },
+    {
+      "title": "上大学",
+      "desc": "来上大学吧，hiahiahia",
+      "resultList": [
+        {
+          "exec": "role.item.add 大学作业"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "name": "幼儿园作业",
+      "value": 1,
+      "onUse": "kit.message 你点击了幼儿园作业。",
+      "onAdd": "kit.message 添加了幼儿园作业。",
+      "onRemove": "kit.message 移除了幼儿园作业。"
+    },
+    {
+      "name": "学前班作业",
+      "value": 1,
+      "onUse": "kit.message 你点击了学前班作业。",
+      "onAdd": "kit.message 添加了学前班作业。",
+      "onRemove": "kit.message 移除了学前班作业。"
+    },
+    {
+      "name": "小学作业",
+      "value": 1,
+      "onUse": "kit.message 你点击了小学作业。",
+      "onAdd": "kit.message 添加了小学作业。",
+      "onRemove": "kit.message 移除了小学作业。"
+    },
+    {
+      "name": "中学作业",
+      "value": 1,
+      "onUse": "kit.message 你点击了中学作业。",
+      "onAdd": "kit.message 添加了中学作业。",
+      "onRemove": "kit.message 移除了中学作业。"
+    },
+    {
+      "name": "大学作业",
+      "value": 1,
+      "onUse": "kit.message 你点击了大学作业。",
+      "onAdd": "kit.message 添加了大学作业。",
+      "onRemove": "kit.message 移除了大学作业。"
+    }
+  ],
+  "rules": [
+  ],
+  "tags": [
+    {
+      "name": "幼儿园",
+      "key": "edu.0",
+      "onAdd": "kit.message 上幼儿园啦;role.tag.remove edu;role.item.add 幼儿园作业",
+      "onRemove": "role.item.remove 幼儿园作业",
+      "value": 0,
+      "visible": true
+    },
+    {
+      "name": "学前班",
+      "key": "edu.1",
+      "onAdd": "kit.message 上学前班啦;role.tag.remove edu;role.item.add 学前班作业",
+      "onRemove": "role.item.remove 学前班作业",
+      "value": 0,
+      "visible": true
+    },
+    {
+      "name": "小学",
+      "key": "edu.2",
+      "onAdd": "kit.message 上小学啦;role.tag.remove edu;role.item.add 小学作业",
+      "onRemove": "role.item.remove 小学作业",
+      "value": 0,
+      "visible": true
+    },
+    {
+      "name": "中学",
+      "key": "edu.3",
+      "onAdd": "kit.message 上中学啦;role.tag.remove edu;role.item.add 中学作业",
+      "onRemove": "role.item.remove 中学作业",
+      "value": 0,
+      "visible": true
+    },
+    {
+      "name": "大学",
+      "key": "edu.4",
+      "onAdd": "kit.message 上大学啦;role.tag.remove edu;role.item.add 大学作业",
+      "onRemove": "role.item.remove 大学作业",
+      "value": 0,
+      "visible": true
+    }
+  ]
+}
