@@ -17,7 +17,7 @@
 
 ```json
 {
-  "afterBranches": [
+  "followBranches": [
     "小学"
   ],
   "key": "小学.作业忘带",
@@ -27,6 +27,14 @@
   "chance": "1000 + @{role.param.attentive} * 50",
   "condition": "@{role.param.attentive} < 20",
   "exec": "kit.message 触发事件;addEventToReady 小学交作业"
+}
+```
+
+最简写法（`afterBranches`按需填写）：
+
+```json
+{
+  "title": "作业忘带"
 }
 ```
 

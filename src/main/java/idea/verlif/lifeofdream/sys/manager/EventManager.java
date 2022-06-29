@@ -49,11 +49,11 @@ public class EventManager implements CanSave {
      * @param event 事件对象
      */
     public void addEventToAll(Event event) {
-        if (event.getAfterBranches().size() == 0) {
+        if (event.getFollowBranches().size() == 0) {
             Set<Event> set = allBranchEventMap.computeIfAbsent(null, k -> new HashSet<>());
             set.add(event);
         } else {
-            for (String branch : event.getAfterBranches()) {
+            for (String branch : event.getFollowBranches()) {
                 Set<Event> set = allBranchEventMap.computeIfAbsent(branch, k -> new HashSet<>());
                 set.add(event);
             }
@@ -107,7 +107,7 @@ public class EventManager implements CanSave {
         }
         allEventMap.load(json.getJSONObject("aem"));
         for (Event event : allEventMap.values()) {
-            for (String branch : event.getAfterBranches()) {
+            for (String branch : event.getFollowBranches()) {
                 Set<Event> set = allBranchEventMap.computeIfAbsent(branch, k -> new HashSet<>());
                 set.add(event);
             }

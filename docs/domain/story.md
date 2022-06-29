@@ -12,11 +12,17 @@
 
 ```json
 {
-  "story": {
-    "name": "一个简单的故事",
-    "desc": "故事开始了",
-    "exec": "world.addRule 年龄提升;role.info.age.up 5"
-  }
+  "name": "一个简单的故事",
+  "desc": "故事开始了",
+  "exec": "world.addRule 年龄提升;role.info.age.up 5"
+}
+```
+
+最简写法：
+
+```json
+{
+  "name": "一个简单的故事"
 }
 ```
 

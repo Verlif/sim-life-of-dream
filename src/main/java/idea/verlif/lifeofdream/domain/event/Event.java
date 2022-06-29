@@ -20,7 +20,7 @@ public class Event implements CanSave, Chancable, Conditionable {
     /**
      * 事件所属支线
      */
-    private final List<String> afterBranches;
+    private final List<String> followBranches;
 
     /**
      * 事件key
@@ -73,7 +73,7 @@ public class Event implements CanSave, Chancable, Conditionable {
     private boolean done;
 
     public Event() {
-        afterBranches = new ArrayList<>();
+        followBranches = new ArrayList<>();
         options = new CanSavedList<Option>() {
             @Override
             protected Option getNewElement() {
@@ -89,8 +89,8 @@ public class Event implements CanSave, Chancable, Conditionable {
         done = false;
     }
 
-    public List<String> getAfterBranches() {
-        return afterBranches;
+    public List<String> getFollowBranches() {
+        return followBranches;
     }
 
     public String getKey() {
@@ -197,7 +197,7 @@ public class Event implements CanSave, Chancable, Conditionable {
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
-        json.put("ab", afterBranches);
+        json.put("ab", followBranches);
         json.put("key", key);
         json.put("tit", title);
         json.put("desc", desc);
@@ -213,12 +213,12 @@ public class Event implements CanSave, Chancable, Conditionable {
 
     @Override
     public boolean load(JSONObject json) {
-        afterBranches.clear();
+        followBranches.clear();
         if (json == null) {
             return false;
         }
         if (json.containsKey("ab")) {
-            afterBranches.addAll(json.getList("ab", String.class));
+            followBranches.addAll(json.getList("ab", String.class));
         }
         key = json.getString("key");
         title = json.getString("tit");

@@ -125,7 +125,7 @@ public class Bag implements CanSave {
             NoticeRunner.notice(Tip.ITEM_ADDED);
         }
         if (item != null) {
-            item.up(count);
+            item.set(count);
             itemMap.put(key, item);
             GameRunner gameRunner = GameRunner.getInstance();
             for (int i = 0; i < count; i++) {

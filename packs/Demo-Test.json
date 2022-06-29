@@ -9,7 +9,7 @@
   "story": {
     "name": "测试开始啦",
     "desc": "欢迎来到《西米的梦境师计划》的测试，在这里请所以点击。",
-    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学;world.addOption 不上学了"
+    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学;world.addOption 不上学了;world.addOption 学写字;world.addOption 学画画"
   },
   "events": [
   ],
@@ -71,12 +71,31 @@
           "exec": "role.tag.remove edu 1"
         }
       ]
+    },
+    {
+      "title": "学写字",
+      "desc": "来写写字吧",
+      "resultList": [
+        {
+          "exec": "role.skill.up 写字 1"
+        }
+      ]
+    },
+    {
+      "title": "学画画",
+      "desc": "来画个画吧",
+      "resultList": [
+        {
+          "exec": "role.skill.up 画画 1"
+        }
+      ]
     }
   ],
   "items": [
     {
       "name": "幼儿园作业",
       "value": 1,
+      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
       "onUse": "kit.message 你点击了幼儿园作业。",
       "onAdd": "kit.message 添加了幼儿园作业。",
       "onRemove": "kit.message 移除了幼儿园作业。"
@@ -84,6 +103,7 @@
     {
       "name": "学前班作业",
       "value": 1,
+      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
       "onUse": "kit.message 你点击了学前班作业。",
       "onAdd": "kit.message 添加了学前班作业。",
       "onRemove": "kit.message 移除了学前班作业。"
@@ -91,6 +111,7 @@
     {
       "name": "小学作业",
       "value": 1,
+      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
       "onUse": "kit.message 你点击了小学作业。",
       "onAdd": "kit.message 添加了小学作业。",
       "onRemove": "kit.message 移除了小学作业。"
@@ -98,6 +119,7 @@
     {
       "name": "中学作业",
       "value": 1,
+      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
       "onUse": "kit.message 你点击了中学作业。",
       "onAdd": "kit.message 添加了中学作业。",
       "onRemove": "kit.message 移除了中学作业。"
@@ -105,6 +127,7 @@
     {
       "name": "大学作业",
       "value": 1,
+      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
       "onUse": "kit.message 你点击了大学作业。",
       "onAdd": "kit.message 添加了大学作业。",
       "onRemove": "kit.message 移除了大学作业。"
@@ -152,6 +175,14 @@
       "onRemove": "role.bag.remove 大学作业 -1",
       "value": 0,
       "visible": true
+    }
+  ],
+  "skills": [
+    {
+      "name": "写字"
+    },
+    {
+      "name": "画画"
     }
   ]
 }

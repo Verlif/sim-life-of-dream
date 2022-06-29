@@ -26,6 +26,14 @@
 }
 ```
 
+最简写法：
+
+```json
+{
+  "name": "生病"
+}
+```
+
 ## 其他
 
 - 当角色没有此标签而新添加`role.tag.add`时，会触发一次`onAdd`。
@@ -34,6 +42,8 @@
 
     - 总标签有`location.sichaun`、`location.sichaun.mianyang`、`location.sichuan.chengdu`、`location.chongqin`。
     - 角色拥有的标签有`location.sichaun.mianyang`。
-    - 此时使用`role.tag.up location 2`，则会添加`location.sichaun`、`location.sichuan.chengdu`、`location.chongqin`这三个标签，之后将所有的标签值提升2。
-    - 之后使用`role.tag.remove location.sichuan`，则会移除`location.sichaun`、`location.sichaun.mianyang`、`location.sichuan.chengdu`这三个标签，只留下`location.chongqin`标签。
+    - 此时使用`role.tag.up location 2`，则会添加`location.sichaun`、`location.sichuan.chengdu`、`location.chongqin`
+      这三个标签，之后将所有的标签值提升2。
+    - 之后使用`role.tag.remove location.sichuan`，则会移除`location.sichaun`、`location.sichaun.mianyang`
+      、`location.sichuan.chengdu`这三个标签，只留下`location.chongqin`标签。
 

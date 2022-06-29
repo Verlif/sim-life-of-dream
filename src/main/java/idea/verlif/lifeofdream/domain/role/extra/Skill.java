@@ -27,7 +27,7 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     /**
      * 技能等级
      */
-    private int level;
+    private int level = 0;
 
     /**
      * 技能值
@@ -125,6 +125,7 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
+        json.put("name", name);
         json.put("lel", level);
         json.put("val", value);
         json.put("next", next);
@@ -136,6 +137,7 @@ public class Skill implements NumberValue, LevelValue, CanSave {
         if (json == null) {
             return false;
         }
+        name = json.getString("name");
         level = json.getIntValue("lel");
         value = json.getIntValue("val");
         next = json.getIntValue("next");
