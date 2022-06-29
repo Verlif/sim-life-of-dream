@@ -9,7 +9,7 @@
   "story": {
     "name": "测试开始啦",
     "desc": "欢迎来到《西米的梦境师计划》的测试，在这里请所以点击。",
-    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学"
+    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学;world.addOption 不上学了"
   },
   "events": [
   ],
@@ -58,6 +58,15 @@
           "exec": "role.tag.add edu.4"
         }
       ]
+    },
+    {
+      "title": "不上学了",
+      "desc": "劳资不上学了，哼！！！",
+      "resultList": [
+        {
+          "exec": "role.tag.remove edu"
+        }
+      ]
     }
   ],
   "items": [
@@ -104,7 +113,7 @@
       "name": "幼儿园",
       "key": "edu.0",
       "onAdd": "kit.message 上幼儿园啦;role.bag.add 幼儿园作业 1",
-      "onRemove": "role.bag.remove 幼儿园作业 1",
+      "onRemove": "role.bag.remove 幼儿园作业 -1",
       "value": 0,
       "visible": true
     },
@@ -112,7 +121,7 @@
       "name": "学前班",
       "key": "edu.1",
       "onAdd": "kit.message 上学前班啦;role.bag.add 学前班作业 1",
-      "onRemove": "role.bag.remove 学前班作业 1",
+      "onRemove": "role.bag.remove 学前班作业 -1",
       "value": 0,
       "visible": true
     },
@@ -120,7 +129,7 @@
       "name": "小学",
       "key": "edu.2",
       "onAdd": "kit.message 上小学啦;role.bag.add 小学作业 1",
-      "onRemove": "role.bag.remove 小学作业 1",
+      "onRemove": "role.bag.remove 小学作业 -1",
       "value": 0,
       "visible": true
     },
@@ -128,7 +137,7 @@
       "name": "中学",
       "key": "edu.3",
       "onAdd": "kit.message 上中学啦;role.bag.add 中学作业 1",
-      "onRemove": "role.bag.remove 中学作业 1",
+      "onRemove": "role.bag.remove 中学作业 -1",
       "value": 0,
       "visible": true
     },
@@ -136,7 +145,7 @@
       "name": "大学",
       "key": "edu.4",
       "onAdd": "kit.message 上大学啦;role.bag.add 大学作业 1",
-      "onRemove": "role.bag.remove 大学作业 1",
+      "onRemove": "role.bag.remove 大学作业 -1",
       "value": 0,
       "visible": true
     }

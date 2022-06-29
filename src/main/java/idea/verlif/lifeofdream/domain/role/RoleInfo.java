@@ -3,6 +3,7 @@ package idea.verlif.lifeofdream.domain.role;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.NumberValue;
 import idea.verlif.lifeofdream.standard.TextValue;
@@ -82,6 +83,7 @@ public class RoleInfo implements CanSave {
         @Override
         public void set(String text) {
             this.str = text;
+            NoticeRunner.notice(Tip.NAME_CHANGED);
         }
     }
 
