@@ -19,43 +19,47 @@
       "desc": "来上幼儿园吧，hiahiahia",
       "resultList": [
         {
-          "exec": "role.tag.add edu.0"
+          "exec": "role.tag.up edu.0 1"
         }
       ]
     },
     {
       "title": "上学前班",
       "desc": "来上学前班吧，hiahiahia",
+      "condition": "@{role.tag.has edu.0}",
       "resultList": [
         {
-          "exec": "role.tag.add edu.1"
+          "exec": "role.tag.up edu.1 1"
         }
       ]
     },
     {
       "title": "上小学",
       "desc": "来上小学吧，hiahiahia",
+      "condition": "@{role.tag.has edu.1}",
       "resultList": [
         {
-          "exec": "role.tag.add edu.2"
+          "exec": "role.tag.up edu.2 1"
         }
       ]
     },
     {
       "title": "上中学",
       "desc": "来上中学吧，hiahiahia",
+      "condition": "@{role.tag.has edu.2}",
       "resultList": [
         {
-          "exec": "role.tag.add edu.3"
+          "exec": "role.tag.up edu.3 1"
         }
       ]
     },
     {
       "title": "上大学",
       "desc": "来上大学吧，hiahiahia",
+      "condition": "@{role.tag.has edu.3}",
       "resultList": [
         {
-          "exec": "role.tag.add edu.4"
+          "exec": "role.tag.up edu.4 1"
         }
       ]
     },
@@ -64,7 +68,7 @@
       "desc": "劳资不上学了，哼！！！",
       "resultList": [
         {
-          "exec": "role.tag.remove edu"
+          "exec": "role.tag.remove edu 1"
         }
       ]
     }

@@ -27,6 +27,11 @@ public class Item implements NumberValue, CanSave, Conditionable {
     private String key;
 
     /**
+     * 道具描述
+     */
+    private String desc;
+
+    /**
      * 道具数量
      */
     private int value = 0;
@@ -96,6 +101,14 @@ public class Item implements NumberValue, CanSave, Conditionable {
         this.value = value;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     @Override
     public String getCondition() {
         return condition;
@@ -151,6 +164,7 @@ public class Item implements NumberValue, CanSave, Conditionable {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("key", key);
+        json.put("desc", desc);
         json.put("val", value);
         json.put("con", condition);
         json.put("use", onUse);
@@ -166,6 +180,7 @@ public class Item implements NumberValue, CanSave, Conditionable {
         }
         name = json.getString("name");
         key = json.getString("key");
+        desc = json.getString("desc");
         value = json.getIntValue("val");
         condition = json.getString("con");
         onUse = json.getString("use");
