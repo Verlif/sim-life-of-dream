@@ -2,7 +2,7 @@ package idea.verlif.lifeofdream.pack;
 
 import idea.verlif.lifeofdream.domain.branch.Branch;
 import idea.verlif.lifeofdream.domain.event.Event;
-import idea.verlif.lifeofdream.domain.event.Option;
+import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;

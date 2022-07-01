@@ -1,4 +1,4 @@
-package idea.verlif.lifeofdream.domain.event;
+package idea.verlif.lifeofdream.domain.option;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
@@ -20,6 +20,11 @@ public class Option implements CanSave, Chancable, Conditionable {
      * 衔接的事件Key列表
      */
     private final List<String> followEvents;
+
+    /**
+     * 衔接的道具Key列表
+     */
+    private final List<String> followItems;
 
     /**
      * 选项key
@@ -53,6 +58,7 @@ public class Option implements CanSave, Chancable, Conditionable {
 
     public Option() {
         followEvents = new ArrayList<>();
+        followItems = new ArrayList<>();
         resultList = new ArrayList<>();
     }
 
@@ -109,6 +115,10 @@ public class Option implements CanSave, Chancable, Conditionable {
         return followEvents;
     }
 
+    public List<String> getFollowItems() {
+        return followItems;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -135,7 +145,8 @@ public class Option implements CanSave, Chancable, Conditionable {
         json.put("cha", chance);
         json.put("con", condition);
         json.put("res", resultList);
-        json.put("aes", followEvents);
+        json.put("fes", followEvents);
+        json.put("fis", followItems);
         return json;
     }
 
@@ -143,6 +154,7 @@ public class Option implements CanSave, Chancable, Conditionable {
     public boolean load(JSONObject json) {
         resultList.clear();
         followEvents.clear();
+        followItems.clear();
         if (json == null) {
             return false;
         }
@@ -154,8 +166,11 @@ public class Option implements CanSave, Chancable, Conditionable {
         if (json.containsKey("res")) {
             resultList.addAll(json.getList("res", OptionResult.class));
         }
-        if (json.containsKey("aes")) {
-            followEvents.addAll(json.getList("aes", String.class));
+        if (json.containsKey("fes")) {
+            followEvents.addAll(json.getList("fes", String.class));
+        }
+        if (json.containsKey("fis")) {
+            followItems.addAll(json.getList("fis", String.class));
         }
         return true;
     }

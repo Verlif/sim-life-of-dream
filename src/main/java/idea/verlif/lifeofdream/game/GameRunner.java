@@ -7,9 +7,9 @@ import idea.verlif.lifeofdream.base.CanSavedList;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.branch.Branch;
 import idea.verlif.lifeofdream.domain.event.Event;
-import idea.verlif.lifeofdream.domain.event.Option;
-import idea.verlif.lifeofdream.domain.event.OptionResult;
 import idea.verlif.lifeofdream.domain.item.Item;
+import idea.verlif.lifeofdream.domain.option.Option;
+import idea.verlif.lifeofdream.domain.option.OptionResult;
 import idea.verlif.lifeofdream.domain.role.Role;
 import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
@@ -290,7 +290,30 @@ public class GameRunner implements CanSave {
             Event event = readyEvents.get(0);
             event.getReadyOptions().clear();
             readyEvents.remove(0);
+            // 添加跟随事件
+            Set<Event> events = eventManager.getEventOfEvent(event.getKey());
+            if (events != null) {
+                for (Event e : events) {
+                    if (testCondition(event) && randomChance(event)) {
+                        readyEvents.add(e);
+                    }
+                }
+            }
         }
+    }
+
+    /**
+     * 是否可以执行选项
+     *
+     * @param key 选项key
+     * @return 是否条件满足
+     */
+    public boolean canExecOption(String key) {
+        Option option = optionManager.getOption(key);
+        if (option == null) {
+            return false;
+        }
+        return testCondition(option);
     }
 
     /**
@@ -313,21 +336,7 @@ public class GameRunner implements CanSave {
     }
 
     /**
-     * 是否可以执行选项
-     *
-     * @param key 选项key
-     * @return 是否条件满足
-     */
-    public boolean canExecOption(String key) {
-        Option option = world.getOptionMap().get(key);
-        if (option == null) {
-            return false;
-        }
-        return testCondition(option);
-    }
-
-    /**
-     * 执行事件选项。执行后，事件会自动移除。
+     * 执行当前事件选项。执行后，事件会自动移除。
      *
      * @param key 选项Key
      * @return 执行结果
@@ -341,6 +350,26 @@ public class GameRunner implements CanSave {
             if (option.getKey().equals(key)) {
                 // 跳过此事件
                 skipEvent();
+                return invokeOption(option);
+            }
+        }
+        return Result.fail("No such option!");
+    }
+
+    /**
+     * 执行背包中道具的选项。
+     *
+     * @param itemKey 道具Key
+     * @param optKey  选项Key
+     * @return 执行结果
+     */
+    public Result execOptionOfItem(String itemKey, String optKey) {
+        Item item = role.getBag().get(itemKey);
+        if (item == null) {
+            return Result.fail("No such item in bag!");
+        }
+        for (Option option : item.getOptions()) {
+            if (option.getKey().equals(optKey) && testCondition(option)) {
                 return invokeOption(option);
             }
         }
@@ -567,6 +596,14 @@ public class GameRunner implements CanSave {
             }
         }
         return Result.fail("Fail");
+    }
+
+    public int random(int min, int max) {
+        int bound = max - min;
+        if (bound < 1) {
+            return 0;
+        }
+        return random.nextInt(max) + min;
     }
 
     /**

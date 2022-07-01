@@ -4,24 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 增加了道具描述字段&#10;2. 1.4.3">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 在使用role.bag.add时，若背包中没有此物品，则物品计数会被设置为添加数量&#10;2. 修复了技能在保存后，名称为空的问题&#10;3. 事件的afterBranches改名为followBranches&#10;4. 为项目文档添加了最简写法&#10;5. 完善了各种文档&#10;6. 1.5">
+      <change afterPath="$PROJECT_DIR$/packs/Demo-FakeMc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packs/Demo-OneDayAsANoobCoder.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/branch.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/branch.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/domain/event.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/event.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/domain/item.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/item.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/domain/option.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/option.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/rule.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/rule.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/skill.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/skill.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/story.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/story.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/tag.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/tag.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/数据编写说明.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/数据编写说明.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/资源包编写.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/资源包编写.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-Test.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-Test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/变量与执行描述.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/变量与执行描述.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Bag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Option.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/option/Option.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/OptionResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/option/OptionResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/item/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/role/extra/Skill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/world/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/Tip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/Tip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/ValueType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/notice/entity/ValueType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/Pack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/pack/Pack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/EventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/EventManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/OptionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/sys/manager/OptionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForIt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForIt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +101,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Code/Self/sim-life-of-dream&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Code/JAVA/sim-life-of-dream/packs&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
@@ -106,9 +111,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Code\JAVA\sim-life-of-dream\packs" />
       <recent name="F:\Code\JAVA\sim-life-of-dream\docs" />
       <recent name="F:\Code\JAVA\sim-life-of-dream\docs\domain" />
-      <recent name="F:\Code\JAVA\sim-life-of-dream\packs" />
       <recent name="F:\Code\JAVA\sim-life-of-dream\src\main\java\idea\verlif\lifeofdream\base" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -370,7 +375,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656504490993</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="1. 在使用role.bag.add时，若背包中没有此物品，则物品计数会被设置为添加数量&#10;2. 修复了技能在保存后，名称为空的问题&#10;3. 事件的afterBranches改名为followBranches&#10;4. 为项目文档添加了最简写法&#10;5. 完善了各种文档&#10;6. 1.5">
+      <created>1656513531672</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1656513531672</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,7 +412,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. 完善了背包的判定方法&#10;2. 完善了标签的判定方法&#10;3. 增加了各种文档&#10;4. 对kit.message添加了变量处理&#10;5. 选项的触发改为了触发组&#10;6. 规则的默认触发概率改为了10000&#10;7. 对所有项目管理器中的get进行了copy操作，避免影响源数据" />
     <MESSAGE value="1. 数据运算增加除余%&#10;2. 保存了kit.message的输出内容&#10;3. 角色姓名改为了对象，现在支持文本类型的方法了&#10;4. 事件管理器addEventToAll需要修复无分依赖的事件没有添加到分支事件表中的问题&#10;5. 物品有使用条件&#10;6. 同时加载多个资源包时，所有的故事都可以展现并触发&#10;7. 完善了文档&#10;8. 项目[选项]中的afterEvents属性改名为followEvents&#10;9. 修复了事件剩余次数无法自动减少的bug" />
     <MESSAGE value="1. 去除了资源包的类型，现在会加载所有选择的资源包&#10;2. 完善了项目加载逻辑，现在可以按照顺序来替换先加载的项目" />
     <MESSAGE value="1. 对标签key进行了分组管理，现在可以通过分组key进行更方便的操作了&#10;2. 修复了添加已拥有标签会导致重复触发效果的问题" />
@@ -425,7 +436,8 @@
     <MESSAGE value="1. 向NoticeRunner中增加了removeHandler方法" />
     <MESSAGE value="1. 完善NoticeHandler的Tip类型" />
     <MESSAGE value="1. 增加了道具描述字段&#10;2. 1.4.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 增加了道具描述字段&#10;2. 1.4.3" />
+    <MESSAGE value="1. 在使用role.bag.add时，若背包中没有此物品，则物品计数会被设置为添加数量&#10;2. 修复了技能在保存后，名称为空的问题&#10;3. 事件的afterBranches改名为followBranches&#10;4. 为项目文档添加了最简写法&#10;5. 完善了各种文档&#10;6. 1.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 在使用role.bag.add时，若背包中没有此物品，则物品计数会被设置为添加数量&#10;2. 修复了技能在保存后，名称为空的问题&#10;3. 事件的afterBranches改名为followBranches&#10;4. 为项目文档添加了最简写法&#10;5. 完善了各种文档&#10;6. 1.5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

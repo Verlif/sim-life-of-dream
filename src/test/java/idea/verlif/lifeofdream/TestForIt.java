@@ -2,10 +2,9 @@ package idea.verlif.lifeofdream;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.domain.event.Event;
-import idea.verlif.lifeofdream.domain.event.Option;
+import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
-import idea.verlif.lifeofdream.domain.role.RoleTag;
 import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.world.World;
@@ -14,7 +13,6 @@ import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.SkillManager;
-import idea.verlif.lifeofdream.sys.manager.TagManager;
 
 import java.util.ArrayList;
 import java.util.List;

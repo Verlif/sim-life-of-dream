@@ -2,7 +2,7 @@ package idea.verlif.lifeofdream;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.domain.event.Event;
-import idea.verlif.lifeofdream.domain.event.Option;
+import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
 import idea.verlif.lifeofdream.domain.rule.Rule;

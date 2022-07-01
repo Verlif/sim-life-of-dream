@@ -1,0 +1,128 @@
+{
+  "info": {
+    "name": "一个菜鸡码农的一天",
+    "desc": "我们不生产代码，我们只做代码的搬运工（误）。此资源包可以让你小小地体验一下一个菜鸡码农的一天。在这一天中，你可以和Bug亲密接触，可以和项目经理友好交谈，可以和前端愉快合作，以及其他的什么什么的。",
+    "key": "verlif.demo.odaanc",
+    "version": "1.0",
+    "author": "Verlif"
+  },
+  "story": {
+    "name": "一个菜鸡码农的一天",
+    "exec": "role.info.name.set 菜鸡;addEventToReady 醒来 0;role.bag.add coin 5"
+  },
+  "branches": [
+    {
+      "name": "洗漱"
+    },
+    {
+      "name": "早餐"
+    },
+    {
+      "name": "早通勤"
+    },
+    {
+      "name": "工作"
+    },
+    {
+      "name": "午餐"
+    },
+    {
+      "name": "午休"
+    },
+    {
+      "name": "下班"
+    },
+    {
+      "name": "晚通勤"
+    },
+    {
+      "name": "晚餐"
+    },
+    {
+      "name": "晚休闲"
+    }
+  ],
+  "events": [
+    {
+      "title": "醒来",
+      "remain": "1",
+      "exec": "addBranch 洗漱;addEventToReady 洗漱 0"
+    },
+    {},
+    {
+      "followBranches": [
+        "洗漱"
+      ],
+      "title": "牙龈出血",
+      "desc": "你刷牙的时候，突然感觉漱口水的味道不对。你吐出来后，发现自己牙龈出血了。",
+      "exec": "role.attr.health.down 5;role.attr.mood.down 5",
+      "remain": "-1",
+      "chance": "100"
+    },
+    {
+      "followBranches": [
+        "洗漱"
+      ],
+      "title": "长痘痘",
+      "desc": "你一边洗漱",
+      "exec": "role.attr.health.down 5;role.attr.mood.down 5",
+      "remain": "-1",
+      "chance": "100"
+    }
+  ],
+  "options": [
+    {
+      "followEvents": [
+        "醒来"
+      ],
+      "title": "醒来",
+      "desc": "新的一天开始了。",
+      "resultList": [
+        {
+          "desc": "你被楼下吵架的情侣吵醒了。",
+          "exec": "role.tag.add awake.bad"
+        },
+        {
+          "desc": "叮！叮！叮！叮！叮！叮！你被讨厌的闹铃吵醒。",
+          "exec": "role.attr.mood.down 5"
+        },
+        {
+          "desc": "昨晚睡得早，今天居然睡到了自然醒，nice！！！",
+          "exec": "role.tag.add awake.great"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "name": "一般等价物",
+      "key": "coin",
+      "desc": "如果这个世界正常的话，这个东西应该是可以用来交换其他东西的。",
+      "value": 1,
+      "onUse": "kit.message 一个弱弱的声音传来：你扒拉我干哈！",
+      "onRemove": "kit.message 你丢失了某种很重要的东西。"
+    }
+  ],
+  "rules": [
+  ],
+  "tags": [
+    {
+      "name": "起床气",
+      "key": "awoke.bad",
+      "onAdd": "role.attr.mood.down 5"
+    },
+    {
+      "name": "元气满满",
+      "key": "awoke.great",
+      "onAdd": "role.attr.mood.up 5"
+    }
+  ],
+  "skills": [
+    {
+      "name": "写字"
+    },
+    {
+      "name": "画画"
+    }
+  ]
+}

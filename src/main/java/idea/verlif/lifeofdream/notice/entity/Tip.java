@@ -21,6 +21,11 @@ public enum Tip {
     SKILL_ADDED,
 
     /**
+     * 技能升级
+     */
+    SKILL_LEVEL_UP,
+
+    /**
      * 技能遗忘
      */
     SKILL_REMOVED,
@@ -36,12 +41,12 @@ public enum Tip {
     TAG_REMOVED,
 
     /**
-     * 添加了物品
+     * 添加了道具
      */
     ITEM_ADDED,
 
     /**
-     * 移除了物品
+     * 移除了道具
      */
     ITEM_REMOVED;
 }

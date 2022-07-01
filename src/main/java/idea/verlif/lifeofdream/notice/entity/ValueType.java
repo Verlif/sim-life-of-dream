@@ -26,7 +26,7 @@ public enum ValueType {
     SKILL,
 
     /**
-     * 物品数量改变
+     * 道具数量改变
      */
     ITEM,
 

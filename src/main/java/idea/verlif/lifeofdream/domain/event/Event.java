@@ -3,6 +3,7 @@ package idea.verlif.lifeofdream.domain.event;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedList;
+import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.standard.Chancable;
 import idea.verlif.lifeofdream.standard.Conditionable;
 
@@ -21,6 +22,11 @@ public class Event implements CanSave, Chancable, Conditionable {
      * 事件所属支线
      */
     private final List<String> followBranches;
+
+    /**
+     * 事件链接的事件
+     */
+    private final List<String> followEvents;
 
     /**
      * 事件key
@@ -74,6 +80,7 @@ public class Event implements CanSave, Chancable, Conditionable {
 
     public Event() {
         followBranches = new ArrayList<>();
+        followEvents = new ArrayList<>();
         options = new CanSavedList<Option>() {
             @Override
             protected Option getNewElement() {
@@ -91,6 +98,10 @@ public class Event implements CanSave, Chancable, Conditionable {
 
     public List<String> getFollowBranches() {
         return followBranches;
+    }
+
+    public List<String> getFollowEvents() {
+        return followEvents;
     }
 
     public String getKey() {
@@ -197,7 +208,8 @@ public class Event implements CanSave, Chancable, Conditionable {
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
-        json.put("ab", followBranches);
+        json.put("fb", followBranches);
+        json.put("fe", followEvents);
         json.put("key", key);
         json.put("tit", title);
         json.put("desc", desc);
@@ -214,11 +226,15 @@ public class Event implements CanSave, Chancable, Conditionable {
     @Override
     public boolean load(JSONObject json) {
         followBranches.clear();
+        followEvents.clear();
         if (json == null) {
             return false;
         }
-        if (json.containsKey("ab")) {
-            followBranches.addAll(json.getList("ab", String.class));
+        if (json.containsKey("fb")) {
+            followBranches.addAll(json.getList("fb", String.class));
+        }
+        if (json.containsKey("fe")) {
+            followEvents.addAll(json.getList("fe", String.class));
         }
         key = json.getString("key");
         title = json.getString("tit");

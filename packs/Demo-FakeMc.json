@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "假装在玩MC",
+    "desc": "想玩MC，但是时间有限怎么办？来我们《假装在玩MC》吧，你只需要几分钟即可通关MC（误）",
+    "key": "verlif.demo.fm",
+    "version": "1.0",
+    "author": "Verlif"
+  },
+  "story": {
+    "name": "游戏开始啦",
+    "exec": "role.tag.add 难度计数器;role.tag.add 难度等级;role.tag.add 存活天数;world.addRule 每天恢复体力;world.addRule 难度提升"
+  },
+  "rules": [
+    {
+      "name": "每天恢复体力",
+      "exec": "role.attr.endurance.set @{role.attr.endurance.max}"
+    },
+    {
+      "name": "难度提升",
+      "condition": "@{role.tag.lt 难度计数器 1}",
+      "exec": "role.tag.up 难度计数器 19;role.tag.up 难度等级 1"
+    }
+  ],
+  "items": [
+  ],
+  "tags": [
+    {
+      "name": "难度等级",
+      "value": 0
+    },
+    {
+      "name": "难度计数器",
+      "value": 18,
+      "onTurn": "role.tag.down 难度计数器 1",
+      "onRemove": "role.tag.add 难度计数器"
+    },
+    {
+      "name": "存活天数",
+      "value": 1,
+      "onTurn": "kit.message \"你已存活了 @{role.tag.value 存活天数} 天。\";role.tag.up 存活天数 1"
+    }
+  ]
+}

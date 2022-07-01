@@ -3,7 +3,7 @@ package idea.verlif.lifeofdream.domain.world;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
-import idea.verlif.lifeofdream.domain.event.Option;
+import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.RuleManager;

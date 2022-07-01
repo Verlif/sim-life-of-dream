@@ -2,12 +2,15 @@ package idea.verlif.lifeofdream.domain.item;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
+import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.notice.NoticeRunner;
 import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.Conditionable;
 import idea.verlif.lifeofdream.standard.NumberValue;
+import idea.verlif.lifeofdream.sys.manager.OptionManager;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * 道具
@@ -15,6 +18,8 @@ import java.util.Objects;
  * @author Verlif
  */
 public class Item implements NumberValue, CanSave, Conditionable {
+
+    private static final OptionManager OPTION_MANAGER = OptionManager.getInstance();
 
     /**
      * 道具名称
@@ -55,6 +60,9 @@ public class Item implements NumberValue, CanSave, Conditionable {
      * 移除道具时触发。每个道具数量都会触发一次。
      */
     private String onRemove;
+
+    public Item() {
+    }
 
     public String getName() {
         return name;
@@ -140,6 +148,10 @@ public class Item implements NumberValue, CanSave, Conditionable {
 
     public void setOnRemove(String onRemove) {
         this.onRemove = onRemove;
+    }
+
+    public Set<Option> getOptions() {
+        return OPTION_MANAGER.getOptionOfItem(key);
     }
 
     @Override

@@ -3,7 +3,7 @@ package idea.verlif.lifeofdream.sys.manager;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
-import idea.verlif.lifeofdream.domain.event.Option;
+import idea.verlif.lifeofdream.domain.option.Option;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +20,7 @@ public class OptionManager implements CanSave {
     private final CanSavedMap<String, Option> allOptionMap;
 
     private final Map<String, Set<Option>> allEventOptionMap;
+    private final Map<String, Set<Option>> allItemsOptionMap;
 
     private OptionManager() {
         allOptionMap = new CanSavedMap<String, Option>() {
@@ -29,6 +30,7 @@ public class OptionManager implements CanSave {
             }
         };
         allEventOptionMap = new HashMap<>();
+        allItemsOptionMap = new HashMap<>();
     }
 
     public static OptionManager getInstance() {
@@ -56,14 +58,31 @@ public class OptionManager implements CanSave {
         return setCopy;
     }
 
+    public Set<Option> getOptionOfItem(String key) {
+        Set<Option> set = allItemsOptionMap.computeIfAbsent(key, k -> new HashSet<>());
+        Set<Option> setCopy = new HashSet<>();
+        for (Option option : set) {
+            setCopy.add(option.copy());
+        }
+        return setCopy;
+    }
+
     public Map<String, Set<Option>> getAllEventOptionMap() {
         return allEventOptionMap;
     }
 
     public void addOptionToAll(Option option) {
         allOptionMap.put(option.getKey(), option);
+        addOptionToSet(option);
+    }
+
+    private void addOptionToSet(Option option) {
         for (String event : option.getFollowEvents()) {
             Set<Option> set = allEventOptionMap.computeIfAbsent(event, k -> new HashSet<>());
+            set.add(option);
+        }
+        for (String event : option.getFollowItems()) {
+            Set<Option> set = allItemsOptionMap.computeIfAbsent(event, k -> new HashSet<>());
             set.add(option);
         }
     }
@@ -87,10 +106,7 @@ public class OptionManager implements CanSave {
         }
         allOptionMap.load(json.getJSONObject("aom"));
         for (Option option : allOptionMap.values()) {
-            for (String event : option.getFollowEvents()) {
-                Set<Option> set = allEventOptionMap.computeIfAbsent(event, k -> new HashSet<>());
-                set.add(option);
-            }
+            addOptionToSet(option);
         }
         return true;
     }

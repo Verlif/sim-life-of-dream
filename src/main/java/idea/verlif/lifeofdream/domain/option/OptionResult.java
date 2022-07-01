@@ -1,4 +1,4 @@
-package idea.verlif.lifeofdream.domain.event;
+package idea.verlif.lifeofdream.domain.option;
 
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
