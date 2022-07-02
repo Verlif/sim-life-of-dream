@@ -44,7 +44,7 @@
   ],
   "events": [
     {
-      "title": "醒来",
+      "name": "醒来",
       "remain": "1",
       "exec": "addBranch 洗漱;addEventToReady 洗漱 0"
     },
@@ -53,7 +53,7 @@
       "followBranches": [
         "洗漱"
       ],
-      "title": "牙龈出血",
+      "name": "牙龈出血",
       "desc": "你刷牙的时候，突然感觉漱口水的味道不对。你吐出来后，发现自己牙龈出血了。",
       "exec": "role.attr.health.down 5;role.attr.mood.down 5",
       "remain": "-1",
@@ -63,7 +63,7 @@
       "followBranches": [
         "洗漱"
       ],
-      "title": "长痘痘",
+      "name": "长痘痘",
       "desc": "你一边洗漱",
       "exec": "role.attr.health.down 5;role.attr.mood.down 5",
       "remain": "-1",
@@ -75,7 +75,7 @@
       "followEvents": [
         "醒来"
       ],
-      "title": "醒来",
+      "name": "醒来",
       "desc": "新的一天开始了。",
       "resultList": [
         {

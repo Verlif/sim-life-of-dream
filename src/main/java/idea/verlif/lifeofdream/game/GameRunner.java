@@ -33,6 +33,7 @@ import idea.verlif.parser.vars.VarsHandler;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 指令执行器
@@ -377,7 +378,7 @@ public class GameRunner implements CanSave {
     }
 
     private Result invokeOption(Option option) {
-        kit.message(option.getDesc());
+        kit.message(option.getPrint());
         // 效果选择
         List<OptionResult> results = option.getResultList();
         List<OptionResult> readyResults = new ArrayList<>();
@@ -413,7 +414,7 @@ public class GameRunner implements CanSave {
         if (event.isDone()) {
             return event;
         }
-        kit.message(event.getDesc());
+        kit.message(event.getPrint());
         execCmd(event.getExec());
         event.setDone(true);
         // 降低事件剩余次数
@@ -469,9 +470,10 @@ public class GameRunner implements CanSave {
                 addBranch(branch.getKey());
             }
         }
-        Set<String> allKeys = new HashSet<>(branchMap.keySet());
+        Set<String> allKeys = readyEvents.stream().map(Event::getKey).collect(Collectors.toSet());
         // 向readyEvents中添加需要触发的事件
         // 添加分支的事件
+        List<Event> list = new ArrayList<>();
         for (Branch branch : branchMap.values()) {
             Set<Event> set = eventManager.getEventOfBranch(branch.getKey());
             if (set != null) {
@@ -481,9 +483,15 @@ public class GameRunner implements CanSave {
                             && testCondition(event)
                             && randomChance(event)) {
                         allKeys.add(event.getKey());
-                        addEventToReady(event.getKey(), -1);
+                        list.add(event);
                     }
                 }
+                if (list.size() > 1) {
+                    addReadyEvent(list.get(random.nextInt(list.size())));
+                } else if (list.size() == 1) {
+                    addReadyEvent(list.get(0));
+                }
+                list.clear();
             }
         }
         // 添加全局的事件
@@ -495,8 +503,13 @@ public class GameRunner implements CanSave {
                         && testCondition(event)
                         && randomChance(event)) {
                     allKeys.add(event.getKey());
-                    addEventToReady(event.getKey(), -1);
+                    list.add(event);
                 }
+            }
+            if (list.size() > 1) {
+                addReadyEvent(list.get(random.nextInt(list.size())));
+            } else if (list.size() == 1) {
+                addReadyEvent(list.get(0));
             }
         }
         return Result.ok(null);
@@ -548,6 +561,10 @@ public class GameRunner implements CanSave {
             return true;
         }
         return false;
+    }
+
+    public void addReadyEvent(Event event) {
+        readyEvents.add(event);
     }
 
     /**

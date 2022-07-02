@@ -34,14 +34,19 @@ public class Event implements CanSave, Chancable, Conditionable {
     private String key;
 
     /**
-     * 事件标题
+     * 事件名称
      */
-    private String title;
+    private String name;
 
     /**
      * 事件描述
      */
     private String desc;
+
+    /**
+     * 事件触发打印消息
+     */
+    private String print;
 
     /**
      * 概率描述
@@ -106,7 +111,7 @@ public class Event implements CanSave, Chancable, Conditionable {
 
     public String getKey() {
         if (key == null) {
-            key = title;
+            key = name;
         }
         return key;
     }
@@ -115,12 +120,12 @@ public class Event implements CanSave, Chancable, Conditionable {
         this.key = key;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -129,6 +134,14 @@ public class Event implements CanSave, Chancable, Conditionable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getPrint() {
+        return print;
+    }
+
+    public void setPrint(String print) {
+        this.print = print;
     }
 
     @Override
@@ -211,8 +224,9 @@ public class Event implements CanSave, Chancable, Conditionable {
         json.put("fb", followBranches);
         json.put("fe", followEvents);
         json.put("key", key);
-        json.put("tit", title);
+        json.put("name", name);
         json.put("desc", desc);
+        json.put("pri", print);
         json.put("cha", chance);
         json.put("con", condition);
         json.put("exec", exec);
@@ -237,8 +251,9 @@ public class Event implements CanSave, Chancable, Conditionable {
             followEvents.addAll(json.getList("fe", String.class));
         }
         key = json.getString("key");
-        title = json.getString("tit");
+        name = json.getString("name");
         desc = json.getString("desc");
+        print = json.getString("pri");
         chance = json.getString("cha");
         condition = json.getString("con");
         exec = json.getString("exec");

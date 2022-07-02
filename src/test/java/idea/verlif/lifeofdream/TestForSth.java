@@ -158,7 +158,7 @@ public class TestForSth {
     private static void showOptions(List<Option> options) {
         for (int i = 0; i < options.size(); i++) {
             Option option = options.get(i);
-            System.out.println((i + 1) + ".\t" + option.getTitle() + " ---- " + option.getDesc());
+            System.out.println((i + 1) + ".\t" + option.getName() + " ---- " + option.getDesc());
         }
     }
 

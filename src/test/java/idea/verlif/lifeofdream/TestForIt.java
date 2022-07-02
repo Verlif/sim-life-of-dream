@@ -107,13 +107,13 @@ public class TestForIt {
 
     public Event createEvent(String key) {
         Event event = new Event();
-        event.setTitle(key);
+        event.setName(key);
         return event;
     }
 
     public Option createOption(String key, String... events) {
         Option option = new Option();
-        option.setTitle(key);
+        option.setName(key);
         for (String event : events) {
             option.getFollowEvents().add(event);
         }

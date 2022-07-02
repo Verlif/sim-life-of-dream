@@ -9,13 +9,13 @@
   "story": {
     "name": "测试开始啦",
     "desc": "欢迎来到《西米的梦境师计划》的测试，在这里请所以点击。",
-    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学;world.addOption 不上学了;world.addOption 学写字;world.addOption 学画画"
+    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学;world.addOption 不上学了;world.addOption 学写字;world.addOption 学画画;world.addOption wataxi"
   },
   "events": [
   ],
   "options": [
     {
-      "title": "上幼儿园",
+      "name": "上幼儿园",
       "desc": "来上幼儿园吧，hiahiahia",
       "resultList": [
         {
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "title": "上学前班",
+      "name": "上学前班",
       "desc": "来上学前班吧，hiahiahia",
       "condition": "@{role.tag.has edu.0}",
       "resultList": [
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "title": "上小学",
+      "name": "上小学",
       "desc": "来上小学吧，hiahiahia",
       "condition": "@{role.tag.has edu.1}",
       "resultList": [
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "title": "上中学",
+      "name": "上中学",
       "desc": "来上中学吧，hiahiahia",
       "condition": "@{role.tag.has edu.2}",
       "resultList": [
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "title": "上大学",
+      "name": "上大学",
       "desc": "来上大学吧，hiahiahia",
       "condition": "@{role.tag.has edu.3}",
       "resultList": [
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "title": "不上学了",
+      "name": "不上学了",
       "desc": "劳资不上学了，哼！！！",
       "resultList": [
         {
@@ -73,7 +73,7 @@
       ]
     },
     {
-      "title": "学写字",
+      "name": "学写字",
       "desc": "来写写字吧",
       "resultList": [
         {
@@ -82,11 +82,89 @@
       ]
     },
     {
-      "title": "学画画",
+      "name": "学画画",
       "desc": "来画个画吧",
       "resultList": [
         {
           "exec": "role.skill.up 画画 1"
+        }
+      ]
+    },
+    {
+      "name": "wataxi",
+      "desc": "点了会怎么样呢？",
+      "resultList": [
+        {
+          "exec": "role.bag.add 很多东西 1"
+        }
+      ]
+    },
+    {
+      "name": "wataxi",
+      "desc": "点了会怎么样呢？",
+      "resultList": [
+        {
+          "exec": "role.bag.add 很多东西 1"
+        }
+      ]
+    },
+    {
+      "followItems": [
+        "很多东西"
+      ],
+      "name": "丢弃",
+      "desc": "丢弃此物品",
+      "resultList": [
+        {
+          "exec": "role.bag.remove 很多东西 -1"
+        }
+      ]
+    },
+    {
+      "followItems": [
+        "很多东西"
+      ],
+      "name": "A他",
+      "desc": "就A他就完了",
+      "resultList": [
+        {
+          "exec": "kit.message 我A到他了，nice"
+        }
+      ]
+    },
+    {
+      "followItems": [
+        "很多东西"
+      ],
+      "name": "A他",
+      "desc": "就A他就完了",
+      "resultList": [
+        {
+          "exec": "kit.message 我A到他了，nice"
+        }
+      ]
+    },
+    {
+      "followItems": [
+        "很多东西"
+      ],
+      "name": "B他",
+      "desc": "就B他就完了",
+      "resultList": [
+        {
+          "exec": "kit.message 我B到他了，nice"
+        }
+      ]
+    },
+    {
+      "followItems": [
+        "很多东西"
+      ],
+      "name": "C他",
+      "desc": "就C他就完了",
+      "resultList": [
+        {
+          "exec": "kit.message 我C到他了，nice"
         }
       ]
     }
@@ -131,6 +209,11 @@
       "onUse": "kit.message 你点击了大学作业。",
       "onAdd": "kit.message 添加了大学作业。",
       "onRemove": "kit.message 移除了大学作业。"
+    },
+    {
+      "name": "很多东西",
+      "value": 1,
+      "desc": "咔哒咔哒咔哒"
     }
   ],
   "rules": [

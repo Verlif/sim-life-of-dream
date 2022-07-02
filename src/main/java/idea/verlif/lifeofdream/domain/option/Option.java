@@ -32,14 +32,19 @@ public class Option implements CanSave, Chancable, Conditionable {
     private String key;
 
     /**
-     * 选项标题
+     * 选项名称
      */
-    private String title;
+    private String name;
 
     /**
      * 选项描述。用于选择生效后的显示。
      */
     private String desc;
+
+    /**
+     * 选项打印
+     */
+    private String print;
 
     /**
      * 概率描述
@@ -64,7 +69,7 @@ public class Option implements CanSave, Chancable, Conditionable {
 
     public String getKey() {
         if (key == null) {
-            key = title;
+            key = name;
         }
         return key;
     }
@@ -73,12 +78,12 @@ public class Option implements CanSave, Chancable, Conditionable {
         this.key = key;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -87,6 +92,14 @@ public class Option implements CanSave, Chancable, Conditionable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getPrint() {
+        return print;
+    }
+
+    public void setPrint(String print) {
+        this.print = print;
     }
 
     @Override
@@ -139,9 +152,10 @@ public class Option implements CanSave, Chancable, Conditionable {
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
-        json.put("tit", title);
+        json.put("name", name);
         json.put("key", key);
         json.put("desc", desc);
+        json.put("pri", print);
         json.put("cha", chance);
         json.put("con", condition);
         json.put("res", resultList);
@@ -158,9 +172,10 @@ public class Option implements CanSave, Chancable, Conditionable {
         if (json == null) {
             return false;
         }
-        title = json.getString("tit");
+        name = json.getString("name");
         key = json.getString("key");
         desc = json.getString("desc");
+        print = json.getString("pri");
         chance = json.getString("cha");
         condition = json.getString("con");
         if (json.containsKey("res")) {

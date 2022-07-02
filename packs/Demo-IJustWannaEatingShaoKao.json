@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "剧情演示资源包",
+    "key": "verlif.demo.ijwesk",
+    "desc": "用于演示剧情编写资源包的一个演示包，主资源包请只加载这一个。",
+    "version": "1.0",
+    "author": "Verlif"
+  },
+  "story": {
+    "name": "我只是想去吃烧烤啊",
+    "desc": "我已经很久没吃烧烤了，今天必须要吃到。等下就下班了，我应该要好好计划一下。",
+    "exec": "role.tag.add 下班倒计时判断;role.tag.add 饿死倒计时;world.addRule 烧烤店距离判断;world.addRule "
+  },
+  "branches": [
+    {
+      "name": "准备下班"
+    },
+    {
+      "name": "路上"
+    }
+  ],
+  "events": [
+    {
+      "followBranches": [
+        "准备下班"
+      ],
+      "name": "无事发生",
+      "remain": "-1",
+      "desc": "没有什么事情发生，静静地等待下班。"
+    },
+    {
+      "followBranches": [
+        "准备下班"
+      ],
+      "name": "有文件没有处理",
+      "remain": "-1",
+      "desc": "没有什么事情发生，静静地等待下班。"
+    }
+  ],
+  "options": [
+  ],
+  "items": [],
+  "rules": [
+    {
+      "name": "下班倒计时判断",
+      "condition": "role.tag.has 下班倒计时;@{role.tag.value 下班倒计时} < 1",
+      "exec": "role.tag.remove 下班倒计时;role.tag.add 烧烤店距离"
+    },
+    {
+      "name": "烧烤店距离判断",
+      "condition": "role.tag.has 烧烤店距离;@{role.tag.value 烧烤店距离} < 1",
+      "exec": "kit.message 终于到达了烧烤店，真不容易啊，眼泪从你的嘴角流了下来。;finish;kit.message 演示结束"
+    }
+  ],
+  "tags": [
+    {
+      "name": "下班倒计时",
+      "value": 5,
+      "onTurn": "role.tag.down 下班倒计时 1"
+    },
+    {
+      "name": "烧烤店距离",
+      "value": 20
+    },
+    {
+      "name": "饿死倒计时",
+      "value": 20,
+      "onTurn": "role.tag.down 饿死倒计时 1"
+    }
+  ],
+  "skills": [
+  ]
+}

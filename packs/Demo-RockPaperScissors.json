@@ -14,31 +14,31 @@
   "events": [
     {
       "key": "player.a",
-      "title": "小明",
+      "name": "小明",
       "remain": "-1",
       "desc": "你面对的是小明，你准备出什么呢？"
     },
     {
       "key": "player.b",
-      "title": "小红",
+      "name": "小红",
       "remain": "-1",
       "desc": "你面对的是小红，她更偏向出剪刀，你出布并获胜的话可以额外获得1分，你准备出什么呢？"
     },
     {
       "key": "player.c",
-      "title": "小刚",
+      "name": "小刚",
       "remain": "-1",
       "desc": "你面对的是小刚，他更偏向出石头，你出剪刀并获胜的话可以额外获得1分，你准备出什么呢？"
     },
     {
       "key": "player.d",
-      "title": "小丽",
+      "name": "小丽",
       "remain": "-1",
       "desc": "你面对的是小丽，她更偏向出布，你出石头并获胜的话可以额外获得1分，你准备出什么呢？"
     },
     {
       "key": "play",
-      "title": "对手选择",
+      "name": "对手选择",
       "remain": "-1",
       "desc": "正在选择你的下一个对手，会是谁呢？"
     }
@@ -49,7 +49,7 @@
         "player.a"
       ],
       "key": "a.s",
-      "title": "剪刀",
+      "name": "剪刀",
       "desc": "出剪刀",
       "resultList": [
         {
@@ -73,7 +73,7 @@
         "player.a"
       ],
       "key": "a.r",
-      "title": "石头",
+      "name": "石头",
       "desc": "出石头",
       "resultList": [
         {
@@ -97,7 +97,7 @@
         "player.a"
       ],
       "key": "a.p",
-      "title": "布",
+      "name": "布",
       "desc": "出布",
       "resultList": [
         {
@@ -121,7 +121,7 @@
         "player.b"
       ],
       "key": "b.s",
-      "title": "剪刀",
+      "name": "剪刀",
       "desc": "出剪刀",
       "resultList": [
         {
@@ -145,7 +145,7 @@
         "player.b"
       ],
       "key": "b.r",
-      "title": "石头",
+      "name": "石头",
       "desc": "出石头",
       "resultList": [
         {
@@ -169,7 +169,7 @@
         "player.b"
       ],
       "key": "b.p",
-      "title": "布",
+      "name": "布",
       "desc": "出布",
       "resultList": [
         {
@@ -193,7 +193,7 @@
         "player.c"
       ],
       "key": "c.s",
-      "title": "剪刀",
+      "name": "剪刀",
       "desc": "出剪刀",
       "resultList": [
         {
@@ -217,7 +217,7 @@
         "player.c"
       ],
       "key": "c.r",
-      "title": "石头",
+      "name": "石头",
       "desc": "出石头",
       "resultList": [
         {
@@ -241,7 +241,7 @@
         "player.c"
       ],
       "key": "c.p",
-      "title": "布",
+      "name": "布",
       "desc": "出布",
       "resultList": [
         {
@@ -265,7 +265,7 @@
         "player.d"
       ],
       "key": "d.s",
-      "title": "剪刀",
+      "name": "剪刀",
       "desc": "出剪刀",
       "resultList": [
         {
@@ -289,7 +289,7 @@
         "player.d"
       ],
       "key": "d.r",
-      "title": "石头",
+      "name": "石头",
       "desc": "出石头",
       "resultList": [
         {
@@ -313,7 +313,7 @@
         "player.d"
       ],
       "key": "d.p",
-      "title": "布",
+      "name": "布",
       "desc": "出布",
       "resultList": [
         {
@@ -337,7 +337,7 @@
         "play"
       ],
       "key": "random",
-      "title": "选择...",
+      "name": "选择...",
       "resultList": [
         {
           "desc": "你的对手是小明。",
