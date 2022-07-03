@@ -5,23 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 事件与选项的title更名为name&#10;2. 事件与选项新增print属性。现在print作为文本输出，desc作为项目描述&#10;3. 现在每回合的事件触发做了限制。每个分支只能最多触发一个事件，全局事件也只会随机一个事件。&#10;4. 1.6.1">
-      <change afterPath="$PROJECT_DIR$/packs/Demo-IJustWannaEatingShaoKao.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packs/template.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/event.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/event.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/option.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/option.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-OneDayAsANoobCoder.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-OneDayAsANoobCoder.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-Test.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-Test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/default.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/testOfLife.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/testOfLife2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packs/Demo-IJustWannaEatingShaoKao.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-IJustWannaEatingShaoKao.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/event/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/option/Option.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/option/Option.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForIt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForIt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -384,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656696958757</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="1. 事件与选项的title更名为name&#10;2. 事件与选项新增print属性。现在print作为文本输出，desc作为项目描述&#10;3. 现在每回合的事件触发做了限制。每个分支只能最多触发一个事件，全局事件也只会随机一个事件。&#10;4. 1.6.1">
+      <created>1656781265020</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1656781265020</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

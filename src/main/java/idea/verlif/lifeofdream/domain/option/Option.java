@@ -87,6 +87,9 @@ public class Option implements CanSave, Chancable, Conditionable {
     }
 
     public String getDesc() {
+        if (desc == null && print != null) {
+            desc = print;
+        }
         return desc;
     }
 
@@ -95,6 +98,9 @@ public class Option implements CanSave, Chancable, Conditionable {
     }
 
     public String getPrint() {
+        if (print == null && desc != null) {
+            print = desc;
+        }
         return print;
     }
 
