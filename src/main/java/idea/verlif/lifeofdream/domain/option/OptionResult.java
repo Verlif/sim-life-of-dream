@@ -20,7 +20,7 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
     /**
      * 触发描述
      */
-    private String desc;
+    private String print;
 
     /**
      * 触发几率
@@ -41,12 +41,12 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
         this.condition = condition;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getPrint() {
+        return print;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setPrint(String print) {
+        this.print = print;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
     public JSONObject save() {
         JSONObject json = new JSONObject();
         json.put("con", condition);
-        json.put("desc", desc);
+        json.put("pri", print);
         json.put("cha", chance);
         json.put("exec", exec);
         return json;
@@ -79,7 +79,7 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
     @Override
     public boolean load(JSONObject json) {
         condition = json.getString("con");
-        desc = json.getString("desc");
+        print = json.getString("pri");
         chance = json.getString("cha");
         exec = json.getString("exec");
         return true;

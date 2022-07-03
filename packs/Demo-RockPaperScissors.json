@@ -340,19 +340,19 @@
       "name": "选择...",
       "resultList": [
         {
-          "desc": "你的对手是小明。",
+          "print": "你的对手是小明。",
           "exec": "addEventToReady player.a 0"
         },
         {
-          "desc": "你的对手是小红。",
+          "print": "你的对手是小红。",
           "exec": "addEventToReady player.b 0"
         },
         {
-          "desc": "你的对手是小刚。",
+          "print": "你的对手是小刚。",
           "exec": "addEventToReady player.c 0"
         },
         {
-          "desc": "你的对手是小丽。",
+          "print": "你的对手是小丽。",
           "exec": "addEventToReady player.d 0"
         }
       ]

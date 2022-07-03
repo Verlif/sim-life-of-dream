@@ -389,11 +389,11 @@ public class GameRunner implements CanSave {
         }
         ChanceRandom<OptionResult> random = new ChanceRandom<>();
         for (OptionResult readyResult : readyResults) {
-            random.add(DescUtil.result(tran(readyResult.getChance())), readyResult);
+            random.add(DescUtil.resultDesc(tran(readyResult.getChance())), readyResult);
         }
         OptionResult result = random.random();
         if (result != null) {
-            kit.message(result.getDesc());
+            kit.message(result.getPrint());
             // 执行结果
             return execCmd(result.getExec());
         } else {
@@ -724,7 +724,7 @@ public class GameRunner implements CanSave {
     }
 
     private boolean randomChance(Chancable chancable) {
-        return DescUtil.result(tran(chancable.getChance())) > random.nextInt(10000);
+        return DescUtil.resultDesc(tran(chancable.getChance())) > random.nextInt(10000);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class TestForSth {
 
     public void simulation() throws IOException {
         PackManager pm = PackManager.getInstance();
-        pm.loadFromFile(new File("packs\\Demo-Test.json"));
+        pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
         Map<String, Pack> packMap = pm.getPackMap();
         NoticeHandler handler = new NoticeHandler() {
             @Override

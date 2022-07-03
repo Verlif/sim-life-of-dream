@@ -79,15 +79,15 @@
       "desc": "新的一天开始了。",
       "resultList": [
         {
-          "desc": "你被楼下吵架的情侣吵醒了。",
+          "print": "你被楼下吵架的情侣吵醒了。",
           "exec": "role.tag.add awake.bad"
         },
         {
-          "desc": "叮！叮！叮！叮！叮！叮！你被讨厌的闹铃吵醒。",
+          "print": "叮！叮！叮！叮！叮！叮！你被讨厌的闹铃吵醒。",
           "exec": "role.attr.mood.down 5"
         },
         {
-          "desc": "昨晚睡得早，今天居然睡到了自然醒，nice！！！",
+          "print": "昨晚睡得早，今天居然睡到了自然醒，nice！！！",
           "exec": "role.tag.add awake.great"
         }
       ]

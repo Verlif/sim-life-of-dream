@@ -9,7 +9,7 @@
   "story": {
     "name": "我只是想去吃烧烤啊",
     "desc": "我已经很久没吃烧烤了，今天必须要吃到。等下就下班了，我应该要好好计划一下。",
-    "exec": "role.tag.add 下班倒计时判断;role.tag.add 饿死倒计时;world.addRule 烧烤店距离判断;world.addRule "
+    "exec": "role.tag.add 下班倒计时;role.tag.add 饿死倒计时;world.addRule 烧烤店距离判断;world.addRule 下班倒计时判断;addBranch 准备下班;world.addRule 饿死判断;world.addOption 直接下班"
   },
   "branches": [
     {
@@ -25,15 +25,38 @@
         "准备下班"
       ],
       "name": "无事发生",
-      "remain": "-1",
-      "desc": "没有什么事情发生，静静地等待下班。"
+      "remain": -1,
+      "desc": "没有什么事情发生，静静地等待下班。",
+      "chance": "10000"
     },
     {
       "followBranches": [
         "准备下班"
       ],
       "name": "文件未处理",
-      "desc": "有文件没有处理，领导希望你辛苦一下"
+      "desc": "领导走过来，给了你一个文件，说这个事情比较着急，希望你辛苦一下，搞完再下班。",
+      "chance": "5000"
+    },
+    {
+      "name": "不想加班",
+      "desc": "领导很生气，要找你谈谈。",
+      "remain": -1
+    },
+    {
+      "followBranch": [
+        "准备下班"
+      ],
+      "name": "重要会议",
+      "desc": "组长跑进办公室，告诉大家等下有一个重要的会议，稍微晚下班一会儿",
+      "chance": "5000"
+    },
+    {
+      "name": "组长回Call",
+      "desc": "组长打电话过来了，接不接呢？"
+    },
+    {
+      "name": "你人去哪了",
+      "desc": "组长问你人在哪里，会议已经开始了。"
     }
   ],
   "options": [
@@ -41,17 +64,194 @@
       "followEvents": [
         "文件未处理"
       ],
-      "name": "花点事件处理一下",
+      "name": "花点时间处理一下",
       "desc": "延长下班倒计时",
-      "print": "你向老师请个假，去回家那作业",
+      "print": "你和领导说没有问题，然后就加了一会班。",
       "resultList": [
         {
-          "chance": "400",
-          "desc": "老师希望你下次注意，也没有让你回去拿"
+          "exec": "role.tag.up 下班倒计时 4;role.tag.up 剧情分数 2"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "文件未处理"
+      ],
+      "name": "明天再说",
+      "desc": "你和领导说明天再处理，有几率成功。",
+      "print": "你和领导说明天再处理。",
+      "resultList": [
+        {
+          "print": "领导表示没问题。"
         },
         {
-          "chance": "400",
-          "desc": "老师同意你回家去拿了"
+          "print": "领导说不行，今天就要弄完。",
+          "exec": "role.tag.up 下班倒计时 4;role.attr.mood.down 10"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "文件未处理"
+      ],
+      "name": "假装没听到",
+      "desc": "你假装没听到，继续做自己的事情。",
+      "resultList": [
+        {
+          "exec": "addEventToReady 不想加班 0"
+        },
+        {
+          "print": "领导也没有再说什么就走了。;role.tag.up 剧情分数 1"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "不想加班"
+      ],
+      "name": "斗争到底",
+      "desc": "你怒怼领导。",
+      "resultList": [
+        {
+          "print": "领导让你明天不用来上班了，你说正有此意。",
+          "exec": "role.tag.down 下班倒计时 999;role.tag.up 剧情分数 10"
+        },
+        {
+          "print": "领导表示尊重你的安排，让你明天再来弄。",
+          "exec": "role.attr.mood.up 20;role.tag.up 剧情分数 2"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "不想加班"
+      ],
+      "name": "忍耐",
+      "desc": "你忍住怒气，听领导教育了半天。",
+      "resultList": [
+        {
+          "exec": "role.tag.up 下班倒计时 10;role.tag.up 剧情分数 1"
+        }
+      ]
+    },
+    {
+      "name": "直接下班",
+      "desc": "什么工作不工作的，烧烤才是硬道理。",
+      "print": "你当即收拾收拾东西，直接出了办公楼。",
+      "resultList": [
+        {
+          "exec": "role.tag.remove 下班倒计时;role.tag.down 剧情分数 2;world.removeOption 直接下班"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "重要会议"
+      ],
+      "name": "自认倒霉",
+      "desc": "你叹了口气，自认倒霉。",
+      "resultList": [
+        {
+          "exec": "role.tag.up 下班倒计时 10;role.attr.mood.down 20;role.tag.up 剧情分数 1"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "重要会议"
+      ],
+      "name": "找理由溜号",
+      "desc": "你给路达哟...",
+      "resultList": [
+        {
+          "exec": "role.tag.up 下班倒计时 10;role.attr.mood.down 20;role.tag.down 剧情分数 4"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "重要会议"
+      ],
+      "name": "悄悄溜走",
+      "desc": "你表面同意，然后准备悄悄溜走。",
+      "resultList": [
+        {
+          "exec": "role.tag.add 会议溜号 10;role.attr.mood.down 20;role.tag.down 剧情分数 4"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "组长回Call"
+      ],
+      "name": "接电话",
+      "desc": "看看他有什么事",
+      "print": "你接了电话。",
+      "resultList": [
+        {
+          "exec": "addEventToReady 你人去哪了？ 0"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "组长回Call"
+      ],
+      "name": "忽略",
+      "desc": "假装没听到",
+      "print": "你按下了音量键，忽略了电话。",
+      "resultList": [
+        {
+          "exec": "role.tag.down 剧情分数 5"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "组长回Call"
+      ],
+      "name": "挂断",
+      "desc": "真当我没脾气？",
+      "print": "你挂断了电话，并拉黑了他。",
+      "resultList": [
+        {
+          "exec": "role.tag.down 剧情分数 10;role.attr.mood.up 10"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "你人去哪了"
+      ],
+      "name": "忘记了",
+      "desc": "你假装忘记了这次的会议",
+      "print": "你说你忘记了这次的会议，都已经快到家了。",
+      "resultList": [
+        {
+          "print": "组长很愤怒地挂掉了电话。",
+          "exec": "role.tag.down 剧情分数 4"
+        },
+        {
+          "print": "组长说了你几句，也没再说什么了。",
+          "exec": "role.tag.down 剧情分数 2"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "你人去哪了"
+      ],
+      "name": "不想参加",
+      "desc": "你直说不想参加这次的会议",
+      "print": "你直说你不想参加会议。",
+      "resultList": [
+        {
+          "print": "组长很愤怒地挂掉了电话。",
+          "exec": "role.tag.down 剧情分数 4"
+        },
+        {
+          "print": "组长回了个哦就挂掉了电话。",
+          "exec": "role.tag.down 剧情分数 10"
         }
       ]
     }
@@ -60,20 +260,31 @@
   "rules": [
     {
       "name": "下班倒计时判断",
-      "condition": "role.tag.has 下班倒计时;@{role.tag.value 下班倒计时} < 1",
-      "exec": "role.tag.remove 下班倒计时;role.tag.add 烧烤店距离"
+      "condition": "@{role.tag.has 下班倒计时} & @{role.tag.value 下班倒计时} < 1",
+      "exec": "role.tag.remove 下班倒计时"
     },
     {
       "name": "烧烤店距离判断",
-      "condition": "role.tag.has 烧烤店距离;@{role.tag.value 烧烤店距离} < 1",
+      "condition": "@{role.tag.has 烧烤店距离} & @{role.tag.value 烧烤店距离} < 1",
       "exec": "kit.message 终于到达了烧烤店，真不容易啊，眼泪从你的嘴角流了下来。;finish;kit.message 演示结束"
+    },
+    {
+      "name": "会议溜号",
+      "chance": "@{role.tag.value 会议溜号} * 1500",
+      "exec": "addEventToReady 组长回Call;role.tag.remove 会议溜号"
+    },
+    {
+      "name": "饿死判断",
+      "condition": "@{role.tag.value 饿死倒计时} < 1",
+      "exec": "kit.message 你饿死了，啊;finish"
     }
   ],
   "tags": [
     {
       "name": "下班倒计时",
       "value": 5,
-      "onTurn": "role.tag.down 下班倒计时 1"
+      "onTurn": "role.tag.down 下班倒计时 1",
+      "onRemove": "removeBranch 准备下班;addBranch 路上;role.tag.add 烧烤店距离;kit.message 终于下班了，赶紧前往烧烤店。"
     },
     {
       "name": "烧烤店距离",
@@ -81,10 +292,21 @@
     },
     {
       "name": "饿死倒计时",
-      "value": 20,
+      "value": 50,
       "onTurn": "role.tag.down 饿死倒计时 1"
+    },
+    {
+      "name": "会议溜号",
+      "value": 0,
+      "condition" : "@{hasBranch 路上}",
+      "onAdd": "world.addRule 会议溜号",
+      "onRemove": "world.removeRule 会议溜号",
+      "onTurn": "role.tag.up 会议溜号 1"
+    },
+    {
+      "name": "剧情分数",
+      "value": 0
     }
   ],
-  "skills": [
-  ]
+  "skills": []
 }

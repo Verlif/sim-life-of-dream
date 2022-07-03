@@ -78,6 +78,13 @@ public class DescUtil {
         }
     }
 
+    public static int resultDesc(String desc) {
+        if (desc == null) {
+            return 0;
+        }
+        return result(desc.replace(" ", ""));
+    }
+
     /**
      * 数字简单运算求值。仅支持加减乘除，不支持括号<br/>
      * 1+2*3-4/2
@@ -85,7 +92,7 @@ public class DescUtil {
      * @param desc 运算描述
      * @return 运算结果
      */
-    public static int result(String desc) {
+    private static int result(String desc) {
         if (desc == null || desc.trim().length() == 0) {
             return 0;
         }
