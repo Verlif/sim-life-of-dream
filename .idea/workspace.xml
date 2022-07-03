@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 事件与选项的print与desc会相互填充">
+    <list default="true" id="1489d689-ede7-467b-be4e-edfa183cebad" name="变更" comment="1. 修改了optionResult中的desc为print&#10;2. 修复了DescUtil.result中没有对空格过滤的问题&#10;3. 1.6.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/event.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/event.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/domain/option.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/domain/option.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packs/Demo-IJustWannaEatingShaoKao.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-IJustWannaEatingShaoKao.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-OneDayAsANoobCoder.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-OneDayAsANoobCoder.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/Demo-RockPaperScissors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packs/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/packs/default.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/option/OptionResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/domain/option/OptionResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/game/GameRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/util/DescUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/lifeofdream/util/DescUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/lifeofdream/TestForSth.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -392,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656814551379</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="1. 修改了optionResult中的desc为print&#10;2. 修复了DescUtil.result中没有对空格过滤的问题&#10;3. 1.6.2">
+      <created>1656856490003</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1656856490003</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,8 +421,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. 数字类型添加了set方法&#10;2. 已经开始的游戏使用start不会再次触发开始&#10;3. 正式版1.0" />
-    <MESSAGE value="1. 完善readme" />
     <MESSAGE value="1. 完善了角色判定属性&#10;2. 对角色技能进行了拓展，现在角色技能可以像角色标签一样进行自定义了" />
     <MESSAGE value="1. 项目[标签]中增加了onTurn参数，用于在每回合时触发&#10;2. 增加了提醒触发器，用于对数值或是一些游戏变化做消息提醒&#10;3. 现在nextTurn只能在当前回合没有事件的情况下生效&#10;4. 1.2" />
     <MESSAGE value="1. 增加了资源包信息&#10;2. 将fastjson2切换版本到2.0.7.android" />
@@ -447,7 +444,9 @@
     <MESSAGE value="1. 事件中增加了跟随事件&#10;2. 修复了分支下事件的影响会改变源事件的问题&#10;3. 修改了canExecOption的判定，现在此方法会判断任意存在的选项了&#10;4. Option与OptionResult单独封包&#10;5. 事件增加了道具跟随&#10;6. 增加了技能升级提示&#10;6. 1.6" />
     <MESSAGE value="1. 事件与选项的title更名为name&#10;2. 事件与选项新增print属性。现在print作为文本输出，desc作为项目描述&#10;3. 现在每回合的事件触发做了限制。每个分支只能最多触发一个事件，全局事件也只会随机一个事件。&#10;4. 1.6.1" />
     <MESSAGE value="1. 事件与选项的print与desc会相互填充" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 事件与选项的print与desc会相互填充" />
+    <MESSAGE value="1. 修改了optionResult中的desc为print&#10;2. 修复了DescUtil.result中没有对空格过滤的问题" />
+    <MESSAGE value="1. 修改了optionResult中的desc为print&#10;2. 修复了DescUtil.result中没有对空格过滤的问题&#10;3. 1.6.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 修改了optionResult中的desc为print&#10;2. 修复了DescUtil.result中没有对空格过滤的问题&#10;3. 1.6.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

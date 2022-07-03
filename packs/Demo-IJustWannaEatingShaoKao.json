@@ -101,7 +101,8 @@
           "exec": "addEventToReady 不想加班 0"
         },
         {
-          "print": "领导也没有再说什么就走了。;role.tag.up 剧情分数 1"
+          "print": "领导也没有再说什么就走了。",
+          "exec": "role.tag.up 剧情分数 1"
         }
       ]
     },

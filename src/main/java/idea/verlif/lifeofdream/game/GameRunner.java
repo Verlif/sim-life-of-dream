@@ -454,12 +454,14 @@ public class GameRunner implements CanSave {
         }
         readyEvents.addAll(preEvents);
         // 每回合规则触发
-        for (Rule rule : world.getRuleMap().values()) {
+        List<Rule> rules = new ArrayList<>(world.getRuleMap().values());
+        for (Rule rule : rules) {
             if (testCondition(rule) && randomChance(rule)) {
                 execCmd(rule.getExec());
             }
         }
-        for (Tag tag : role.getTag().getTagMap().values()) {
+        List<Tag> tags = new ArrayList<>(role.getTag().getTagMap().values());
+        for (Tag tag : tags) {
             execCmd(tag.getOnTurn());
         }
         // 分支触发
