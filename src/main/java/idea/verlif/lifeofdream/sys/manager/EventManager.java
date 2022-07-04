@@ -52,6 +52,10 @@ public class EventManager implements CanSave {
      * @param event 事件对象
      */
     public void addEventToAll(Event event) {
+        Event raw = allEventMap.get(event.getKey());
+        if (raw != null) {
+            event.setRemain(raw.getRemain());
+        }
         addEventToSet(event);
         allEventMap.put(event.getKey(), event);
     }

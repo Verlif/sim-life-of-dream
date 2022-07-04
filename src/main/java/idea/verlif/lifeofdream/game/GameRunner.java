@@ -251,7 +251,6 @@ public class GameRunner implements CanSave {
             bm.addBranch(branch);
         }
         EventManager em = EventManager.getInstance();
-        em.getAllEventMap().clear();
         for (Event event : events) {
             em.addEventToAll(event);
         }
@@ -745,6 +744,7 @@ public class GameRunner implements CanSave {
         json.put("res", readyEvents.save());
         json.put("pes", preEvents.save());
         json.put("bm", branchMap.save());
+        json.put("em", eventManager.save());
         return json;
     }
 
@@ -768,6 +768,7 @@ public class GameRunner implements CanSave {
         readyEvents.load(json.getJSONObject("res"));
         preEvents.load(json.getJSONObject("pes"));
         branchMap.load(json.getJSONObject("bm"));
+        eventManager.load(json.getJSONObject("em"));
         return true;
     }
 

@@ -17,6 +17,18 @@
     },
     {
       "name": "路上"
+    },
+    {
+      "name": "公交车"
+    },
+    {
+      "name": "等公交车"
+    },
+    {
+      "name": "走路"
+    },
+    {
+      "name": "打车"
     }
   ],
   "events": [
@@ -57,6 +69,71 @@
     {
       "name": "你人去哪了",
       "desc": "组长问你人在哪里，会议已经开始了。"
+    },
+    {
+      "followBranches": [
+        "路上"
+      ],
+      "name": "出行方式",
+      "print": "现在怎么去烧烤店呢",
+      "chance": "10000"
+    },
+    {
+      "followBranches": [
+        "走路"
+      ],
+      "name": "走路进行时",
+      "print": "你继续走着...",
+      "condition": "@{role.tag.value 烧烤店距离} > 0",
+      "chance": "10000",
+      "remain": -1,
+      "exec": "role.tag.down 烧烤店距离 1"
+    },
+    {
+      "followBranches": [
+        "公交车"
+      ],
+      "name": "公交车行进中",
+      "print": "公交车继续行驶着...",
+      "condition": "@{role.tag.value 烧烤店距离} > 0",
+      "chance": "10000",
+      "remain": -1,
+      "exec": "role.tag.down 烧烤店距离 2"
+    },
+    {
+      "followBranches": [
+        "打车"
+      ],
+      "name": "打车行进中",
+      "print": "汽车继续行驶着...",
+      "condition": "@{role.tag.value 烧烤店距离} > 0",
+      "chance": "10000",
+      "remain": -1,
+      "exec": "role.tag.down 烧烤店距离 3"
+    },
+    {
+      "followBranches": [
+        "走路"
+      ],
+      "name": "道路施工",
+      "print": "很不巧，这条路正在施工，可能需要绕道走。",
+      "chance": "1000"
+    },
+    {
+      "followBranches": [
+        "走路"
+      ],
+      "name": "街头表演",
+      "desc": "旁边有街头表演，围了好多人，要不要去看看呢？",
+      "chance": "1000"
+    },
+    {
+      "followBranches": [
+        "走路"
+      ],
+      "name": "街头乞讨",
+      "desc": "走着走着，你看到路边有一个衣衫破烂的人，面前有用粉笔书写的悲惨经历。",
+      "chance": "1000"
     }
   ],
   "options": [
@@ -165,7 +242,7 @@
       "desc": "你给路达哟...",
       "resultList": [
         {
-          "exec": "role.tag.up 下班倒计时 10;role.attr.mood.down 20;role.tag.down 剧情分数 4"
+          "exec": "role.attr.mood.down 20;role.tag.down 剧情分数 4"
         }
       ]
     },
@@ -178,6 +255,9 @@
       "resultList": [
         {
           "exec": "role.tag.add 会议溜号 10;role.attr.mood.down 20;role.tag.down 剧情分数 4"
+        },
+        {
+          "exec": "role.attr.mood.down 20;role.tag.down 剧情分数 4"
         }
       ]
     },
@@ -190,7 +270,7 @@
       "print": "你接了电话。",
       "resultList": [
         {
-          "exec": "addEventToReady 你人去哪了？ 0"
+          "exec": "addEventToReady 你人去哪了 0"
         }
       ]
     },
@@ -255,6 +335,119 @@
           "exec": "role.tag.down 剧情分数 10"
         }
       ]
+    },
+    {
+      "followEvents": [
+        "出行方式"
+      ],
+      "name": "走路",
+      "desc": "走路过去，每回合减少1点距离",
+      "print": "你为了锻炼身体，选择了走路，是这样的吧。",
+      "resultList": [
+        {
+          "exec": "role.tag.add 走路"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "出行方式"
+      ],
+      "name": "公交车",
+      "desc": "坐公交车过去，需要最多等待5回合，在公交车上每回合减少2点距离",
+      "print": "你决定坐公交车过去。",
+      "resultList": [
+        {
+          "exec": "role.tag.add 等公交车"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "出行方式"
+      ],
+      "name": "打车",
+      "desc": "打车过去是最快的，每回合减少3点距离",
+      "print": "你决定打车过去。",
+      "resultList": [
+        {
+          "exec": "role.tag.add 打车"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "道路施工"
+      ],
+      "name": "绕路",
+      "desc": "绕路走，需要额外行进5点时间",
+      "print": "你只能选择绕路走。",
+      "resultList": [
+        {
+          "exec": "role.tag.up 烧烤店距离 3"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "道路施工"
+      ],
+      "name": "强行通过",
+      "desc": "冒险从这里冲过去，可能会受伤",
+      "print": "你想了想，直接跨过路障冲了过去...",
+      "resultList": [
+        {
+          "print": "你突然脚下一空，一个踉跄摔了一跤。",
+          "exec": "kit.message 你受伤严重，去了医院，无法抵达烧烤店，享用烧烤失败。;finish"
+        },
+        {
+          "print": "施工人员发现了你，并把你赶了出去。",
+          "exec": "kit.message 没办法，现在只能绕路了。;role.tag.up 烧烤店距离 3"
+        },
+        {
+          "print": "没有人发现你，顺利通过。"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "街头表演"
+      ],
+      "name": "去看看",
+      "desc": "你决定去看看。",
+      "resultList": [
+        {
+          "print": "精彩的表演。",
+          "exec": "role.attr.mood.up 5;role.tag.down 饿死倒计时 2"
+        },
+        {
+          "print": "你凑过去一看，竟然只是买东西的小摊。",
+          "exec": "role.attr.mood.down 2;role.tag.down 饿死倒计时 1"
+        },
+        {
+          "print": "你看了一会，并没有觉得太精彩。",
+          "exec": "role.tag.down 饿死倒计时 1"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "街头表演", "街头乞讨"
+      ],
+      "name": "离开",
+      "desc": "你没时间理会这些。"
+    },
+    {
+      "followEvents": [
+        "街头乞讨"
+      ],
+      "name": "捐点钱",
+      "desc": "你停下了脚步，从包里翻找出一些钱放在了那人的身旁。",
+      "resultList": [
+        {
+          "exec": "role.tag.down 饿死倒计时 1"
+        }
+      ]
     }
   ],
   "items": [],
@@ -271,13 +464,18 @@
     },
     {
       "name": "会议溜号",
-      "chance": "@{role.tag.value 会议溜号} * 1500",
-      "exec": "addEventToReady 组长回Call;role.tag.remove 会议溜号"
+      "chance": "@{role.tag.value 会议溜号} * 500",
+      "exec": "addEventToReady 组长回Call 0;role.tag.remove 会议溜号"
     },
     {
       "name": "饿死判断",
       "condition": "@{role.tag.value 饿死倒计时} < 1",
       "exec": "kit.message 你饿死了，啊;finish"
+    },
+    {
+      "name": "等公交车",
+      "chance": "10000 - @{role.tag.value 等公交车} * 2000",
+      "exec": "role.tag.remove 等公交车;kit.message 公交车到了。"
     }
   ],
   "tags": [
@@ -299,7 +497,6 @@
     {
       "name": "会议溜号",
       "value": 0,
-      "condition" : "@{hasBranch 路上}",
       "onAdd": "world.addRule 会议溜号",
       "onRemove": "world.removeRule 会议溜号",
       "onTurn": "role.tag.up 会议溜号 1"
@@ -307,6 +504,28 @@
     {
       "name": "剧情分数",
       "value": 0
+    },
+    {
+      "name": "走路",
+      "onAdd": "addBranch 走路",
+      "onTurn": "role.tag.up 走路 1"
+    },
+    {
+      "name": "等公交车",
+      "value": 5,
+      "onAdd": "addBranch 等公交车;world.addRule 等公交车",
+      "onTurn": "role.tag.down 等公交车 1",
+      "onRemove": "role.tag.add 公交车;removeBranch 等公交车;world.removeRule 等公交车"
+    },
+    {
+      "name": "公交车",
+      "onAdd": "addBranch 公交车",
+      "onTurn": "role.tag.up 公交车 1"
+    },
+    {
+      "name": "打车",
+      "onAdd": "addBranch 打车",
+      "onTurn": "role.tag.up 打车 1"
     }
   ],
   "skills": []

@@ -45,4 +45,5 @@
 
 - 在使用`nextEvent`时就会直接触发返回的事件（重复的`nextEvent`同一个事件只会触发一次）。
 - 在`nextTurn`时，会优先判定规则，再判定分支。所以再规则中添加的事件会排在前端。
+- 当`followBranches`不存在时，此事件只能由`afterEvents`、`addEventToReady`或是`addEventToPre`来添加。
 - `desc`与`print`会相互填充，若不希望被填充，可以通过设置空字符串来避免，例如`"desc": ""`。
