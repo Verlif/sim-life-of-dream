@@ -9,7 +9,7 @@
   "story": {
     "name": "那个商城",
     "desc": "欢迎光临【那个商城】，请您随意参观。",
-    "exec": "role.tag.add floor.1L"
+    "exec": "role.tag.add floor.1L;addOption 电梯;role.bag.add RMB 1000"
   },
   "branches": [
   ],
@@ -77,6 +77,28 @@
       "name": "没有找到",
       "remain": -1,
       "desc": "你在这些失物当中并没有找到自己的东西。工作人员询问你是否需要报警处理，你说不用了，也不是什么贵重物品（作者说的，因为不想写后面的剧本了）。"
+    },
+    {
+      "name": "电梯",
+      "remain": -1,
+      "desc": "你要去几楼？"
+    },
+    {
+      "name": "取款机",
+      "remain": -1,
+      "desc": "这里只提供取款服务。",
+      "print": ""
+    },
+    {
+      "name": "圆圈旗舰店",
+      "remain": -1,
+      "desc": "您好，这里是圆圈旗舰店，请问您需要什么服务呢？"
+    },
+    {
+      "key": "圆圈旗舰店.购买",
+      "name": "购买",
+      "remain": -1,
+      "desc": "您想要买什么呢？"
     }
   ],
   "options": [
@@ -223,6 +245,240 @@
       "key": "寻找失物.没有",
       "name": "没有",
       "linkEvent": "寻找失物.没有找到"
+    },
+    {
+      "name": "电梯",
+      "desc": "通向其他楼层的设备",
+      "linkEvent": "电梯"
+    },
+    {
+      "followEvents": [
+        "电梯"
+      ],
+      "name": "一楼",
+      "order": 1,
+      "condition": "@{role.tag.hasno floor.1L}",
+      "resultList": [
+        {
+          "exec": "role.tag.remove floor;role.tag.add floor.1L"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "电梯"
+      ],
+      "name": "二楼",
+      "order": 2,
+      "condition": "@{role.tag.hasno floor.2L}",
+      "resultList": [
+        {
+          "exec": "role.tag.remove floor;role.tag.add floor.2L"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "电梯"
+      ],
+      "name": "三楼",
+      "order": 3,
+      "condition": "@{role.tag.hasno floor.3L}",
+      "resultList": [
+        {
+          "exec": "role.tag.remove floor;role.tag.add floor.3L"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "电梯"
+      ],
+      "name": "四楼",
+      "order": 4,
+      "condition": "@{role.tag.hasno floor.4L}",
+      "resultList": [
+        {
+          "exec": "role.tag.remove floor;role.tag.add floor.4L"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "电梯"
+      ],
+      "name": "五楼",
+      "order": 5,
+      "condition": "@{role.tag.hasno floor.5L}",
+      "resultList": [
+        {
+          "exec": "role.tag.remove floor;role.tag.add floor.5L"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "电梯"
+      ],
+      "name": "六楼",
+      "order": 6,
+      "condition": "@{role.tag.hasno floor.6L}",
+      "resultList": [
+        {
+          "exec": "role.tag.remove floor;role.tag.add floor.6L"
+        }
+      ]
+    },
+    {
+      "name": "取款机",
+      "desc": "可以在这里取出你拥有的RMB",
+      "print": "你来到取款机前。",
+      "linkEvent": "取款机"
+    },
+    {
+      "followEvents": [
+        "取款机"
+      ],
+      "key": "取款机.取100",
+      "name": "取100",
+      "desc": "取出100RMB",
+      "print": "你从取款机中取出100RMB。",
+      "linkEvent": "取款机",
+      "resultList": [
+        {
+          "exec": "role.bag.add RMB 100"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "取款机"
+      ],
+      "key": "取款机.取500",
+      "name": "取500",
+      "desc": "取出500RMB",
+      "print": "你从取款机中取出500RMB。",
+      "linkEvent": "取款机",
+      "resultList": [
+        {
+          "exec": "role.bag.add RMB 500"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "取款机"
+      ],
+      "key": "取款机.取1000",
+      "name": "取1000",
+      "desc": "取出1000RMB",
+      "print": "你从取款机中取出1000RMB。",
+      "linkEvent": "取款机",
+      "resultList": [
+        {
+          "exec": "role.bag.add RMB 1000"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "取款机"
+      ],
+      "key": "取款机.取2000",
+      "name": "取2000",
+      "desc": "取出2000RMB",
+      "print": "你从取款机中取出2000RMB。",
+      "linkEvent": "取款机",
+      "resultList": [
+        {
+          "exec": "role.bag.add RMB 2000"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "取款机"
+      ],
+      "key": "取款机.离开",
+      "name": "离开",
+      "desc": "离开取款机",
+      "print": "你离开了取款机。"
+    },
+    {
+      "name": "圆圈旗舰店",
+      "desc": "这里是售卖代步车的店铺",
+      "print": "你来到圆圈旗舰店。",
+      "linkEvent": "圆圈旗舰店"
+    },
+    {
+      "followEvents": [
+        "圆圈旗舰店"
+      ],
+      "key": "圆圈旗舰店.购买",
+      "name": "购买",
+      "desc": "购买代步车",
+      "linkEvent": "圆圈旗舰店.购买"
+    },
+    {
+      "followEvents": [
+        "圆圈旗舰店.购买"
+      ],
+      "key": "圆圈旗舰店.自行车",
+      "name": "自行车",
+      "desc": "400RMB",
+      "print": "",
+      "resultList": [
+        {
+          "condition": "@{role.bag.bt RMB 399}",
+          "print": "你买下了自行车。",
+          "exec": "role.bag.add 自行车 1;role.bag.remove RMB 400"
+        },
+        {
+          "condition": "@{role.bag.lt RMB 400}",
+          "print": "你的钱不够"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "圆圈旗舰店.购买"
+      ],
+      "key": "圆圈旗舰店.平衡车",
+      "name": "平衡车",
+      "desc": "600RMB",
+      "print": "",
+      "resultList": [
+        {
+          "condition": "@{role.bag.bt RMB 599}",
+          "print": "你买下了平衡车。",
+          "exec": "role.bag.add 自行车 1;role.bag.remove RMB 600"
+        },
+        {
+          "condition": "@{role.bag.lt RMB 600}",
+          "print": "你的钱不够"
+        }
+      ]
+    },
+    {
+      "followItems": [
+        "自行车"
+      ],
+      "key": "自行车.骑行",
+      "name": "骑行",
+      "resultList": [
+        {
+          "exec": "kit.message 这里不让骑。"
+        }
+      ]
+    },
+    {
+      "followEvents": [
+        "圆圈旗舰店", "圆圈旗舰店.购买"
+      ],
+      "key": "圆圈旗舰店.离开",
+      "name": "离开",
+      "desc": "离开圆圈旗舰店",
+      "print": "你离开了圆圈旗舰店。"
     }
   ],
   "items": [
@@ -231,6 +487,22 @@
       "desc": "本导览将为您介绍【那个商城】的一些浏览细节。",
       "value": 1,
       "onAdd": "kit.message 您已获得【商城导览】"
+    },
+    {
+      "name": "RMB",
+      "desc": "一般等价物，用来交换其他的东西。",
+      "value": 1,
+      "onUse": "kit.message 你点了下你的RMB，足足有@{role.bag.value RMB}个之多。"
+    },
+    {
+      "name": "自行车",
+      "desc": "一个有两个轮子的代步车，需要一定的练习才能驾驭它。",
+      "value": 1
+    },
+    {
+      "name": "平衡车",
+      "desc": "一个有两个轮子的代步车，与自行车不同的是，它的两个轮子是并排的，同样需要一定的练习才能驾驭它。",
+      "value": 1
     }
   ],
   "rules": [
@@ -241,8 +513,48 @@
       "key": "floor.1L",
       "value": 1,
       "visible": true,
-      "onAdd": "world.addOption 服务中心",
-      "onRemove": "world.removeOption 服务中心"
+      "onAdd": "world.addOption 服务中心;world.addOption 圆圈旗舰店;world.addOption 取款机;kit.message 到达一楼。",
+      "onRemove": "world.removeOption 服务中心;world.removeOption 圆圈旗舰店;world.removeOption 取款机"
+    },
+    {
+      "name": "2L",
+      "key": "floor.2L",
+      "value": 2,
+      "visible": true,
+      "onAdd": "kit.message 到达二楼。",
+      "onRemove": ""
+    },
+    {
+      "name": "3L",
+      "key": "floor.3L",
+      "value": 3,
+      "visible": true,
+      "onAdd": "kit.message 到达三楼。",
+      "onRemove": ""
+    },
+    {
+      "name": "4L",
+      "key": "floor.4L",
+      "value": 4,
+      "visible": true,
+      "onAdd": "kit.message 到达四楼。",
+      "onRemove": ""
+    },
+    {
+      "name": "5L",
+      "key": "floor.5L",
+      "value": 5,
+      "visible": true,
+      "onAdd": "kit.message 到达五楼。",
+      "onRemove": ""
+    },
+    {
+      "name": "6L",
+      "key": "floor.6L",
+      "value": 6,
+      "visible": true,
+      "onAdd": "kit.message 到达六楼。",
+      "onRemove": ""
     }
   ],
   "skills": [

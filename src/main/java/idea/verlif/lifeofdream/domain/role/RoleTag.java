@@ -3,20 +3,21 @@ package idea.verlif.lifeofdream.domain.role;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
+import idea.verlif.lifeofdream.base.OrderCompare;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.game.GameRunner;
 import idea.verlif.lifeofdream.notice.NoticeRunner;
 import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.sys.manager.TagManager;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Verlif
  */
 public class RoleTag implements CanSave {
+
+    private final static Comparator<Tag> COMPARATOR = new OrderCompare<>();
 
     private final CanSavedMap<String, Tag> tagMap;
 
@@ -39,6 +40,12 @@ public class RoleTag implements CanSave {
 
     public boolean hasno(String key) {
         return !tagMap.containsKey(key);
+    }
+
+    public List<Tag> getTagList() {
+        List<Tag> tags = new ArrayList<>(tagMap.values());
+        tags.sort(COMPARATOR);
+        return tags;
     }
 
     /**

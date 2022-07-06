@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.standard.Chancable;
 import idea.verlif.lifeofdream.standard.Conditionable;
+import idea.verlif.lifeofdream.standard.Orderable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Objects;
  *
  * @author Verlif
  */
-public class Option implements CanSave, Chancable, Conditionable {
+public class Option implements CanSave, Chancable, Conditionable, Orderable {
 
     /**
      * 衔接的事件Key列表
@@ -60,6 +61,11 @@ public class Option implements CanSave, Chancable, Conditionable {
      * 链接的事件key
      */
     private String linkEvent;
+
+    /**
+     * 排列权重
+     */
+    private int order = 20;
 
     /**
      * 触发效果组
@@ -143,6 +149,14 @@ public class Option implements CanSave, Chancable, Conditionable {
         return followItems;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     public String getLinkEvent() {
         return linkEvent;
     }
@@ -181,6 +195,7 @@ public class Option implements CanSave, Chancable, Conditionable {
         json.put("fes", followEvents);
         json.put("fis", followItems);
         json.put("le", linkEvent);
+        json.put("ord", order);
         return json;
     }
 
@@ -199,6 +214,7 @@ public class Option implements CanSave, Chancable, Conditionable {
         chance = json.getString("cha");
         condition = json.getString("con");
         linkEvent = json.getString("le");
+        order = json.getIntValue("ord");
         if (json.containsKey("res")) {
             resultList.addAll(json.getList("res", OptionResult.class));
         }

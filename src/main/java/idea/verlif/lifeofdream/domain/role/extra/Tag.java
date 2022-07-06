@@ -5,6 +5,7 @@ import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.notice.NoticeRunner;
 import idea.verlif.lifeofdream.notice.entity.ValueType;
 import idea.verlif.lifeofdream.standard.NumberValue;
+import idea.verlif.lifeofdream.standard.Orderable;
 
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
  *
  * @author Verlif
  */
-public class Tag implements NumberValue, CanSave {
+public class Tag implements NumberValue, CanSave, Orderable {
 
     /**
      * 标签名称
@@ -49,6 +50,11 @@ public class Tag implements NumberValue, CanSave {
      * 移除标签时触发
      */
     private String onRemove;
+
+    /**
+     * 排序权重
+     */
+    private int order = 20;
 
     public String getName() {
         return name;
@@ -109,6 +115,14 @@ public class Tag implements NumberValue, CanSave {
         this.onRemove = onRemove;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -136,6 +150,7 @@ public class Tag implements NumberValue, CanSave {
         json.put("add", onAdd);
         json.put("turn", onTurn);
         json.put("rem", onRemove);
+        json.put("ord", order);
         return json;
     }
 
@@ -151,6 +166,7 @@ public class Tag implements NumberValue, CanSave {
         onAdd = json.getString("add");
         onTurn = json.getString("turn");
         onRemove = json.getString("rem");
+        order = json.getIntValue("ord");
         return true;
     }
 

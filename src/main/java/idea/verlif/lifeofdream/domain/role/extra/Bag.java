@@ -69,6 +69,19 @@ public class Bag implements CanSave {
         return item.value();
     }
 
+    public void set(String key, int value) {
+        Item item = itemMap.get(key);
+        if (item == null) {
+            item = ItemManager.getInstance().get(key);
+            if (item != null) {
+                item.set(value);
+                itemMap.put(key, item);
+            }
+        } else {
+            item.set(value);
+        }
+    }
+
     public boolean eq(String key, int value) {
         Item item = itemMap.get(key);
         if (item != null) {
@@ -122,10 +135,13 @@ public class Bag implements CanSave {
         if (item == null) {
             ItemManager itemManager = ItemManager.getInstance();
             item = itemManager.get(key);
+            if (item != null) {
+                item.set(0);
+            }
             NoticeRunner.notice(Tip.ITEM_ADDED);
         }
         if (item != null) {
-            item.set(count);
+            item.up(count);
             itemMap.put(key, item);
             GameRunner gameRunner = GameRunner.getInstance();
             for (int i = 0; i < count; i++) {

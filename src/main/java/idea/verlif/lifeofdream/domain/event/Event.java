@@ -3,11 +3,14 @@ package idea.verlif.lifeofdream.domain.event;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedList;
+import idea.verlif.lifeofdream.base.OrderCompare;
 import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.standard.Chancable;
 import idea.verlif.lifeofdream.standard.Conditionable;
+import idea.verlif.lifeofdream.standard.Orderable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +20,8 @@ import java.util.Objects;
  * @author Verlif
  */
 public class Event implements CanSave, Chancable, Conditionable {
+
+    private final static Comparator<Option> COMPARATOR = new OrderCompare<>();
 
     /**
      * 事件所属支线
@@ -181,6 +186,7 @@ public class Event implements CanSave, Chancable, Conditionable {
     }
 
     public List<Option> getReadyOptions() {
+        readyOptions.sort(COMPARATOR);
         return readyOptions;
     }
 
