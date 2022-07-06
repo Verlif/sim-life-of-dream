@@ -57,6 +57,11 @@ public class Option implements CanSave, Chancable, Conditionable {
     private String condition;
 
     /**
+     * 链接的事件key
+     */
+    private String linkEvent;
+
+    /**
      * 触发效果组
      */
     private final List<OptionResult> resultList;
@@ -138,6 +143,14 @@ public class Option implements CanSave, Chancable, Conditionable {
         return followItems;
     }
 
+    public String getLinkEvent() {
+        return linkEvent;
+    }
+
+    public void setLinkEvent(String linkEvent) {
+        this.linkEvent = linkEvent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -167,6 +180,7 @@ public class Option implements CanSave, Chancable, Conditionable {
         json.put("res", resultList);
         json.put("fes", followEvents);
         json.put("fis", followItems);
+        json.put("le", linkEvent);
         return json;
     }
 
@@ -184,6 +198,7 @@ public class Option implements CanSave, Chancable, Conditionable {
         print = json.getString("pri");
         chance = json.getString("cha");
         condition = json.getString("con");
+        linkEvent = json.getString("le");
         if (json.containsKey("res")) {
             resultList.addAll(json.getList("res", OptionResult.class));
         }

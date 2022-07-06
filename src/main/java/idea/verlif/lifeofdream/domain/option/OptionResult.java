@@ -32,6 +32,11 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
      */
     private String exec;
 
+    /**
+     * 链接的事件key
+     */
+    private String linkEvent;
+
     @Override
     public String getCondition() {
         return condition;
@@ -66,6 +71,14 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
         this.exec = exec;
     }
 
+    public String getLinkEvent() {
+        return linkEvent;
+    }
+
+    public void setLinkEvent(String linkEvent) {
+        this.linkEvent = linkEvent;
+    }
+
     @Override
     public JSONObject save() {
         JSONObject json = new JSONObject();
@@ -73,6 +86,7 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
         json.put("pri", print);
         json.put("cha", chance);
         json.put("exec", exec);
+        json.put("le", linkEvent);
         return json;
     }
 
@@ -82,6 +96,7 @@ public class OptionResult implements CanSave, Chancable, Conditionable {
         print = json.getString("pri");
         chance = json.getString("cha");
         exec = json.getString("exec");
+        linkEvent = json.getString("le");
         return true;
     }
 }

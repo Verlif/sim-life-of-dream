@@ -55,7 +55,7 @@
       "remain": -1
     },
     {
-      "followBranch": [
+      "followBranches": [
         "准备下班"
       ],
       "name": "重要会议",
@@ -175,7 +175,7 @@
       "desc": "你假装没听到，继续做自己的事情。",
       "resultList": [
         {
-          "exec": "addEventToReady 不想加班 0"
+          "linkEvent": "不想加班"
         },
         {
           "print": "领导也没有再说什么就走了。",
@@ -268,11 +268,7 @@
       "name": "接电话",
       "desc": "看看他有什么事",
       "print": "你接了电话。",
-      "resultList": [
-        {
-          "exec": "addEventToReady 你人去哪了 0"
-        }
-      ]
+      "linkEvent": "你人去哪了"
     },
     {
       "followEvents": [
@@ -465,7 +461,7 @@
     {
       "name": "会议溜号",
       "chance": "@{role.tag.value 会议溜号} * 500",
-      "exec": "addEventToReady 组长回Call 0;role.tag.remove 会议溜号"
+      "exec": "addTopEvent 组长回Call;role.tag.remove 会议溜号"
     },
     {
       "name": "饿死判断",

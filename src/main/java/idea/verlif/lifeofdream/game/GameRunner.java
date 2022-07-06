@@ -378,6 +378,11 @@ public class GameRunner implements CanSave {
 
     private Result invokeOption(Option option) {
         kit.message(option.getPrint());
+        // 添加链接的事件
+        Event event = eventManager.getEvent(option.getLinkEvent());
+        if (event != null) {
+            addEventToReadyTop(event);
+        }
         // 效果选择
         List<OptionResult> results = option.getResultList();
         List<OptionResult> readyResults = new ArrayList<>();
@@ -394,7 +399,13 @@ public class GameRunner implements CanSave {
         if (result != null) {
             kit.message(result.getPrint());
             // 执行结果
-            return execCmd(result.getExec());
+            Result r = execCmd(result.getExec());
+            // 添加链接的事件
+            Event e = eventManager.getEvent(result.getLinkEvent());
+            if (e != null) {
+                addEventToReadyTop(e);
+            }
+            return r;
         } else {
             return Result.ok("ok");
         }
@@ -566,6 +577,20 @@ public class GameRunner implements CanSave {
 
     public void addReadyEvent(Event event) {
         readyEvents.add(event);
+    }
+
+    public void addEventToReadyTop(Event event) {
+        readyEvents.add(0, event);
+        NoticeRunner.notice(Tip.EVENT_NOW);
+    }
+
+    /**
+     * 将事件添加到事件队列首位
+     *
+     * @param key 事件Key
+     */
+    public boolean addTopEvent(String key) {
+        return addEventToReady(key, 0);
     }
 
     /**
