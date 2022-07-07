@@ -67,7 +67,7 @@ public class main {
         // 添加资源包
         PackManager pm = PackManager.getInstance();
         pm.loadFromFile(new File("packs\\Demo-RockPaperScissors.json"));
-        pm.loadFromFile(new File("packs\\Demo-default.json"));
+        pm.loadFromFile(new File("packs\\Demo-Shop.json"));
         List<Pack> packs = pm.getPacks();
         if (packs.size() > 0) {
             // 新建游戏

@@ -56,7 +56,7 @@ public class Event implements CanSave, Chancable, Conditionable {
     /**
      * 概率描述
      */
-    private String chance;
+    private String chance = "10000";
 
     /**
      * 事件触发条件
@@ -67,6 +67,16 @@ public class Event implements CanSave, Chancable, Conditionable {
      * 事件执行指令
      */
     private String exec;
+
+    /**
+     * 链接的事件key
+     */
+    private String linkEvent;
+
+    /**
+     * 下一回合的事件
+     */
+    private String nextEvent;
 
     /**
      * 事件选项
@@ -173,6 +183,22 @@ public class Event implements CanSave, Chancable, Conditionable {
         this.condition = condition;
     }
 
+    public String getLinkEvent() {
+        return linkEvent;
+    }
+
+    public void setLinkEvent(String linkEvent) {
+        this.linkEvent = linkEvent;
+    }
+
+    public String getNextEvent() {
+        return nextEvent;
+    }
+
+    public void setNextEvent(String nextEvent) {
+        this.nextEvent = nextEvent;
+    }
+
     public String getExec() {
         return exec;
     }
@@ -242,6 +268,8 @@ public class Event implements CanSave, Chancable, Conditionable {
         json.put("cha", chance);
         json.put("con", condition);
         json.put("exec", exec);
+        json.put("le", linkEvent);
+        json.put("nn", nextEvent);
         json.put("opts", options.save());
         json.put("rps", readyOptions.save());
         json.put("rem", remain);
@@ -269,6 +297,8 @@ public class Event implements CanSave, Chancable, Conditionable {
         chance = json.getString("cha");
         condition = json.getString("con");
         exec = json.getString("exec");
+        linkEvent = json.getString("le");
+        nextEvent = json.getString("nn");
         options.load(json.getJSONObject("opts"));
         readyOptions.load(json.getJSONObject("rps"));
         remain = json.getIntValue("rem");

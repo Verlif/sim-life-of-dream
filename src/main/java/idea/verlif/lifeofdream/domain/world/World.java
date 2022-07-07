@@ -3,11 +3,15 @@ package idea.verlif.lifeofdream.domain.world;
 import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
+import idea.verlif.lifeofdream.base.OrderCompare;
 import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.domain.rule.Rule;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.RuleManager;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +20,8 @@ import java.util.Map;
  * @author Verlif
  */
 public class World implements CanSave {
+
+    private static final Comparator<Option> COMPARATOR = new OrderCompare<>();
 
     /**
      * 每回合规则
@@ -45,6 +51,12 @@ public class World implements CanSave {
 
     public CanSavedMap<String, Option> getOptionMap() {
         return optionMap;
+    }
+
+    public List<Option> getOptionList() {
+        List<Option> options = new ArrayList<>(optionMap.values());
+        options.sort(COMPARATOR);
+        return options;
     }
 
     public void addRule(String key) {

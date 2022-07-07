@@ -290,6 +290,20 @@ public class GameRunner implements CanSave {
             Event event = readyEvents.get(0);
             event.getReadyOptions().clear();
             readyEvents.remove(0);
+            // 添加直链事件
+            if (event.getLinkEvent() != null) {
+                Event link = eventManager.getEvent(event.getLinkEvent());
+                if (link != null) {
+                    addEventToReadyTop(link);
+                }
+            }
+            // 添加到下回合事件
+            if (event.getNextEvent() != null) {
+                Event link = eventManager.getEvent(event.getNextEvent());
+                if (link != null) {
+                    addEventToPreTop(link);
+                }
+            }
             // 添加跟随事件
             Set<Event> events = eventManager.getEventOfEvent(event.getKey());
             if (events != null) {
@@ -610,6 +624,10 @@ public class GameRunner implements CanSave {
             return true;
         }
         return false;
+    }
+
+    public void addEventToPreTop(Event event) {
+        preEvents.add(0, event);
     }
 
     public boolean canUseItem(String key) {
