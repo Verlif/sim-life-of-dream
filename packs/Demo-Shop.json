@@ -9,7 +9,7 @@
   "story": {
     "name": "那个商城",
     "desc": "欢迎光临【那个商城】，请您随意参观。",
-    "exec": "role.tag.add floor.1L;addOption 电梯;role.bag.add RMB 1000"
+    "exec": "role.tag.add floor.1L;role.tag.add 存款;addOption 电梯;role.bag.add RMB 1000"
   },
   "branches": [
   ],
@@ -249,6 +249,7 @@
     {
       "name": "电梯",
       "desc": "通向其他楼层的设备",
+      "order": 99,
       "linkEvent": "电梯"
     },
     {
@@ -341,12 +342,18 @@
       ],
       "key": "取款机.取100",
       "name": "取100",
+      "order": 1,
       "desc": "取出100RMB",
-      "print": "你从取款机中取出100RMB。",
+      "print": "",
       "linkEvent": "取款机",
       "resultList": [
         {
-          "exec": "role.bag.add RMB 100"
+          "condition": "@{role.tag.bt 存款 99}",
+          "exec": "role.bag.add RMB 100;kit.message 你从取款机中取出100RMB。;role.tag.down 存款 100"
+        },
+        {
+          "condition": "@{role.tag.lt 存款 100}",
+          "print": "您的存款不足。"
         }
       ]
     },
@@ -356,12 +363,18 @@
       ],
       "key": "取款机.取500",
       "name": "取500",
+      "order": 2,
       "desc": "取出500RMB",
-      "print": "你从取款机中取出500RMB。",
+      "print": "",
       "linkEvent": "取款机",
       "resultList": [
         {
-          "exec": "role.bag.add RMB 500"
+          "condition": "@{role.tag.bt 存款 499}",
+          "exec": "role.bag.add RMB 500;kit.message 你从取款机中取出500RMB。;role.tag.down 存款 500"
+        },
+        {
+          "condition": "@{role.tag.lt 存款 500}",
+          "print": "您的存款不足。"
         }
       ]
     },
@@ -371,12 +384,18 @@
       ],
       "key": "取款机.取1000",
       "name": "取1000",
+      "order": 3,
       "desc": "取出1000RMB",
-      "print": "你从取款机中取出1000RMB。",
+      "print": "",
       "linkEvent": "取款机",
       "resultList": [
         {
-          "exec": "role.bag.add RMB 1000"
+          "condition": "@{role.tag.bt 存款 999}",
+          "exec": "role.bag.add RMB 1000;kit.message 你从取款机中取出1000RMB。;role.tag.down 存款 1000"
+        },
+        {
+          "condition": "@{role.tag.lt 存款 1000}",
+          "print": "您的存款不足。"
         }
       ]
     },
@@ -386,12 +405,18 @@
       ],
       "key": "取款机.取2000",
       "name": "取2000",
+      "order": 4,
       "desc": "取出2000RMB",
-      "print": "你从取款机中取出2000RMB。",
+      "print": "",
       "linkEvent": "取款机",
       "resultList": [
         {
-          "exec": "role.bag.add RMB 2000"
+          "condition": "@{role.tag.bt 存款 1999}",
+          "exec": "role.bag.add RMB 2000;kit.message 你从取款机中取出2000RMB。;role.tag.down 存款 2000"
+        },
+        {
+          "condition": "@{role.tag.lt 存款 2000}",
+          "print": "您的存款不足。"
         }
       ]
     },
@@ -401,6 +426,7 @@
       ],
       "key": "取款机.离开",
       "name": "离开",
+      "order": 100,
       "desc": "离开取款机",
       "print": "你离开了取款机。"
     },
@@ -421,6 +447,24 @@
     },
     {
       "followEvents": [
+        "圆圈旗舰店"
+      ],
+      "key": "圆圈旗舰店.议价",
+      "name": "议价",
+      "desc": "你打算和老板谈谈价格。",
+      "resultList": [
+        {
+          "chance": 100,
+          "exec": "kit.message 议价成功。;role.tag.add 圆圈旗舰店.减价"
+        },
+        {
+          "chance": 300,
+          "exec": "kit.message 议价失败。"
+        }
+      ]
+    },
+    {
+      "followEvents": [
         "圆圈旗舰店.购买"
       ],
       "key": "圆圈旗舰店.自行车",
@@ -429,12 +473,21 @@
       "print": "",
       "resultList": [
         {
-          "condition": "@{role.bag.bt RMB 399}",
+          "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.value RMB} > 359",
+          "print": "你以9折的价格买下了自行车。",
+          "exec": "role.bag.add 自行车 1;role.bag.remove RMB 360"
+        },
+        {
+          "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.value RMB} > 399",
           "print": "你买下了自行车。",
           "exec": "role.bag.add 自行车 1;role.bag.remove RMB 400"
         },
         {
-          "condition": "@{role.bag.lt RMB 400}",
+          "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.lt RMB 400}",
+          "print": "你的钱不够"
+        },
+        {
+          "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.lt RMB 359}",
           "print": "你的钱不够"
         }
       ]
@@ -449,19 +502,28 @@
       "print": "",
       "resultList": [
         {
-          "condition": "@{role.bag.bt RMB 599}",
+          "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.value RMB} > 599",
           "print": "你买下了平衡车。",
-          "exec": "role.bag.add 自行车 1;role.bag.remove RMB 600"
+          "exec": "role.bag.add 平衡车 1;role.bag.remove RMB 600"
         },
         {
-          "condition": "@{role.bag.lt RMB 600}",
+          "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.value RMB} > 539",
+          "print": "你以9折的价格买下了平衡车。",
+          "exec": "role.bag.add 平衡车 1;role.bag.remove RMB 540"
+        },
+        {
+          "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.lt RMB 600}",
+          "print": "你的钱不够"
+        },
+        {
+          "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.lt RMB 540}",
           "print": "你的钱不够"
         }
       ]
     },
     {
       "followItems": [
-        "自行车"
+        "自行车", "平衡车"
       ],
       "key": "自行车.骑行",
       "name": "骑行",
@@ -478,6 +540,7 @@
       "key": "圆圈旗舰店.离开",
       "name": "离开",
       "desc": "离开圆圈旗舰店",
+      "order": 99,
       "print": "你离开了圆圈旗舰店。"
     }
   ],
@@ -555,6 +618,18 @@
       "visible": true,
       "onAdd": "kit.message 到达六楼。",
       "onRemove": ""
+    },
+    {
+      "key": "圆圈旗舰店.减价",
+      "name": "减价",
+      "value": 1,
+      "visible": true,
+      "onAdd": "你现在在圆圈旗舰店里买东西会打9折。"
+    },
+    {
+      "name": "存款",
+      "value": 10000,
+      "visible": true
     }
   ],
   "skills": [

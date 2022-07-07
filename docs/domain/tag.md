@@ -49,3 +49,4 @@
     - 之后使用`role.tag.remove location.sichuan`，则会移除`location.sichaun`、`location.sichaun.mianyang`
       、`location.sichuan.chengdu`这三个标签，只留下`location.chongqin`标签。
 
+- 因为标签支持分组，所以在大部分需要判定的事件或选项中可以通过`role.tag.remove`与`role.tag.add`结合使用来达到动态标记的效果。
