@@ -4,6 +4,7 @@ import com.alibaba.fastjson2.JSONObject;
 import idea.verlif.lifeofdream.base.CanSave;
 import idea.verlif.lifeofdream.base.CanSavedMap;
 import idea.verlif.lifeofdream.domain.role.extra.Skill;
+import idea.verlif.lifeofdream.game.GameRunner;
 import idea.verlif.lifeofdream.notice.NoticeRunner;
 import idea.verlif.lifeofdream.notice.entity.Tip;
 import idea.verlif.lifeofdream.sys.manager.SkillManager;
@@ -110,13 +111,18 @@ public class RoleSkill implements CanSave {
             Skill skill = SkillManager.getInstance().get(key);
             if (skill != null) {
                 skillMap.put(key, skill);
+                GameRunner gameRunner = GameRunner.getInstance();
+                gameRunner.execCmd(skill.getOnAdd());
                 NoticeRunner.notice(Tip.SKILL_ADDED);
             }
         }
     }
 
     public void remove(String key) {
-        if (skillMap.remove(key) != null) {
+        Skill skill = skillMap.remove(key);
+        if (skill != null) {
+            GameRunner gameRunner = GameRunner.getInstance();
+            gameRunner.execCmd(skill.getOnRemove());
             NoticeRunner.notice(Tip.SKILL_REMOVED);
         }
     }

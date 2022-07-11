@@ -40,6 +40,16 @@ public class Skill implements NumberValue, LevelValue, CanSave {
      */
     private int next = 20;
 
+    /**
+     * 获得技能时触发。每个道具数量都会触发一次。
+     */
+    private String onAdd;
+
+    /**
+     * 失去技能时触发。每个道具数量都会触发一次。
+     */
+    private String onRemove;
+
     public Skill() {
     }
 
@@ -84,6 +94,22 @@ public class Skill implements NumberValue, LevelValue, CanSave {
 
     public void setNext(int next) {
         this.next = next;
+    }
+
+    public String getOnAdd() {
+        return onAdd;
+    }
+
+    public void setOnAdd(String onAdd) {
+        this.onAdd = onAdd;
+    }
+
+    public String getOnRemove() {
+        return onRemove;
+    }
+
+    public void setOnRemove(String onRemove) {
+        this.onRemove = onRemove;
     }
 
     @Override
@@ -131,6 +157,8 @@ public class Skill implements NumberValue, LevelValue, CanSave {
         json.put("lel", level);
         json.put("val", value);
         json.put("next", next);
+        json.put("add", onAdd);
+        json.put("rem", onRemove);
         return json;
     }
 
@@ -143,6 +171,8 @@ public class Skill implements NumberValue, LevelValue, CanSave {
         level = json.getIntValue("lel");
         value = json.getIntValue("val");
         next = json.getIntValue("next");
+        onAdd = json.getString("add");
+        onRemove = json.getString("rem");
         return true;
     }
 

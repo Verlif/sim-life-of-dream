@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "剧情演示资源包",
+    "name": "Demo-剧情演示",
     "key": "verlif.demo.ijwesk",
     "desc": "用于演示剧情编写资源包的一个演示包，主资源包请只加载这一个。",
     "version": "1.0",

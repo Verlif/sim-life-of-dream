@@ -9,75 +9,26 @@
   "story": {
     "name": "测试开始啦",
     "desc": "欢迎来到《西米的梦境师计划》的测试，在这里请所以点击。",
-    "exec": "world.addOption 上幼儿园;world.addOption 上学前班;world.addOption 上小学;world.addOption 上中学;world.addOption 上大学;world.addOption 不上学了;world.addOption 学写字;world.addOption 学画画;world.addOption wataxi"
+    "exec": "world.addOption 学写字;world.addOption 学画画;world.addOption 忘记画画;world.addOption 忘记画画;world.addOption 输入文字;world.addOption 输入数字;world.addOption 存储文本信息;world.addOption 存储数字信息;world.addOption 获取文本信息;world.addOption 获取数字信息"
   },
   "events": [
   ],
   "options": [
-    {
-      "name": "上幼儿园",
-      "desc": "来上幼儿园吧，hiahiahia",
-      "resultList": [
-        {
-          "exec": "role.tag.up edu.0 1"
-        }
-      ]
-    },
-    {
-      "name": "上学前班",
-      "desc": "来上学前班吧，hiahiahia",
-      "condition": "@{role.tag.has edu.0}",
-      "resultList": [
-        {
-          "exec": "role.tag.up edu.1 1"
-        }
-      ]
-    },
-    {
-      "name": "上小学",
-      "desc": "来上小学吧，hiahiahia",
-      "condition": "@{role.tag.has edu.1}",
-      "resultList": [
-        {
-          "exec": "role.tag.up edu.2 1"
-        }
-      ]
-    },
-    {
-      "name": "上中学",
-      "desc": "来上中学吧，hiahiahia",
-      "condition": "@{role.tag.has edu.2}",
-      "resultList": [
-        {
-          "exec": "role.tag.up edu.3 1"
-        }
-      ]
-    },
-    {
-      "name": "上大学",
-      "desc": "来上大学吧，hiahiahia",
-      "condition": "@{role.tag.has edu.3}",
-      "resultList": [
-        {
-          "exec": "role.tag.up edu.4 1"
-        }
-      ]
-    },
-    {
-      "name": "不上学了",
-      "desc": "劳资不上学了，哼！！！",
-      "resultList": [
-        {
-          "exec": "role.tag.remove edu 1"
-        }
-      ]
-    },
     {
       "name": "学写字",
       "desc": "来写写字吧",
       "resultList": [
         {
           "exec": "role.skill.up 写字 1"
+        }
+      ]
+    },
+    {
+      "name": "忘记写字",
+      "desc": "遗忘写字技能",
+      "resultList": [
+        {
+          "exec": "role.skill.remove 写字"
         }
       ]
     },
@@ -91,181 +42,85 @@
       ]
     },
     {
-      "name": "wataxi",
-      "desc": "点了会怎么样呢？",
+      "name": "忘记画画",
+      "desc": "遗忘画画技能",
       "resultList": [
         {
-          "exec": "role.bag.add 很多东西 1"
+          "exec": "role.skill.remove 画画"
         }
       ]
     },
     {
-      "name": "wataxi",
-      "desc": "点了会怎么样呢？",
+      "name": "输入文字",
+      "desc": "正在输入文字...",
       "resultList": [
         {
-          "exec": "role.bag.add 很多东西 1"
+          "exec": "kit.message @{kit.input.getText 请输入文字}"
         }
       ]
     },
     {
-      "followItems": [
-        "很多东西"
-      ],
-      "name": "丢弃",
-      "desc": "丢弃此物品",
+      "name": "输入数字",
+      "desc": "正在输入数字...",
       "resultList": [
         {
-          "exec": "role.bag.remove 很多东西 -1"
+          "exec": "kit.message @{kit.input.getInt 请输入数字}"
         }
       ]
     },
     {
-      "followItems": [
-        "很多东西"
-      ],
-      "name": "A他",
-      "desc": "就A他就完了",
+      "name": "存储文本信息",
+      "desc": "正在输入信息...",
       "resultList": [
         {
-          "exec": "kit.message 我A到他了，nice"
+          "exec": "kit.data.setText data @{kit.input.getText 请输入信息}"
         }
       ]
     },
     {
-      "followItems": [
-        "很多东西"
-      ],
-      "name": "A他",
-      "desc": "就A他就完了",
+      "name": "存储数字信息",
+      "desc": "正在输入信息...",
       "resultList": [
         {
-          "exec": "kit.message 我A到他了，nice"
+          "exec": "kit.data.setInt data @{kit.input.getInt 请输入信息}"
         }
       ]
     },
     {
-      "followItems": [
-        "很多东西"
-      ],
-      "name": "B他",
-      "desc": "就B他就完了",
+      "name": "获取文本信息",
+      "desc": "",
       "resultList": [
         {
-          "exec": "kit.message 我B到他了，nice"
+          "exec": "kit.message @{kit.data.getText data}"
         }
       ]
     },
     {
-      "followItems": [
-        "很多东西"
-      ],
-      "name": "C他",
-      "desc": "就C他就完了",
+      "name": "获取数字信息",
+      "desc": "",
       "resultList": [
         {
-          "exec": "kit.message 我C到他了，nice"
+          "exec": "kit.message @{kit.data.getInt data}"
         }
       ]
     }
   ],
   "items": [
-    {
-      "name": "幼儿园作业",
-      "value": 1,
-      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
-      "onUse": "kit.message 你点击了幼儿园作业。",
-      "onAdd": "kit.message 添加了幼儿园作业。",
-      "onRemove": "kit.message 移除了幼儿园作业。"
-    },
-    {
-      "name": "学前班作业",
-      "value": 1,
-      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
-      "onUse": "kit.message 你点击了学前班作业。",
-      "onAdd": "kit.message 添加了学前班作业。",
-      "onRemove": "kit.message 移除了学前班作业。"
-    },
-    {
-      "name": "小学作业",
-      "value": 1,
-      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
-      "onUse": "kit.message 你点击了小学作业。",
-      "onAdd": "kit.message 添加了小学作业。",
-      "onRemove": "kit.message 移除了小学作业。"
-    },
-    {
-      "name": "中学作业",
-      "value": 1,
-      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
-      "onUse": "kit.message 你点击了中学作业。",
-      "onAdd": "kit.message 添加了中学作业。",
-      "onRemove": "kit.message 移除了中学作业。"
-    },
-    {
-      "name": "大学作业",
-      "value": 1,
-      "desc": "你应该是需要把这个写完吧。嗯，是的没错。",
-      "onUse": "kit.message 你点击了大学作业。",
-      "onAdd": "kit.message 添加了大学作业。",
-      "onRemove": "kit.message 移除了大学作业。"
-    },
-    {
-      "name": "很多东西",
-      "value": 1,
-      "desc": "咔哒咔哒咔哒"
-    }
   ],
   "rules": [
   ],
   "tags": [
-    {
-      "name": "幼儿园",
-      "key": "edu.0",
-      "onAdd": "kit.message 上幼儿园啦;role.bag.add 幼儿园作业 1",
-      "onRemove": "role.bag.remove 幼儿园作业 -1",
-      "value": 0,
-      "visible": true
-    },
-    {
-      "name": "学前班",
-      "key": "edu.1",
-      "onAdd": "kit.message 上学前班啦;role.bag.add 学前班作业 1",
-      "onRemove": "role.bag.remove 学前班作业 -1",
-      "value": 0,
-      "visible": true
-    },
-    {
-      "name": "小学",
-      "key": "edu.2",
-      "onAdd": "kit.message 上小学啦;role.bag.add 小学作业 1",
-      "onRemove": "role.bag.remove 小学作业 -1",
-      "value": 0,
-      "visible": true
-    },
-    {
-      "name": "中学",
-      "key": "edu.3",
-      "onAdd": "kit.message 上中学啦;role.bag.add 中学作业 1",
-      "onRemove": "role.bag.remove 中学作业 -1",
-      "value": 0,
-      "visible": true
-    },
-    {
-      "name": "大学",
-      "key": "edu.4",
-      "onAdd": "kit.message 上大学啦;role.bag.add 大学作业 1",
-      "onRemove": "role.bag.remove 大学作业 -1",
-      "value": 0,
-      "visible": true
-    }
   ],
   "skills": [
     {
-      "name": "写字"
+      "name": "写字",
+      "onAdd": "kit.message 习得写字技能",
+      "onRemove": "kit.message 遗忘写字技能"
     },
     {
-      "name": "画画"
+      "name": "画画",
+      "onAdd": "kit.message 习得画画技能",
+      "onRemove": "kit.message 遗忘画画技能"
     }
   ]
 }

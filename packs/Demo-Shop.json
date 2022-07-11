@@ -1,109 +1,123 @@
 {
   "info": {
-    "name": "Demo商场演示",
+    "name": "Demo-商场演示",
     "key": "verlif.demo.shop",
-    "desc": "用来演示如何进行一个商场和物品的构建。这里只做基础演示，更多的可能性请尽情探索。",
+    "desc": "用来演示如何进行一个商场和物品的构建。这里只做基础演示，更多的可能性请尽情探索。主资源包请只加载这一个。",
     "version": "1.0",
     "author": "Verlif"
   },
   "story": {
     "name": "那个商城",
     "desc": "欢迎光临【那个商城】，请您随意参观。",
-    "exec": "role.tag.add floor.1L;role.tag.add 存款;addOption 电梯;role.bag.add RMB 1000"
+    "exec": "kit.message 需要注意的是，目前只有一楼的圆圈旗舰店在开业，其他的店铺还未开业。;role.tag.add floor.1L;role.tag.add 存款;addOption 电梯;role.bag.add RMB 1000"
   },
   "branches": [
   ],
   "events": [
     {
       "name": "服务电话",
-      "remain": -1,
+      "remain": 0,
       "desc": "这是【那个商城】的服务电话【0123456789】"
     },
     {
       "key": "服务电话.电话接通",
       "name": "电话接通",
-      "remain": -1,
+      "remain": 0,
       "desc": "喂，您好，这里是【那个商城】的客服，很高兴为您服务，请问您需要什么帮助吗？",
       "print": "“喂，您好，这里是【那个商城】的客服，很高兴为您服务，请问您需要什么帮助吗？”"
     },
     {
       "key": "服务电话.失物招领",
       "name": "电话接通",
-      "remain": -1,
+      "remain": 0,
       "desc": "好的，那请您将需要招领的物品放在1楼的服务中心就好了。",
       "print": "“好的，那请您将需要招领的物品放在1楼的服务中心就好了。”"
     },
     {
       "key": "服务电话.丢失物品",
       "name": "丢失物品",
-      "remain": -1,
+      "remain": 0,
       "desc": "您可以到1楼的服务中心，那里有失物招领，看看您的物品是否在那里。如果您的物品很贵重，您可以与那里的工作人员说明，他们会积极地配合您的。=",
       "print": "“您可以到1楼的服务中心，那里有失物招领，看看您的物品是否在那里。如果您的物品很贵重，您可以与那里的工作人员说明，他们会积极地配合您的。”"
     },
     {
       "name": "服务中心",
-      "remain": -1,
+      "remain": 0,
       "desc": "这里是服务中心，请问有什么可以帮助您的吗？",
       "print": "“这里是服务中心，请问有什么可以帮助您的吗？”"
     },
     {
       "key": "服务中心.给予失物",
       "name": "给予失物",
-      "remain": -1,
+      "remain": 0,
       "desc": "感谢您的帮助，我们会保管好这些物品并等待它的主人来认领的。",
       "print": "“感谢您的帮助，我们会保管好这些物品并等待它的主人来认领的。”"
     },
     {
+      "key": "服务中心.休息",
+      "name": "休息",
+      "remain": 0,
+      "desc": "你在服务中心休息了一会儿，恢复了些许体力。",
+      "exec": "role.attr.endurance.up 20",
+      "linkEvent": "服务中心"
+    },
+    {
       "key": "服务中心.祝您游览愉快",
       "name": "祝您游览愉快",
-      "remain": -1,
+      "remain": 0,
       "desc": "祝您游览愉快。",
       "print": "“祝您游览愉快。”"
     },
     {
       "name": "寻找失物",
-      "remain": -1,
+      "remain": 0,
       "desc": "您看下这里的失物有没有您丢失的。",
       "print": "“您看下这里的失物有没有您丢失的。”"
     },
     {
       "key": "寻找失物.找到失物",
       "name": "找到失物",
-      "remain": -1,
+      "remain": 0,
       "desc": "你发现了你丢的东西就在这些失物当中。在填写了工作人员给的认领信息，你拿回了自己的东西。"
     },
     {
       "key": "寻找失物.没有找到",
       "name": "没有找到",
-      "remain": -1,
+      "remain": 0,
       "desc": "你在这些失物当中并没有找到自己的东西。工作人员询问你是否需要报警处理，你说不用了，也不是什么贵重物品（作者说的，因为不想写后面的剧本了）。"
     },
     {
       "name": "电梯",
-      "remain": -1,
+      "remain": 0,
       "desc": "你要去几楼？"
     },
     {
       "name": "取款机",
-      "remain": -1,
+      "remain": 0,
       "desc": "这里只提供取款服务。",
       "print": ""
     },
     {
       "name": "圆圈旗舰店",
-      "remain": -1,
+      "remain": 0,
       "desc": "您好，这里是圆圈旗舰店，请问您需要什么服务呢？"
     },
     {
       "key": "圆圈旗舰店.购买",
       "name": "购买",
-      "remain": -1,
+      "remain": 0,
       "desc": "您想要买什么呢？"
+    },
+    {
+      "name": "未开店",
+      "remain": 0,
+      "desc": "店铺未开店，敬请期待。"
     }
   ],
   "options": [
     {
       "name": "服务中心",
+      "order": 1,
       "desc": "这里是【那个商城】的服务中心，您有任何需要帮助的地方都可以到这里来。这里同样是失物招领中心",
       "print": "你来到服务中心。",
       "linkEvent": "服务中心"
@@ -118,7 +132,7 @@
       "print": "你打开了商城导览的楼层说明。",
       "resultList": [
         {
-          "exec": "kit.message \"1L - 服务中心、家具与代步车\";kit.message \"2L - 图书与教育用品\";kit.message \"3L - 电子产品\";kit.message \"4L - 服装、化妆品与婴儿用品\";kit.message \"5L - 体育用品\";kit.message \"6L - 餐饮\""
+          "exec": "kit.message \"1L - 服务中心、家具、代步车与取款机\";kit.message \"2L - 图书与教育用品\";kit.message \"3L - 电子产品\";kit.message \"4L - 服装、化妆品与婴儿用品\";kit.message \"5L - 体育用品\";kit.message \"6L - 餐饮\""
         }
       ]
     },
@@ -194,16 +208,8 @@
       "followEvents": [
         "服务中心"
       ],
-      "key": "服务中心.给予丢失的物品",
-      "name": "给予丢失的物品",
-      "desc": "你把捡到的东西交给这里的工作人员。",
-      "linkEvent": "服务中心.给予失物"
-    },
-    {
-      "followEvents": [
-        "服务中心"
-      ],
       "key": "服务中心.领取商城导览",
+      "order": 1,
       "name": "领取商城导览",
       "desc": "拿一份商城导览。",
       "resultList": [
@@ -216,10 +222,32 @@
       "followEvents": [
         "服务中心"
       ],
+      "key": "服务中心.给予丢失的物品",
+      "name": "给予丢失的物品",
+      "order": 2,
+      "desc": "你把捡到的东西交给这里的工作人员。",
+      "linkEvent": "服务中心.给予失物"
+    },
+    {
+      "followEvents": [
+        "服务中心"
+      ],
       "key": "服务中心.寻找失物",
       "name": "寻找失物",
+      "order": 3,
       "desc": "你有东西丢了，来这里寻找失物。",
       "linkEvent": "寻找失物"
+    },
+    {
+      "followEvents": [
+        "服务中心"
+      ],
+      "key": "服务中心.休息",
+      "name": "休息",
+      "order": 4,
+      "desc": "在这里休息一会。",
+      "print": "",
+      "linkEvent": "服务中心.休息"
     },
     {
       "followEvents": [
@@ -249,6 +277,7 @@
     {
       "name": "电梯",
       "desc": "通向其他楼层的设备",
+      "print": "",
       "order": 99,
       "linkEvent": "电梯"
     },
@@ -257,6 +286,8 @@
         "电梯"
       ],
       "name": "一楼",
+      "desc": "服务中心、家具、代步车与取款机",
+      "print": "",
       "order": 1,
       "condition": "@{role.tag.hasno floor.1L}",
       "resultList": [
@@ -270,6 +301,8 @@
         "电梯"
       ],
       "name": "二楼",
+      "desc": "图书与教育用品",
+      "print": "",
       "order": 2,
       "condition": "@{role.tag.hasno floor.2L}",
       "resultList": [
@@ -283,6 +316,8 @@
         "电梯"
       ],
       "name": "三楼",
+      "desc": "电子产品",
+      "print": "",
       "order": 3,
       "condition": "@{role.tag.hasno floor.3L}",
       "resultList": [
@@ -296,6 +331,8 @@
         "电梯"
       ],
       "name": "四楼",
+      "desc": "服装、化妆品与婴儿用品",
+      "print": "",
       "order": 4,
       "condition": "@{role.tag.hasno floor.4L}",
       "resultList": [
@@ -309,6 +346,8 @@
         "电梯"
       ],
       "name": "五楼",
+      "desc": "体育用品",
+      "print": "",
       "order": 5,
       "condition": "@{role.tag.hasno floor.5L}",
       "resultList": [
@@ -322,6 +361,8 @@
         "电梯"
       ],
       "name": "六楼",
+      "desc": "餐饮",
+      "print": "",
       "order": 6,
       "condition": "@{role.tag.hasno floor.6L}",
       "resultList": [
@@ -331,9 +372,20 @@
       ]
     },
     {
+      "followEvents": [
+        "电梯"
+      ],
+      "key": "电梯.离开",
+      "name": "离开",
+      "order": 100,
+      "desc": "离开电梯",
+      "print": "你走出了电梯。"
+    },
+    {
       "name": "取款机",
       "desc": "可以在这里取出你拥有的RMB",
       "print": "你来到取款机前。",
+      "order": 90,
       "linkEvent": "取款机"
     },
     {
@@ -451,46 +503,34 @@
       ],
       "key": "圆圈旗舰店.议价",
       "name": "议价",
-      "desc": "你打算和老板谈谈价格。",
+      "desc": "你打算和老板谈谈价格（需要体力）。",
+      "print": "你打算和老板谈谈价格。",
+      "condition": "@{role.attr.endurance.bt 40}",
       "resultList": [
         {
           "chance": 100,
-          "exec": "kit.message 议价成功。;role.tag.add 圆圈旗舰店.减价"
+          "exec": "kit.message 议价成功。;role.tag.add 圆圈旗舰店.减价;role.attr.endurance.down 10"
         },
         {
           "chance": 300,
-          "exec": "kit.message 议价失败。"
+          "exec": "kit.message 议价失败。;role.attr.endurance.down 10"
         }
       ]
     },
     {
-      "followEvents": [
-        "圆圈旗舰店.购买"
+      "name": "圆圈旗舰店",
+      "desc": "这里是售卖代步车的店铺",
+      "print": "你来到圆圈旗舰店。",
+      "linkEvent": "圆圈旗舰店"
+    },
+    {
+      "followBranches": [
+        "floor.1L"
       ],
-      "key": "圆圈旗舰店.自行车",
-      "name": "自行车",
-      "desc": "400RMB",
-      "print": "",
-      "resultList": [
-        {
-          "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.value RMB} > 359",
-          "print": "你以9折的价格买下了自行车。",
-          "exec": "role.bag.add 自行车 1;role.bag.remove RMB 360"
-        },
-        {
-          "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.value RMB} > 399",
-          "print": "你买下了自行车。",
-          "exec": "role.bag.add 自行车 1;role.bag.remove RMB 400"
-        },
-        {
-          "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.lt RMB 400}",
-          "print": "你的钱不够"
-        },
-        {
-          "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.lt RMB 359}",
-          "print": "你的钱不够"
-        }
-      ]
+      "name": "家具店",
+      "desc": "这里是家具店，可以购买家具。",
+      "print": "你走到家具店门口。",
+      "linkEvent": "未开店"
     },
     {
       "followEvents": [
@@ -509,7 +549,7 @@
         {
           "condition": "@{role.tag.has 圆圈旗舰店.减价} & @{role.bag.value RMB} > 539",
           "print": "你以9折的价格买下了平衡车。",
-          "exec": "role.bag.add 平衡车 1;role.bag.remove RMB 540"
+          "exec": "role.bag.add 平衡车 1;role.bag.remove RMB 540;role.tag.remove 圆圈旗舰店.减价"
         },
         {
           "condition": "@{role.tag.hasno 圆圈旗舰店.减价} & @{role.bag.lt RMB 600}",
@@ -542,6 +582,84 @@
       "desc": "离开圆圈旗舰店",
       "order": 99,
       "print": "你离开了圆圈旗舰店。"
+    },
+    {
+      "name": "图书室",
+      "desc": "这里是图书室，可以阅读或购买图书。",
+      "print": "你走到图书室门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "文具店",
+      "desc": "这里是文具店，可以购买一些文具。",
+      "print": "你走到文具店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "通讯营业厅",
+      "desc": "这里是通讯营业厅，可以办理一些通讯业务。",
+      "print": "你走到通讯营业厅门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "香蕉直营店",
+      "desc": "这里是香蕉直营店，可以购买香蕉手机或是办理相关的业务。",
+      "print": "你走到香蕉直营店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "大米之家",
+      "desc": "这里是大米之家，可以购买大米手机或是办理相关的业务。",
+      "print": "你走到大米之家门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "煤油体验店",
+      "desc": "这里是煤油体验店，可以购买煤油手机或是办理相关的业务。",
+      "print": "你走到煤油体验店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "服装店",
+      "desc": "这里是服装店，可以购买服装或是在这里试穿新潮服饰。",
+      "print": "你走到服装店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "化妆品店",
+      "desc": "这里是化妆品店，可以购买化妆品或是在这里体验新品。",
+      "print": "你走到化妆品店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "婴儿用品店",
+      "desc": "这里是婴儿用品店，可以购买婴儿用品，也为您家中的婴幼儿提供相关的帮助",
+      "print": "你走到婴儿用品店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "体育用品店",
+      "desc": "这里是体育用品店，可以购买很多的体育用品",
+      "print": "你走到体育用品店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "奶茶店",
+      "desc": "这里是体奶茶店，可以购买奶茶",
+      "print": "你走到奶茶店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "火锅店",
+      "desc": "这里是火锅店，可以吃火锅（废话）",
+      "print": "你走到火锅店门口。",
+      "linkEvent": "未开店"
+    },
+    {
+      "name": "烧烤店",
+      "desc": "这里是烧烤店，可以吃烧烤（废话）",
+      "print": "你走到火锅店门口。",
+      "linkEvent": "未开店"
     }
   ],
   "items": [
@@ -576,48 +694,48 @@
       "key": "floor.1L",
       "value": 1,
       "visible": true,
-      "onAdd": "world.addOption 服务中心;world.addOption 圆圈旗舰店;world.addOption 取款机;kit.message 到达一楼。",
-      "onRemove": "world.removeOption 服务中心;world.removeOption 圆圈旗舰店;world.removeOption 取款机"
+      "onAdd": "world.addOption 服务中心;world.addOption 圆圈旗舰店;world.addOption 家具店;world.addOption 取款机;kit.message 到达一楼。",
+      "onRemove": "world.removeOption 服务中心;world.removeOption 圆圈旗舰店;world.removeOption 家具店;world.removeOption 取款机"
     },
     {
       "name": "2L",
       "key": "floor.2L",
       "value": 2,
       "visible": true,
-      "onAdd": "kit.message 到达二楼。",
-      "onRemove": ""
+      "onAdd": "world.addOption 图书室;world.addOption 文具店;kit.message 到达二楼。",
+      "onRemove": "world.removeOption 图书室;world.removeOption 文具店"
     },
     {
       "name": "3L",
       "key": "floor.3L",
       "value": 3,
       "visible": true,
-      "onAdd": "kit.message 到达三楼。",
-      "onRemove": ""
+      "onAdd": "world.addOption 通讯营业厅;world.addOption 香蕉直营店;world.addOption 大米之家;world.addOption 煤油体验店;kit.message 到达三楼。",
+      "onRemove": "world.removeOption 通讯营业厅;world.removeOption 香蕉直营店;world.removeOption 大米之家;world.removeOption 煤油体验店"
     },
     {
       "name": "4L",
       "key": "floor.4L",
       "value": 4,
       "visible": true,
-      "onAdd": "kit.message 到达四楼。",
-      "onRemove": ""
+      "onAdd": "world.addOption 服装店;world.addOption 化妆品店;world.addOption 婴儿用品店;kit.message 到达四楼。",
+      "onRemove": "world.removeOption 服装店;world.removeOption 化妆品店;world.removeOption 婴儿用品店"
     },
     {
       "name": "5L",
       "key": "floor.5L",
       "value": 5,
       "visible": true,
-      "onAdd": "kit.message 到达五楼。",
-      "onRemove": ""
+      "onAdd": "world.addOption 体育用品店;kit.message 到达五楼。",
+      "onRemove": "world.removeOption 体育用品店"
     },
     {
       "name": "6L",
       "key": "floor.6L",
       "value": 6,
       "visible": true,
-      "onAdd": "kit.message 到达六楼。",
-      "onRemove": ""
+      "onAdd": "world.addOption 奶茶店;world.addOption 火锅店;world.addOption 烧烤店;kit.message 到达六楼。",
+      "onRemove": "world.removeOption 奶茶店;world.removeOption 火锅店;world.removeOption 烧烤店"
     },
     {
       "key": "圆圈旗舰店.减价",

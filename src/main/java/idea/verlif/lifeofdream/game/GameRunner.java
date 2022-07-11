@@ -126,12 +126,7 @@ public class GameRunner implements CanSave {
                 return new Branch();
             }
         };
-        this.kit = new Kit() {
-            @Override
-            public void message(String message) {
-                super.message(tran(message));
-            }
-        };
+        this.kit = new Kit(this::tran);
 
         this.varsContext = new VarsContextLocal();
         this.attrHandler = new AttrHandler();
@@ -177,7 +172,7 @@ public class GameRunner implements CanSave {
     }
 
     public void setMessageKit(MessageKit kit) {
-        this.kit.setMessageKit(kit);
+        this.kit.setMessage(kit);
     }
 
     public List<Event> getPreEvents() {

@@ -9,6 +9,7 @@ import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.game.GameRunner;
+import idea.verlif.lifeofdream.sys.kit.Kit;
 import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
@@ -27,16 +28,16 @@ public class TestForIt {
     }
 
     public void test() {
-        SkillManager skillManager = SkillManager.getInstance();
-        skillManager.add(createSkill("蛋炒饭"));
-        skillManager.add(createSkill("扬州炒饭"));
-        JSONObject json = skillManager.save();
-        System.out.println(json);
-        skillManager.load(json);
-        System.out.println(skillManager.save());
-        GAME_RUNNER.init(new Role(), new World());
-        System.out.println(JSONObject.toJSONString(GAME_RUNNER.execCmd("role.skill.set 蛋炒饭 30")));
-        System.out.println(JSONObject.toJSONString(GAME_RUNNER.getRole().getSkill()));
+        Kit kit = new Kit(message -> message);
+        kit.getData().setText("你好", "You Good!");
+        kit.getData().setInt("haha", 123);
+        System.out.println(kit.getData().getText("你好"));
+        System.out.println(kit.getData().getInt("haha"));
+        JSONObject save = kit.save();
+        System.out.println("save -- " + save);
+        kit.load(save);
+        System.out.println(kit.getData().getText("你好"));
+        System.out.println(kit.getData().getInt("haha"));
     }
 
     private String[] split(String str) {

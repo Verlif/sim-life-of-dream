@@ -1,0 +1,27 @@
+{
+  "info": {
+    "name": "Demo-事件经历模拟器",
+    "key": "verlif.demo.lifelike",
+    "desc": "如何在《西米的梦境师计划》中实现类似于《人生重来模拟器》这样的事件模拟呢？",
+    "version": "1.0",
+    "author": "Verlif"
+  },
+  "story": {
+    "name": "事件模拟器",
+    "desc": "游戏流程为：",
+    "exec": "kit.message \"1. 选择人物属性\";kit.message \"2. 通过下一回合来进行事件更迭\";kit.message 现在可以通过世界选项来开始游戏。"
+  },
+  "branches": [
+  ],
+  "events": [
+  ],
+  "options": [
+  ],
+  "items": [],
+  "rules": [
+  ],
+  "tags": [
+  ],
+  "skills": [
+  ]
+}
