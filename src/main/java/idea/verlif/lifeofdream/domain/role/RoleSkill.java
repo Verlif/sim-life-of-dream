@@ -55,7 +55,15 @@ public class RoleSkill implements CanSave {
         }
         Skill skill = skillMap.get(key);
         if (skill != null) {
-            skill.set(value);
+            skill.set(0);
+            if (value > 0) {
+                skill.up(value);
+            } else if (value < 0) {
+                skill.down(-value);
+                if (skill.value() < 0 || skill.level() < 0) {
+                    remove(key);
+                }
+            }
         }
     }
 
@@ -71,7 +79,17 @@ public class RoleSkill implements CanSave {
     }
 
     public void down(String key, int down) {
-        up(key, -down);
+        Skill skill = skillMap.get(key);
+        if (skill == null) {
+            add(key);
+            skill = skillMap.get(key);
+        }
+        if (skill != null) {
+            skill.down(down);
+            if (skill.value() < 0 || skill.level() < 0) {
+                remove(key);
+            }
+        }
     }
 
     public boolean eq(String key, int value) {

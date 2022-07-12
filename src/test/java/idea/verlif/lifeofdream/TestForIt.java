@@ -5,13 +5,19 @@ import idea.verlif.lifeofdream.domain.event.Event;
 import idea.verlif.lifeofdream.domain.option.Option;
 import idea.verlif.lifeofdream.domain.item.Item;
 import idea.verlif.lifeofdream.domain.role.Role;
+import idea.verlif.lifeofdream.domain.role.extra.Bag;
 import idea.verlif.lifeofdream.domain.role.extra.Skill;
 import idea.verlif.lifeofdream.domain.role.extra.Tag;
 import idea.verlif.lifeofdream.domain.world.World;
 import idea.verlif.lifeofdream.game.GameRunner;
+import idea.verlif.lifeofdream.notice.NoticeHandler;
+import idea.verlif.lifeofdream.notice.NoticeRunner;
+import idea.verlif.lifeofdream.notice.entity.Tip;
+import idea.verlif.lifeofdream.notice.entity.ValueNotice;
 import idea.verlif.lifeofdream.sys.kit.Kit;
 import idea.verlif.lifeofdream.sys.kit.MessageKit;
 import idea.verlif.lifeofdream.sys.manager.EventManager;
+import idea.verlif.lifeofdream.sys.manager.ItemManager;
 import idea.verlif.lifeofdream.sys.manager.OptionManager;
 import idea.verlif.lifeofdream.sys.manager.SkillManager;
 
@@ -24,20 +30,37 @@ public class TestForIt {
 
     public static void main(String[] args) {
         TestForIt forIt = new TestForIt();
+        GAME_RUNNER.setMessageKit(System.out::println);
         forIt.test();
     }
 
     public void test() {
-        Kit kit = new Kit(message -> message);
-        kit.getData().setText("你好", "You Good!");
-        kit.getData().setInt("haha", 123);
-        System.out.println(kit.getData().getText("你好"));
-        System.out.println(kit.getData().getInt("haha"));
-        JSONObject save = kit.save();
-        System.out.println("save -- " + save);
-        kit.load(save);
-        System.out.println(kit.getData().getText("你好"));
-        System.out.println(kit.getData().getInt("haha"));
+        NoticeRunner nr = NoticeRunner.getInstance();
+        nr.addHandler(new NoticeHandler() {
+            @Override
+            public void handle(Tip tip) {
+                System.out.println(tip.name());
+            }
+
+            @Override
+            public void handle(ValueNotice notice) {
+                System.out.println(notice.getName() + " - " + notice.getType().name());
+            }
+        });
+        Role role = new Role();
+        ItemManager im = ItemManager.getInstance();
+        Item item = createItem("item");
+        item.setAutoRemove(false);
+        im.add(item);
+        Bag bag = role.getBag();
+        bag.set("item", -1);
+        System.out.println(bag.save());
+        bag.add("item", 10);
+        System.out.println(bag.save());
+        bag.set("item", 11);
+        System.out.println(bag.save());
+        bag.set("item", -1);
+        System.out.println(bag.save());
     }
 
     private String[] split(String str) {
@@ -103,6 +126,8 @@ public class TestForIt {
     public Item createItem(String key) {
         Item item = new Item();
         item.setName(key);
+        item.setOnAdd("kit.message \"添加道具 - " + key + "\"");
+        item.setOnRemove("kit.message \"减少道具 - " + key + "\"");
         return item;
     }
 

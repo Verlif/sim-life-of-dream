@@ -50,6 +50,11 @@ public class Skill implements NumberValue, LevelValue, CanSave {
      */
     private String onRemove;
 
+    /**
+     * 在经验值或等级小于零时自动移除技能
+     */
+    private boolean autoRemove = false;
+
     public Skill() {
     }
 
@@ -112,6 +117,14 @@ public class Skill implements NumberValue, LevelValue, CanSave {
         this.onRemove = onRemove;
     }
 
+    public boolean isAutoRemove() {
+        return autoRemove;
+    }
+
+    public void setAutoRemove(boolean autoRemove) {
+        this.autoRemove = autoRemove;
+    }
+
     @Override
     public int value() {
         return value;
@@ -128,6 +141,20 @@ public class Skill implements NumberValue, LevelValue, CanSave {
         }
         if (up != 0) {
             NoticeRunner.notice(name, up, ValueType.SKILL);
+        }
+    }
+
+    @Override
+    public void down(int down) {
+        value -= down;
+        while (value < 0 && level > 0) {
+            next = next >> 1;
+            value += next;
+            level--;
+            NoticeRunner.notice(Tip.SKILL_LEVEL_DOWN);
+        }
+        if (down != 0) {
+            NoticeRunner.notice(name, -down, ValueType.SKILL);
         }
     }
 
@@ -154,11 +181,13 @@ public class Skill implements NumberValue, LevelValue, CanSave {
     public JSONObject save() {
         JSONObject json = new JSONObject();
         json.put("name", name);
+        json.put("key", key);
         json.put("lel", level);
         json.put("val", value);
         json.put("next", next);
         json.put("add", onAdd);
         json.put("rem", onRemove);
+        json.put("ar", autoRemove);
         return json;
     }
 
@@ -168,11 +197,13 @@ public class Skill implements NumberValue, LevelValue, CanSave {
             return false;
         }
         name = json.getString("name");
+        key = json.getString("key");
         level = json.getIntValue("lel");
         value = json.getIntValue("val");
         next = json.getIntValue("next");
         onAdd = json.getString("add");
         onRemove = json.getString("rem");
+        autoRemove = json.getBooleanValue("ar");
         return true;
     }
 

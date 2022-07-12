@@ -61,6 +61,11 @@ public class Item implements NumberValue, CanSave, Conditionable {
      */
     private String onRemove;
 
+    /**
+     * 在道具数量小于1时自动移除道具
+     */
+    private boolean autoRemove = true;
+
     public Item() {
     }
 
@@ -146,6 +151,14 @@ public class Item implements NumberValue, CanSave, Conditionable {
         return onRemove;
     }
 
+    public boolean isAutoRemove() {
+        return autoRemove;
+    }
+
+    public void setAutoRemove(boolean autoRemove) {
+        this.autoRemove = autoRemove;
+    }
+
     public void setOnRemove(String onRemove) {
         this.onRemove = onRemove;
     }
@@ -182,6 +195,7 @@ public class Item implements NumberValue, CanSave, Conditionable {
         json.put("use", onUse);
         json.put("add", onAdd);
         json.put("rem", onRemove);
+        json.put("ar", autoRemove);
         return json;
     }
 
@@ -198,6 +212,7 @@ public class Item implements NumberValue, CanSave, Conditionable {
         onUse = json.getString("use");
         onAdd = json.getString("add");
         onRemove = json.getString("rem");
+        autoRemove = json.getBooleanValue("ar");
         return true;
     }
 

@@ -72,13 +72,18 @@ public class Bag implements CanSave {
     public void set(String key, int value) {
         Item item = itemMap.get(key);
         if (item == null) {
-            item = ItemManager.getInstance().get(key);
-            if (item != null) {
-                item.set(value);
-                itemMap.put(key, item);
+            if (value > 0) {
+                add(key, value);
             }
+        } else if (value < 0) {
+            remove(key, value);
         } else {
-            item.set(value);
+            int os = value - item.value();
+            if (os > 0) {
+                add(key, os);
+            } else if (os < 0) {
+                remove(key, -os);
+            }
         }
     }
 
@@ -131,18 +136,23 @@ public class Bag implements CanSave {
      * @param count 道具数量。在指令中默认值为1。
      */
     public Item add(String key, int count) {
+        if (count < 0) {
+            return remove(key, -count);
+        }
         Item item = itemMap.get(key);
         if (item == null) {
-            ItemManager itemManager = ItemManager.getInstance();
-            item = itemManager.get(key);
-            if (item != null) {
-                item.set(0);
+            if (count > 0) {
+                ItemManager itemManager = ItemManager.getInstance();
+                item = itemManager.get(key);
+                if (item != null) {
+                    item.set(0);
+                }
+                itemMap.put(key, item);
+                NoticeRunner.notice(Tip.ITEM_ADDED);
             }
-            NoticeRunner.notice(Tip.ITEM_ADDED);
         }
         if (item != null) {
             item.up(count);
-            itemMap.put(key, item);
             GameRunner gameRunner = GameRunner.getInstance();
             for (int i = 0; i < count; i++) {
                 gameRunner.execCmd(item.getOnAdd());
@@ -157,9 +167,10 @@ public class Bag implements CanSave {
      * @param key   道具Key
      * @param count 道具数量。在指令中默认值为所有。
      */
-    public void remove(String key, int count) {
+    public Item remove(String key, int count) {
         Item item = itemMap.get(key);
         if (item != null) {
+            int raw = count;
             if (count == -1 || item.lt(count)) {
                 count = item.value();
             }
@@ -168,11 +179,13 @@ public class Bag implements CanSave {
             for (int i = 0; i < count; i++) {
                 gameRunner.execCmd(item.getOnRemove());
             }
-            if (item.getValue() == 0) {
+            if (raw < 0 || item.isAutoRemove() && item.getValue() < 1) {
                 itemMap.remove(key);
                 NoticeRunner.notice(Tip.ITEM_REMOVED);
             }
+            return item;
         }
+        return null;
     }
 
     @Override

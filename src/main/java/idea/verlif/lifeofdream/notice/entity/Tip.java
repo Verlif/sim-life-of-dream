@@ -26,6 +26,11 @@ public enum Tip {
     SKILL_LEVEL_UP,
 
     /**
+     * 技能升级
+     */
+    SKILL_LEVEL_DOWN,
+
+    /**
      * 技能遗忘
      */
     SKILL_REMOVED,
