@@ -1,0 +1,323 @@
+{
+  "info": {
+    "name": "Demo-下一层",
+    "key": "verlif.demo.nl",
+    "desc": "用于演示简单的RougeLike地牢类型的文字游戏。",
+    "version": "1.0",
+    "author": "Verlif"
+  },
+  "story": {
+    "name": "下一层",
+    "desc": "欢迎来到下一层，这里有无尽的地牢，试着往最底层探索吧。",
+    "exec": "addEventToReady init.设定名称 -1"
+  },
+  "branches": [
+    {
+      "name": "1F"
+    },
+    {
+      "name": "2F"
+    },
+    {
+      "name": "3F"
+    },
+    {
+      "name": "4F"
+    },
+    {
+      "name": "5F"
+    },
+    {
+      "name": "6F"
+    },
+    {
+      "name": "7F"
+    },
+    {
+      "name": "8F"
+    },
+    {
+      "name": "9F"
+    }
+  ],
+  "events": [
+    {
+      "key": "init.设定名称",
+      "name": "名称设定",
+      "desc": "请输入您期望的角色名称",
+      "print": "",
+      "chance": "0",
+      "exec": "role.info.name.set @{kit.input.getText};addEventToReady init.角色选择 -1"
+    },
+    {
+      "key": "init.角色选择",
+      "name": "角色选择",
+      "desc": "请选择您喜欢的角色",
+      "print": "",
+      "chance": "0"
+    },
+    {
+      "key": "角色选择.战士",
+      "name": "战士",
+      "desc": "消耗体力值进行战斗",
+      "print": "",
+      "chance": "0"
+    },
+    {
+      "key": "角色选择.法师",
+      "name": "法师",
+      "desc": "消耗脑力值进行战斗",
+      "print": "",
+      "chance": "0"
+    },
+    {
+      "key": "init.开始",
+      "name": "开始",
+      "desc": "欢迎来到高塔，你的目标就是到达第九层。",
+      "chance": "0",
+      "exec": "world.addOption 进入高塔"
+    },
+    {
+      "key": "层数.第一层",
+      "name": "第一层",
+      "desc": "进入第一层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.1F"
+    },
+    {
+      "key": "层数.第二层",
+      "name": "第二层",
+      "desc": "进入第二层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.2F"
+    },
+    {
+      "key": "层数.第三层",
+      "name": "第三层",
+      "desc": "进入第三层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.3F"
+    },
+    {
+      "key": "层数.第四层",
+      "name": "第四层",
+      "desc": "进入第四层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.4F"
+    },
+    {
+      "key": "层数.第五层",
+      "name": "第五层",
+      "desc": "进入第五层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.5F"
+    },
+    {
+      "key": "层数.第六层",
+      "name": "第六层",
+      "desc": "进入第六层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.6F"
+    },
+    {
+      "key": "层数.第七层",
+      "name": "第七层",
+      "desc": "进入第七层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.7F"
+    },
+    {
+      "key": "层数.第八层",
+      "name": "第八层",
+      "desc": "进入第八层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.8F"
+    },
+    {
+      "key": "层数.第九层",
+      "name": "第九层",
+      "desc": "进入第九层",
+      "chance": "0",
+      "exec": "role.tag.remove 层数;role.tag.add 层数.9F"
+    }
+  ],
+  "options": [
+    {
+      "followEvents": [
+        "init.设定名称"
+      ],
+      "key": "设定名称.填写名称",
+      "name": "填写名称",
+      "desc": "输入角色名称",
+      "print": "",
+      "order": 1,
+      "exec": "role.info.name.set @{kit.input.getText 请输入角色名称}"
+    },
+    {
+      "followEvents": [
+        "init.角色选择"
+      ],
+      "key": "角色选择.战士",
+      "name": "战士",
+      "desc": "很强就对了",
+      "print": "",
+      "order": 1,
+      "linkEvent": "角色选择.战士"
+    },
+    {
+      "followEvents": [
+        "角色选择.战士"
+      ],
+      "key": "角色选择.战士.确定",
+      "name": "选择战士",
+      "desc": "以战士的身份进行游戏",
+      "print": "你选择了战士",
+      "order": 1,
+      "linkEvent": "init.开始",
+      "exec": "role.tag.add 角色.战士"
+    },
+    {
+      "followEvents": [
+        "init.角色选择"
+      ],
+      "key": "角色选择.法师",
+      "name": "法师",
+      "desc": "也很强就对了",
+      "print": "",
+      "order": 1,
+      "linkEvent": "角色选择.法师"
+    },
+    {
+      "followEvents": [
+        "角色选择.法师"
+      ],
+      "key": "角色选择.法师.确定",
+      "name": "选择法师",
+      "desc": "以法师的身份进行游戏",
+      "print": "你选择了法师",
+      "linkEvent": "init.开始",
+      "exec": "role.tag.add 角色.法师",
+      "order": 1
+    },
+    {
+      "followEvents": [
+        "角色选择.战士",
+        "角色选择.法师"
+      ],
+      "key": "角色选择.换一个",
+      "name": "换一个",
+      "desc": "重新选择",
+      "print": "",
+      "order": 99,
+      "linkEvent": "init.角色选择"
+    },
+    {
+      "name": "进入高塔",
+      "desc": "重新选择",
+      "print": "",
+      "order": 1,
+      "exec": "world.removeOption 进入高塔",
+      "linkEvent": "层数.第一层"
+    }
+  ],
+  "items": [],
+  "rules": [],
+  "tags": [
+    {
+      "key": "角色.战士",
+      "name": "战士",
+      "value": 1,
+      "visible": true,
+      "order": 0
+    },
+    {
+      "key": "角色.法师",
+      "name": "法师",
+      "value": 1,
+      "visible": true,
+      "order": 0
+    },
+    {
+      "key": "层数.1F",
+      "name": "第一层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 1F",
+      "onRemove": "removeBranch 1F"
+    },
+    {
+      "key": "层数.2F",
+      "name": "第二层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 2F",
+      "onRemove": "removeBranch 2F"
+    },
+    {
+      "key": "层数.3F",
+      "name": "第三层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 3F",
+      "onRemove": "removeBranch 3F"
+    },
+    {
+      "key": "层数.4F",
+      "name": "第四层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 4F",
+      "onRemove": "removeBranch 4F"
+    },
+    {
+      "key": "层数.5F",
+      "name": "第五层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 5F",
+      "onRemove": "removeBranch 5F"
+    },
+    {
+      "key": "层数.6F",
+      "name": "第六层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 6F",
+      "onRemove": "removeBranch 6F"
+    },
+    {
+      "key": "层数.7F",
+      "name": "第七层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 7F",
+      "onRemove": "removeBranch 7F"
+    },
+    {
+      "key": "层数.8F",
+      "name": "第八层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 8F",
+      "onRemove": "removeBranch 8F"
+    },
+    {
+      "key": "层数.9F",
+      "name": "第九层",
+      "value": 1,
+      "visible": true,
+      "order": 1,
+      "onAdd": "addBranch 9F",
+      "onRemove": "removeBranch 9F"
+    }
+  ],
+  "skills": []
+}

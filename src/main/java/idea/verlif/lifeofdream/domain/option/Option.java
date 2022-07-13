@@ -58,6 +58,11 @@ public class Option implements CanSave, Chancable, Conditionable, Orderable {
     private String condition;
 
     /**
+     * 执行效果
+     */
+    private String exec;
+
+    /**
      * 链接的事件key
      */
     private String linkEvent;
@@ -137,6 +142,14 @@ public class Option implements CanSave, Chancable, Conditionable, Orderable {
         this.condition = condition;
     }
 
+    public String getExec() {
+        return exec;
+    }
+
+    public void setExec(String exec) {
+        this.exec = exec;
+    }
+
     public List<OptionResult> getResultList() {
         return resultList;
     }
@@ -191,6 +204,7 @@ public class Option implements CanSave, Chancable, Conditionable, Orderable {
         json.put("pri", print);
         json.put("cha", chance);
         json.put("con", condition);
+        json.put("exec", exec);
         json.put("res", resultList);
         json.put("fes", followEvents);
         json.put("fis", followItems);
@@ -213,6 +227,7 @@ public class Option implements CanSave, Chancable, Conditionable, Orderable {
         print = json.getString("pri");
         chance = json.getString("cha");
         condition = json.getString("con");
+        exec = json.getString("exec");
         linkEvent = json.getString("le");
         order = json.getIntValue("ord");
         if (json.containsKey("res")) {

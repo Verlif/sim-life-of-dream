@@ -387,6 +387,7 @@ public class GameRunner implements CanSave {
 
     private Result invokeOption(Option option) {
         kit.message(option.getPrint());
+        execCmd(option.getExec());
         // 添加链接的事件
         Event event = eventManager.getEvent(option.getLinkEvent());
         if (event != null) {
